@@ -1,0 +1,15 @@
+.field {
+  @apply flex flex-col gap-2 relative;
+
+  > input {
+    @apply bg-transparent border border-gray-stroke rounded-md py-1.5 px-5 focus:outline-none;
+  }
+
+  > button {
+    @apply absolute right-5 bottom-3 text-primary;
+
+    &.active {
+      @apply text-white;
+    }
+  }
+}

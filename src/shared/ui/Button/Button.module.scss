@@ -1,0 +1,10 @@
+.button {
+  @apply rounded-full px-8 py-3 font-semibold;
+  &.primary {
+    @apply bg-primary text-white;
+  }
+
+  &.secondary {
+    @apply bg-white text-primary;
+  }
+}

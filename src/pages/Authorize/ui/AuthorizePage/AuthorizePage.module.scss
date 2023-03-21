@@ -1,0 +1,35 @@
+.authorize {
+  @apply grid h-full overflow-hidden;
+  grid-template-columns: 1fr 2fr;
+
+  > .actions {
+    @apply bg-black;
+  }
+
+  > .landing {
+    @apply relative px-14 py-24;
+    background: linear-gradient(
+      107.56deg,
+      #191921 0%,
+      #1f1f29 28.08%,
+      #191921 28.19%,
+      #1f1f29 51.82%,
+      #252532 51.88%,
+      #252532 74.03%,
+      #2c2c3b 74.13%,
+      #2c2c3b 100%
+    );
+
+    > h1 {
+      @apply text-5xl font-semibold;
+    }
+
+    > p {
+      @apply text-lg mt-2 tracking-wide;
+    }
+
+    > img {
+      @apply absolute mt-10 rounded-lg shadow-base -right-44 -bottom-10 scale-110 -rotate-12;
+    }
+  }
+}

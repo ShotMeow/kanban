@@ -1,0 +1,7 @@
+.logo {
+  @apply flex items-center gap-4 text-2xl font-bold;
+
+  > .icon {
+    @apply text-primary;
+  }
+}

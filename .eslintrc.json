@@ -18,6 +18,11 @@
   "rules": {
     "@typescript-eslint/prefer-nullish-coalescing": "off",
     "@typescript-eslint/strict-boolean-expressions": "off",
-    "@typescript-eslint/triple-slash-reference": "off"
+    "@typescript-eslint/triple-slash-reference": "off",
+    "react/react-in-jsx-scope": "off",
+    "prefer-promise-reject-errors": "off",
+    "no-void": "off",
+    "@typescript-eslint/no-invalid-void-type": "off",
+    "@typescript-eslint/no-misused-promises": "off"
   }
 }

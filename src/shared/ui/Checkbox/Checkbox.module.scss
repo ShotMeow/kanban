@@ -1,0 +1,14 @@
+.checkbox {
+  @apply flex items-center gap-4 text-gray text-sm;
+
+  > button {
+    @apply w-5 h-5 bg-gray-dark border border-gray-stroke rounded-sm flex items-center justify-center;
+  }
+
+  &.active {
+    @apply text-white;
+    > button {
+      @apply bg-primary border-primary;
+    }
+  }
+}
