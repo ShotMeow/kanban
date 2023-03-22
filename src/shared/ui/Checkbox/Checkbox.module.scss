@@ -3,6 +3,13 @@
 
   > button {
     @apply w-5 h-5 bg-gray-dark border border-gray-stroke rounded-sm flex items-center justify-center;
+
+    > svg {
+      @apply hidden;
+      &.visible {
+        @apply block;
+      }
+    }
   }
 
   &.active {

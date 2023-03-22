@@ -26,7 +26,11 @@ export const Checkbox: FC<Props> = ({ title, isActive, setIsActive }) => {
           setIsActive(!isActive);
         }}
       >
-        {isActive && <CheckIcon />}
+        <CheckIcon
+          className={classNames({
+            [styles.visible]: isActive,
+          })}
+        />
       </button>
       <span>{title}</span>
     </label>
