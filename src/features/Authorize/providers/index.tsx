@@ -60,7 +60,7 @@ export const AuthContextProvider: FC<TProps> = (props) => {
     auth.useDeviceLanguage();
 
     auth.onAuthStateChanged((user) => {
-      if (user?.emailVerified) {
+      if (user?.emailVerified || user?.providerData.length) {
         setUser(user);
         setIsAuthenticated(true);
       } else {
