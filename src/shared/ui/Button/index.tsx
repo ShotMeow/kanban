@@ -1,28 +1,33 @@
-import React, { forwardRef, type HTMLAttributes } from 'react';
+import React, { type ButtonHTMLAttributes, forwardRef } from 'react';
 import classNames from 'classnames';
 
 import styles from './Button.module.scss';
+import { Spinner } from '@/shared/ui';
 
-interface Props extends HTMLAttributes<HTMLButtonElement> {
+interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
+  disabled?: boolean;
   primary?: boolean;
   secondary?: boolean;
 }
 
 export const Button = forwardRef<HTMLButtonElement, Props>(
-  ({ primary, secondary, children, className, ...props }, ref) => {
+  ({ disabled, primary, secondary, children, className, ...props }, ref) => {
     return (
       <button
         className={classNames(
           {
             [styles.primary]: primary,
             [styles.secondary]: secondary,
+            [styles.disabled]: disabled,
           },
           styles.button,
           className
         )}
+        disabled={disabled}
         ref={ref}
         {...props}
       >
+        {disabled && <Spinner />}
         {children}
       </button>
     );

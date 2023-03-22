@@ -1,10 +1,19 @@
 .button {
-  @apply rounded-full px-8 py-3 font-semibold;
+  @apply rounded-full px-8 py-3 font-semibold relative;
   &.primary {
     @apply bg-primary text-white;
   }
 
   &.secondary {
     @apply bg-white text-primary;
+  }
+
+  &.disabled {
+    @apply bg-opacity-60 text-white/80;
+
+    > div {
+      @apply w-5 h-5 border-opacity-80 border-white border-4 absolute;
+      border-color: rgba(255, 255, 255, 0.8) transparent rgba(255, 255, 255, 0.8) transparent;
+    }
   }
 }

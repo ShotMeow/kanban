@@ -1,12 +1,10 @@
 import React, { type FC, type FormEvent, useState } from 'react';
 import { Button, Checkbox, Field, Message } from '@/shared/ui';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import styles from './SignUp.module.scss';
 import { useAuthContext } from '@/features/Authorize';
 import { AnimatePresence } from 'framer-motion';
-import { ALLOWED_OAUTH_PROVIDERS } from '@/features/Authorize/providers';
-import { getOAuthProviderIcon } from '@/features/Authorize/utils/getOAuthProviderIcon';
 
 interface Props {
   setIsSignIn: React.Dispatch<React.SetStateAction<boolean>>;
@@ -14,7 +12,9 @@ interface Props {
 
 export const SignUp: FC<Props> = ({ setIsSignIn }) => {
   const [isRememberMe, setIsRememberMe] = useState<boolean>(false);
-  const { registerUserWithEmailAndPassword, loginWithOauthPopup } = useAuthContext();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  const { registerUserWithEmailAndPassword } = useAuthContext();
 
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
@@ -27,12 +27,16 @@ export const SignUp: FC<Props> = ({ setIsSignIn }) => {
     event.preventDefault();
 
     if (password === passwordRepeat) {
-      registerUserWithEmailAndPassword(email, password)
+      setIsLoading(true);
+      registerUserWithEmailAndPassword(email, password, isRememberMe)
         .then(() => {
           navigate('/');
         })
         .catch(() => {
           setErrorMessage('This email is already busy');
+        })
+        .finally(() => {
+          setIsLoading(false);
         });
     } else {
       setErrorMessage("Passwords don't match");
@@ -82,32 +86,10 @@ export const SignUp: FC<Props> = ({ setIsSignIn }) => {
         </div>
         <div className={styles.actions}>
           <Checkbox isActive={isRememberMe} setIsActive={setIsRememberMe} title="Remember me" />
-          <Link to="/">Forgot password</Link>
         </div>
-        <Button primary>Create an account</Button>
-        <div className={styles.socials}>
-          <h3>Sign up with</h3>
-          <ul>
-            {Object.keys(ALLOWED_OAUTH_PROVIDERS).map((item) => (
-              <li key={item}>
-                <Link
-                  to="#"
-                  onClick={async () => {
-                    await loginWithOauthPopup(item)
-                      .then(() => {
-                        navigate('/');
-                      })
-                      .catch(() => {
-                        setErrorMessage('Service is not working. Try again later');
-                      });
-                  }}
-                >
-                  {getOAuthProviderIcon(item)}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
+        <Button disabled={isLoading} primary>
+          Create an account
+        </Button>
         <p className={styles.state}>
           Have an account?{' '}
           <button

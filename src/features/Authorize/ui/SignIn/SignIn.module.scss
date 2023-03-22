@@ -13,7 +13,7 @@
   > .actions {
     @apply flex items-center justify-between mb-4;
 
-    > a {
+    > button {
       @apply text-primary underline text-sm;
     }
   }
@@ -39,6 +39,20 @@
     @apply mt-4;
     > button {
       @apply text-primary underline;
+    }
+  }
+}
+
+.modal {
+  @apply w-1/4;
+  > form {
+    @apply space-y-4 w-full;
+    > h3 {
+      @apply text-xl;
+    }
+
+    > button {
+      @apply w-full;
     }
   }
 }

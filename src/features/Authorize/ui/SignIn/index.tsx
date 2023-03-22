@@ -1,7 +1,7 @@
 import React, { type FC, type FormEvent, useState } from 'react';
 
 import styles from './SignIn.module.scss';
-import { Button, Checkbox, Field, Message } from '@/shared/ui';
+import { Button, Checkbox, Field, Message, Modal } from '@/shared/ui';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuthContext, ALLOWED_OAUTH_PROVIDERS } from '../../providers';
 import { AnimatePresence } from 'framer-motion';
@@ -13,24 +13,59 @@ interface Props {
 
 export const SignIn: FC<Props> = ({ setIsSignIn }) => {
   const [isRememberMe, setIsRememberMe] = useState<boolean>(false);
-
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
 
-  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [forgotPasswordModal, setForgotPasswordModal] = useState<boolean>(false);
+  const [forgotPasswordEmail, setForgotPasswordEmail] = useState<string>('');
 
-  const { loginWithEmailAndPassword, loginWithOauthPopup } = useAuthContext();
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [successMessage, setSuccessMessage] = useState<string | null>(null);
+
+  const { loginWithEmailAndPassword, loginWithOauthPopup, sendPasswordReset } = useAuthContext();
 
   const navigate = useNavigate();
   const handleSubmit = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
-
-    loginWithEmailAndPassword(email, password)
+    setIsLoading(true);
+    loginWithEmailAndPassword(email, password, isRememberMe)
       .then(() => {
         navigate('/');
       })
       .catch(() => {
         setErrorMessage('Email or Password entered incorrectly');
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  };
+
+  const handleOAuth = async (item: string): Promise<void> => {
+    setIsLoading(true);
+    await loginWithOauthPopup(item, isRememberMe)
+      .then(() => {
+        navigate('/');
+      })
+      .catch(() => {
+        setErrorMessage('Service is not working. Try again later');
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  };
+
+  const handlePasswordReset = async (): Promise<void> => {
+    setIsLoading(true);
+    await sendPasswordReset(forgotPasswordEmail)
+      .then(() => {
+        setSuccessMessage(`A password reset email has been sent to ${forgotPasswordEmail}`);
+      })
+      .catch(() => {
+        setErrorMessage('Email not found. Try to register');
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   };
 
@@ -68,9 +103,19 @@ export const SignIn: FC<Props> = ({ setIsSignIn }) => {
         </div>
         <div className={styles.actions}>
           <Checkbox isActive={isRememberMe} setIsActive={setIsRememberMe} title="Remember me" />
-          <Link to="/">Forgot password</Link>
+          <button
+            type="button"
+            onClick={(event) => {
+              event.stopPropagation();
+              setForgotPasswordModal(true);
+            }}
+          >
+            Forgot password
+          </button>
         </div>
-        <Button primary>Sign In Account</Button>
+        <Button type="submit" disabled={isLoading} primary>
+          Sign In Account
+        </Button>
         <div className={styles.socials}>
           <h3>Sign in with</h3>
           <ul>
@@ -79,13 +124,7 @@ export const SignIn: FC<Props> = ({ setIsSignIn }) => {
                 <Link
                   to="#"
                   onClick={async () => {
-                    await loginWithOauthPopup(item)
-                      .then(() => {
-                        navigate('/');
-                      })
-                      .catch(() => {
-                        setErrorMessage('Service is not working. Try again later');
-                      });
+                    await handleOAuth(item);
                   }}
                 >
                   {getOAuthProviderIcon(item)}
@@ -111,6 +150,37 @@ export const SignIn: FC<Props> = ({ setIsSignIn }) => {
           <Message messageVisibleHandler={setErrorMessage} error>
             {errorMessage}
           </Message>
+        )}
+        {successMessage && (
+          <Message messageVisibleHandler={setSuccessMessage} success>
+            {successMessage}
+          </Message>
+        )}
+      </AnimatePresence>
+      <AnimatePresence>
+        {forgotPasswordModal && (
+          <Modal className={styles.modal} onShownChange={setForgotPasswordModal} shown={forgotPasswordModal}>
+            <form
+              onSubmit={async (event) => {
+                event.preventDefault();
+                await handlePasswordReset();
+              }}
+            >
+              <h3>Send password reset</h3>
+              <Field
+                required
+                title="E-mail"
+                type="email"
+                value={forgotPasswordEmail}
+                onChange={(event) => {
+                  setForgotPasswordEmail(event.currentTarget.value);
+                }}
+              />
+              <Button disabled={isLoading} primary>
+                Send
+              </Button>
+            </form>
+          </Modal>
         )}
       </AnimatePresence>
     </>

@@ -1,7 +1,7 @@
 .frame {
-  @apply fixed left-0 top-0 w-full h-full bg-black/30 flex items-center justify-center;
+  @apply fixed z-40 left-0 top-0 w-full h-full bg-black/30 flex items-center justify-center;
 
   > .modal {
-    @apply bg-gray-dark p-6 rounded-md shadow-base flex flex-col items-center gap-4 text-center;
+    @apply bg-gray-dark p-6 rounded-md shadow-base flex flex-col items-center gap-4;
   }
 }

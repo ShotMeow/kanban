@@ -3,10 +3,12 @@ import {
   getAuth,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
+  inMemoryPersistence,
   browserSessionPersistence,
   signOut,
   ProviderId,
   signInWithPopup,
+  sendPasswordResetEmail,
   TwitterAuthProvider,
   FacebookAuthProvider,
   GoogleAuthProvider,
@@ -31,8 +33,13 @@ export const ALLOWED_OAUTH_PROVIDERS: Record<string, any> = {
 export const AuthContext = createContext<TAuthContext>({
   isAuthenticated: null,
   loginWithEmailAndPassword: async () => await Promise.reject({}),
-  registerUserWithEmailAndPassword: async () => await Promise.reject({}),
+  registerUserWithEmailAndPassword: async () => {
+    await Promise.reject({});
+  },
   loginWithOauthPopup: async () => await Promise.reject({}),
+  sendPasswordReset: async () => {
+    await Promise.reject({});
+  },
   logout: () => void 0,
 });
 
@@ -49,7 +56,6 @@ export const AuthContextProvider: FC<TProps> = (props) => {
     if (!auth) {
       return;
     }
-    void auth.setPersistence(browserSessionPersistence);
     auth.useDeviceLanguage();
 
     auth.onAuthStateChanged((user) => {
@@ -63,7 +69,22 @@ export const AuthContextProvider: FC<TProps> = (props) => {
     });
   }, [auth]);
 
-  const loginWithEmailAndPassword = async (email: string, password: string): Promise<UserCredential> => {
+  const sendPasswordReset = async (email: string): Promise<void> => {
+    await sendPasswordResetEmail(auth, email)
+      .then((result) => {
+        return result;
+      })
+      .catch((error) => {
+        throw error;
+      });
+  };
+
+  const loginWithEmailAndPassword = async (
+    email: string,
+    password: string,
+    rememberMe?: boolean
+  ): Promise<UserCredential> => {
+    void auth.setPersistence(rememberMe ? browserSessionPersistence : inMemoryPersistence);
     return await signInWithEmailAndPassword(auth, email, password)
       .then((result) => {
         return result;
@@ -73,17 +94,22 @@ export const AuthContextProvider: FC<TProps> = (props) => {
       });
   };
 
-  const registerUserWithEmailAndPassword = async (email: string, password: string): Promise<UserCredential> => {
-    return await createUserWithEmailAndPassword(auth, email, password)
-      .then((result) => {
-        return result;
+  const registerUserWithEmailAndPassword = async (
+    email: string,
+    password: string,
+    rememberMe?: boolean
+  ): Promise<void> => {
+    await createUserWithEmailAndPassword(auth, email, password)
+      .then(async () => {
+        return await loginWithEmailAndPassword(email, password, rememberMe);
       })
       .catch((error) => {
         throw error;
       });
   };
 
-  const loginWithOauthPopup = async (providerId: string): Promise<UserCredential> => {
+  const loginWithOauthPopup = async (providerId: string, rememberMe?: boolean): Promise<UserCredential> => {
+    void auth.setPersistence(rememberMe ? browserSessionPersistence : inMemoryPersistence);
     setUser(null);
     setIsAuthenticated(null);
     return await signInWithPopup(auth, ALLOWED_OAUTH_PROVIDERS[providerId])
@@ -108,6 +134,7 @@ export const AuthContextProvider: FC<TProps> = (props) => {
         logout,
         registerUserWithEmailAndPassword,
         loginWithOauthPopup,
+        sendPasswordReset,
       }}
     >
       {props.children}

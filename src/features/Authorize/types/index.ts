@@ -5,8 +5,13 @@ type TLoginWithEmailAndPasswordResult = UserCredential;
 export interface TAuthContext {
   isAuthenticated: boolean | null;
   user?: any;
-  loginWithEmailAndPassword: (email: string, password: string) => Promise<TLoginWithEmailAndPasswordResult>;
-  registerUserWithEmailAndPassword: (email: string, password: string) => Promise<TLoginWithEmailAndPasswordResult>;
-  loginWithOauthPopup: (provider: string) => Promise<TLoginWithEmailAndPasswordResult>;
+  loginWithEmailAndPassword: (
+    email: string,
+    password: string,
+    rememberMe?: boolean
+  ) => Promise<TLoginWithEmailAndPasswordResult>;
+  registerUserWithEmailAndPassword: (email: string, password: string, rememberMe?: boolean) => Promise<void>;
+  loginWithOauthPopup: (provider: string, rememberMe?: boolean) => Promise<TLoginWithEmailAndPasswordResult>;
+  sendPasswordReset: (email: string) => Promise<void>;
   logout: () => void;
 }

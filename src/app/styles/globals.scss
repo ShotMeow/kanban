@@ -17,3 +17,7 @@ body,
 p {
   @apply text-gray;
 }
+
+#overlay {
+  @apply w-full flex justify-center;
+}

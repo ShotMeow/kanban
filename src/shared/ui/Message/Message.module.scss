@@ -1,5 +1,5 @@
 .message {
-  @apply fixed top-4 px-4 py-2 rounded-md flex items-center gap-2 bg-black shadow-base left-1/2 -translate-x-1/2 text-sm;
+  @apply fixed z-50 top-4 px-4 py-2 rounded-md flex items-center gap-2 bg-black shadow-base text-sm;
 
   > .icon {
     @apply w-5 h-5 flex items-center justify-center text-lg rounded-full;
