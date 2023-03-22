@@ -15,6 +15,7 @@
     "@reduxjs/toolkit": "^1.9.3",
     "classnames": "^2.3.2",
     "firebase": "^9.18.0",
+    "focus-trap": "^7.4.0",
     "framer-motion": "^10.7.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

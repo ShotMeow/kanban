@@ -1,4 +1,4 @@
-import React, { type FC, type HTMLAttributes } from 'react';
+import React, { forwardRef, type HTMLAttributes } from 'react';
 
 import { OtherIcon } from '../Icons/Other';
 
@@ -6,10 +6,12 @@ import styles from './OtherButton.module.scss';
 
 interface Props extends HTMLAttributes<HTMLButtonElement> {}
 
-export const OtherButton: FC<Props> = ({ ...props }) => {
+export const OtherButton = forwardRef<HTMLButtonElement, Props>(({ ...props }, ref) => {
   return (
-    <button className={styles.other} {...props}>
+    <button ref={ref} className={styles.other} {...props}>
       <OtherIcon className={styles.icon} />
     </button>
   );
-};
+});
+
+OtherButton.displayName = 'OtherButton';

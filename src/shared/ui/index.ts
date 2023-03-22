@@ -6,3 +6,6 @@ export { Checkbox } from './Checkbox';
 export { GoogleIcon, AppleIcon, GithubIcon } from './Icons/Socials';
 export { Message } from './Message';
 export { Spinner } from './Spinner';
+export { Dropdown } from './Dropdown';
+export { LogoutIcon } from './Icons/Logout';
+export { Modal } from './Modal';
