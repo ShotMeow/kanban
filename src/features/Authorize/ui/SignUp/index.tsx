@@ -1,10 +1,12 @@
 import React, { type FC, type FormEvent, useState } from 'react';
-import { AppleIcon, Button, Checkbox, Field, GithubIcon, GoogleIcon, Message } from '@/shared/ui';
+import { Button, Checkbox, Field, Message } from '@/shared/ui';
 import { Link, useNavigate } from 'react-router-dom';
 
 import styles from './SignUp.module.scss';
 import { useAuthContext } from '@/features/Authorize';
 import { AnimatePresence } from 'framer-motion';
+import { ALLOWED_OAUTH_PROVIDERS } from '@/features/Authorize/providers';
+import { getOAuthProviderIcon } from '@/features/Authorize/utils/getOAuthProviderIcon';
 
 interface Props {
   setIsSignIn: React.Dispatch<React.SetStateAction<boolean>>;
@@ -12,7 +14,7 @@ interface Props {
 
 export const SignUp: FC<Props> = ({ setIsSignIn }) => {
   const [isRememberMe, setIsRememberMe] = useState<boolean>(false);
-  const { registerUserWithEmailAndPassword } = useAuthContext();
+  const { registerUserWithEmailAndPassword, loginWithOauthPopup } = useAuthContext();
 
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
@@ -86,21 +88,20 @@ export const SignUp: FC<Props> = ({ setIsSignIn }) => {
         <div className={styles.socials}>
           <h3>Sign up with</h3>
           <ul>
-            <li>
-              <button type="button">
-                <GithubIcon />
-              </button>
-            </li>
-            <li>
-              <button type="button">
-                <AppleIcon />
-              </button>
-            </li>
-            <li>
-              <button type="button">
-                <GoogleIcon />
-              </button>
-            </li>
+            {Object.keys(ALLOWED_OAUTH_PROVIDERS).map((item) => (
+              <li key={item}>
+                <Link
+                  to="#"
+                  onClick={async () => {
+                    await loginWithOauthPopup(item).finally(() => {
+                      navigate('/');
+                    });
+                  }}
+                >
+                  {getOAuthProviderIcon(item)}
+                </Link>
+              </li>
+            ))}
           </ul>
         </div>
         <p className={styles.state}>

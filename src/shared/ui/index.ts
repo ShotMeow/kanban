@@ -3,7 +3,7 @@ export { Button } from './Button';
 export { OtherButton } from './OtherButton';
 export { Field } from './Field';
 export { Checkbox } from './Checkbox';
-export { GoogleIcon, AppleIcon, GithubIcon } from './Icons/Socials';
+export { GoogleIcon, FacebookIcon, GithubIcon, TwitterIcon } from './Icons/Socials';
 export { Message } from './Message';
 export { Spinner } from './Spinner';
 export { Dropdown } from './Dropdown';

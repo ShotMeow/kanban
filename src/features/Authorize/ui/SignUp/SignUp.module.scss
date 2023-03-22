@@ -25,7 +25,7 @@
     }
     > ul {
       @apply flex gap-2;
-      > li > button {
+      > li > a {
         @apply w-8 h-8 bg-gray-dark flex items-center justify-center rounded-sm;
 
         &:hover {
