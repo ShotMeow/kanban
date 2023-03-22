@@ -15,8 +15,10 @@ export const AuthorizePage: FC = () => {
         {isSignIn ? <SignIn setIsSignIn={setIsSignIn} /> : <SignUp setIsSignIn={setIsSignIn} />}
       </div>
       <div className={styles.landing}>
-        <h1>Kanban Todo Application</h1>
-        <p>Keeping a list of tasks has become even easier</p>
+        <div className={styles.heading}>
+          <h1>Kanban Todo Application</h1>
+          <p>Keeping a list of tasks has become even easier</p>
+        </div>
         <img src={kanbanSrc} alt="Kanban Application Preview" />
       </div>
     </main>

@@ -1,5 +1,10 @@
 .form {
-  @apply p-14 flex flex-col gap-4 justify-center h-full;
+  @apply p-6 flex flex-col gap-4 justify-center h-full;
+
+  @media (min-width: theme('screens.sm')) {
+    @apply p-14;
+  }
+
   > .heading {
     > h2 {
       @apply text-2xl font-bold;
@@ -44,9 +49,13 @@
 }
 
 .modal {
-  @apply w-1/4;
   > form {
     @apply space-y-4 w-full;
+
+    @media (min-width: theme('screens.sm')) {
+      @apply mx-20;
+    }
+
     > h3 {
       @apply text-xl;
     }

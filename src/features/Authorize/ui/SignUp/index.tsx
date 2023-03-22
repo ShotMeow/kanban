@@ -1,6 +1,5 @@
 import React, { type FC, type FormEvent, useState } from 'react';
-import { Button, Checkbox, Field, Message } from '@/shared/ui';
-import { useNavigate } from 'react-router-dom';
+import { Button, Field, Message } from '@/shared/ui';
 
 import styles from './SignUp.module.scss';
 import { useAuthContext } from '@/features/Authorize';
@@ -11,7 +10,6 @@ interface Props {
 }
 
 export const SignUp: FC<Props> = ({ setIsSignIn }) => {
-  const [isRememberMe, setIsRememberMe] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const { registerUserWithEmailAndPassword } = useAuthContext();
@@ -21,16 +19,16 @@ export const SignUp: FC<Props> = ({ setIsSignIn }) => {
   const [passwordRepeat, setPasswordRepeat] = useState<string>('');
 
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [successMessage, setSuccessMessage] = useState<string | null>(null);
 
-  const navigate = useNavigate();
   const handleSubmit = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
 
     if (password === passwordRepeat) {
       setIsLoading(true);
-      registerUserWithEmailAndPassword(email, password, isRememberMe)
+      registerUserWithEmailAndPassword(email, password)
         .then(() => {
-          navigate('/');
+          setSuccessMessage(`A message with verification has been sent to ${email}`);
         })
         .catch(() => {
           setErrorMessage('This email is already busy');
@@ -84,9 +82,6 @@ export const SignUp: FC<Props> = ({ setIsSignIn }) => {
             type="password"
           />
         </div>
-        <div className={styles.actions}>
-          <Checkbox isActive={isRememberMe} setIsActive={setIsRememberMe} title="Remember me" />
-        </div>
         <Button disabled={isLoading} primary>
           Create an account
         </Button>
@@ -106,6 +101,11 @@ export const SignUp: FC<Props> = ({ setIsSignIn }) => {
         {errorMessage && (
           <Message messageVisibleHandler={setErrorMessage} error>
             {errorMessage}
+          </Message>
+        )}
+        {successMessage && (
+          <Message messageVisibleHandler={setSuccessMessage} success>
+            {successMessage}
           </Message>
         )}
       </AnimatePresence>

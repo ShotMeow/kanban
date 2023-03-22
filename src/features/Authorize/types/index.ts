@@ -10,7 +10,7 @@ export interface TAuthContext {
     password: string,
     rememberMe?: boolean
   ) => Promise<TLoginWithEmailAndPasswordResult>;
-  registerUserWithEmailAndPassword: (email: string, password: string, rememberMe?: boolean) => Promise<void>;
+  registerUserWithEmailAndPassword: (email: string, password: string) => Promise<void>;
   loginWithOauthPopup: (provider: string, rememberMe?: boolean) => Promise<TLoginWithEmailAndPasswordResult>;
   sendPasswordReset: (email: string) => Promise<void>;
   logout: () => void;

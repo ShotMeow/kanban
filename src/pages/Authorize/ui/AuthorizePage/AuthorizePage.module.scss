@@ -1,13 +1,12 @@
 .authorize {
-  @apply grid h-full overflow-hidden;
-  grid-template-columns: 1fr 2fr;
+  @apply grid h-full overflow-x-hidden grid-cols-1;
 
   > .actions {
     @apply bg-black;
   }
 
   > .landing {
-    @apply relative px-14 py-24;
+    @apply px-6 py-10;
     background: linear-gradient(
       107.56deg,
       #191921 0%,
@@ -20,16 +19,42 @@
       #2c2c3b 100%
     );
 
-    > h1 {
-      @apply text-5xl font-semibold;
-    }
+    > .heading {
+     @apply relative z-20;
+     > h1 {
+       @apply text-3xl font-semibold;
+     }
 
-    > p {
-      @apply text-lg mt-2 tracking-wide;
-    }
+     > p {
+       @apply text-lg mt-2 tracking-wide;
+     }
+   }
 
     > img {
-      @apply absolute mt-10 rounded-lg shadow-base -right-44 -bottom-10 scale-110 -rotate-12;
+      @apply static rotate-0 scale-100 rounded-lg shadow-base mt-10;
     }
+  }
+
+  @media (min-width: theme('screens.sm')) {
+    grid-template-columns: 1fr;
+  }
+
+  @media (min-width: theme('screens.md')) {
+    grid-template-columns: 3fr 3fr;
+
+    > .landing {
+      @apply px-14 py-24;
+      > .heading > h1 {
+        @apply text-5xl;
+      }
+    }
+  }
+
+  @media (min-width: theme('screens.lg')) {
+    grid-template-columns: 2fr 3fr;
+  }
+
+  @media (min-width: theme('screens.xl')) {
+    grid-template-columns: 1fr 2fr;
   }
 }

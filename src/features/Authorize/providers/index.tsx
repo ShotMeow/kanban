@@ -9,6 +9,7 @@ import {
   ProviderId,
   signInWithPopup,
   sendPasswordResetEmail,
+  sendEmailVerification,
   TwitterAuthProvider,
   FacebookAuthProvider,
   GoogleAuthProvider,
@@ -59,7 +60,7 @@ export const AuthContextProvider: FC<TProps> = (props) => {
     auth.useDeviceLanguage();
 
     auth.onAuthStateChanged((user) => {
-      if (user) {
+      if (user?.emailVerified) {
         setUser(user);
         setIsAuthenticated(true);
       } else {
@@ -94,14 +95,11 @@ export const AuthContextProvider: FC<TProps> = (props) => {
       });
   };
 
-  const registerUserWithEmailAndPassword = async (
-    email: string,
-    password: string,
-    rememberMe?: boolean
-  ): Promise<void> => {
+  const registerUserWithEmailAndPassword = async (email: string, password: string): Promise<void> => {
     await createUserWithEmailAndPassword(auth, email, password)
-      .then(async () => {
-        return await loginWithEmailAndPassword(email, password, rememberMe);
+      .then(async (credentials): Promise<void> => {
+        await sendEmailVerification(credentials.user);
+        await signOut(auth);
       })
       .catch((error) => {
         throw error;
