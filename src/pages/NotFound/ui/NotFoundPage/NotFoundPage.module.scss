@@ -1,0 +1,9 @@
+.notfound {
+  @apply h-screen w-screen p-8;
+  > div {
+    @apply h-full flex items-center justify-center;
+    > h1 {
+      @apply text-4xl;
+    }
+  }
+}

@@ -2,7 +2,8 @@ import { createBrowserRouter } from 'react-router-dom';
 import { Layout } from '@/app/layouts/Layout/ui/Layout';
 import { HomePage } from '@/pages/Home';
 import { AuthorizePage } from '@/pages/Authorize';
-import { PrivateRoute } from '@/shared/libs/react-router-dom/ui/PrivateRoute';
+import { PrivateRoute } from '@/features/Authorize/ui/PrivateRoute';
+import { NotFoundPage } from '@/pages/NotFound';
 
 export const router = createBrowserRouter([
   {
@@ -18,5 +19,9 @@ export const router = createBrowserRouter([
   {
     path: '/authorize',
     element: <AuthorizePage />,
+  },
+  {
+    path: '/*',
+    element: <NotFoundPage />,
   },
 ]);

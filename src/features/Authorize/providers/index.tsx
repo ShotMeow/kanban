@@ -5,24 +5,39 @@ import {
   createUserWithEmailAndPassword,
   browserSessionPersistence,
   signOut,
+  ProviderId,
+  signInWithPopup,
+  TwitterAuthProvider,
+  FacebookAuthProvider,
+  GoogleAuthProvider,
+  GithubAuthProvider,
   type UserCredential,
 } from 'firebase/auth';
 import { type TAuthContext } from '../types';
 import { type FirebaseApp } from 'firebase/app';
+
 interface TProps {
   children: React.ReactNode;
   firebaseApp: FirebaseApp;
 }
 
-export const authContext = createContext<TAuthContext>({
+export const ALLOWED_OAUTH_PROVIDERS: Record<string, any> = {
+  [ProviderId.GOOGLE]: new GoogleAuthProvider(),
+  [ProviderId.GITHUB]: new GithubAuthProvider(),
+  [ProviderId.FACEBOOK]: new FacebookAuthProvider(),
+  [ProviderId.TWITTER]: new TwitterAuthProvider(),
+};
+
+export const AuthContext = createContext<TAuthContext>({
   isAuthenticated: null,
   loginWithEmailAndPassword: async () => await Promise.reject({}),
   registerUserWithEmailAndPassword: async () => await Promise.reject({}),
+  loginWithOauthPopup: async () => await Promise.reject({}),
   logout: () => void 0,
 });
 
 export const useAuthContext = (): TAuthContext => {
-  return useContext<TAuthContext>(authContext);
+  return useContext<TAuthContext>(AuthContext);
 };
 
 export const AuthContextProvider: FC<TProps> = (props) => {
@@ -35,7 +50,7 @@ export const AuthContextProvider: FC<TProps> = (props) => {
       return;
     }
     void auth.setPersistence(browserSessionPersistence);
-    auth.languageCode = 'ru';
+    auth.useDeviceLanguage();
 
     auth.onAuthStateChanged((user) => {
       if (user) {
@@ -68,21 +83,32 @@ export const AuthContextProvider: FC<TProps> = (props) => {
       });
   };
 
+  const loginWithOauthPopup = async (providerId: string): Promise<UserCredential> => {
+    return await signInWithPopup(auth, ALLOWED_OAUTH_PROVIDERS[providerId])
+      .then((result) => {
+        return result;
+      })
+      .catch((error) => {
+        throw error;
+      });
+  };
+
   const logout = async (): Promise<void> => {
     await signOut(auth);
   };
 
   return (
-    <authContext.Provider
+    <AuthContext.Provider
       value={{
         isAuthenticated,
         user,
         loginWithEmailAndPassword,
         logout,
         registerUserWithEmailAndPassword,
+        loginWithOauthPopup,
       }}
     >
       {props.children}
-    </authContext.Provider>
+    </AuthContext.Provider>
   );
 };
