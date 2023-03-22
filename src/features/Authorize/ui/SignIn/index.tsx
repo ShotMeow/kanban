@@ -79,9 +79,13 @@ export const SignIn: FC<Props> = ({ setIsSignIn }) => {
                 <Link
                   to="#"
                   onClick={async () => {
-                    await loginWithOauthPopup(item).finally(() => {
-                      navigate('/');
-                    });
+                    await loginWithOauthPopup(item)
+                      .then(() => {
+                        navigate('/');
+                      })
+                      .catch(() => {
+                        setErrorMessage('Service is not working. Try again later');
+                      });
                   }}
                 >
                   {getOAuthProviderIcon(item)}
