@@ -84,6 +84,8 @@ export const AuthContextProvider: FC<TProps> = (props) => {
   };
 
   const loginWithOauthPopup = async (providerId: string): Promise<UserCredential> => {
+    setUser(null);
+    setIsAuthenticated(null);
     return await signInWithPopup(auth, ALLOWED_OAUTH_PROVIDERS[providerId])
       .then((result) => {
         return result;
