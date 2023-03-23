@@ -18,31 +18,6 @@
 
     > .board {
       @apply flex items-center gap-4;
-
-      > .other {
-        @apply relative;
-        .dropdown {
-          @apply w-48;
-          > button {
-            @apply flex items-center gap-2;
-            > * {
-              @apply flex-shrink-0;
-            }
-          }
-        }
-      }
-    }
-  }
-}
-
-.modal {
-  > form {
-    @apply flex flex-col items-center gap-4;
-    > .actions {
-      @apply flex gap-4;
-      > button {
-        @apply py-2 px-10;
-      }
     }
   }
 }

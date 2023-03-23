@@ -1,5 +1,6 @@
 import React from 'react';
 import { ProviderId } from 'firebase/auth';
+
 import { FacebookIcon, GithubIcon, GoogleIcon, TwitterIcon } from '@/shared/ui';
 
 export const getOAuthProviderIcon = (provider: string): React.ReactNode => {

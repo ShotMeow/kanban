@@ -1,4 +1,4 @@
-import React, { type FC, useEffect, useState } from 'react';
+import React, { type FC, type PropsWithChildren, useEffect, useState } from 'react';
 import {
   getAuth,
   signInWithEmailAndPassword,
@@ -16,12 +16,12 @@ import {
   type UserCredential,
   type User,
 } from 'firebase/auth';
-import { type TAuthContext } from '../types';
 import { type FirebaseApp } from 'firebase/app';
+
+import { type TAuthContext } from '../types';
 import { AuthContext } from '../context';
 
-interface TProps {
-  children: React.ReactNode;
+interface Props {
   firebaseApp: FirebaseApp;
 }
 
@@ -32,10 +32,10 @@ export const ALLOWED_OAUTH_PROVIDERS: Record<string, any> = {
   [ProviderId.TWITTER]: new TwitterAuthProvider(),
 };
 
-export const AuthContextProvider: FC<TProps> = (props) => {
+export const AuthContextProvider: FC<PropsWithChildren<Props>> = ({ children, firebaseApp }) => {
   const [isAuthenticated, setIsAuthenticated] = useState<TAuthContext['isAuthenticated']>(null);
   const [user, setUser] = useState<User>();
-  const [auth] = useState(getAuth(props.firebaseApp));
+  const [auth] = useState(getAuth(firebaseApp));
 
   useEffect(() => {
     if (!auth) {
@@ -123,7 +123,7 @@ export const AuthContextProvider: FC<TProps> = (props) => {
         sendPasswordReset,
       }}
     >
-      {props.children}
+      {children}
     </AuthContext.Provider>
   );
 };

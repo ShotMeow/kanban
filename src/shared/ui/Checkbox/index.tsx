@@ -1,8 +1,9 @@
 import React, { type FC } from 'react';
 import classNames from 'classnames';
 
+import { CheckIcon } from '../Icons/Check';
+
 import styles from './Checkbox.module.scss';
-import { CheckIcon } from '@/shared/ui/Icons/Check';
 
 interface Props {
   isActive: boolean;

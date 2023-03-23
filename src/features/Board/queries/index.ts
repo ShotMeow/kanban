@@ -6,6 +6,7 @@ import {
 } from '../api';
 import { type AddBoardType, type ChangeBoardType, type DeleteBoardType, type GetBoardType } from '../types';
 import { clearBoards, setBoards } from '../slice';
+
 import { rtkApi } from '@/shared/libs/redux-toolkit';
 
 export const boardApi = rtkApi.injectEndpoints({

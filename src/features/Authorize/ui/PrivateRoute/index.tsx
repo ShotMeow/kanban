@@ -3,7 +3,7 @@ import { Navigate } from 'react-router-dom';
 
 import { Loader } from '@/widgets/Loader';
 
-import { useAuthContext } from '../../';
+import { useAuthContext } from '../../context';
 
 export const PrivateRoute: FC<PropsWithChildren> = ({ children }) => {
   const { isAuthenticated } = useAuthContext();

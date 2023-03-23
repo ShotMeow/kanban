@@ -1,9 +1,9 @@
 import React, { type FC, type HTMLAttributes, type PropsWithChildren, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { createFocusTrap } from 'focus-trap';
+import classNames from 'classnames';
 
 import styles from './Dropdown.module.scss';
-import classNames from 'classnames';
 
 interface Props extends HTMLAttributes<HTMLDivElement> {
   onShownChange: React.Dispatch<React.SetStateAction<boolean>>;

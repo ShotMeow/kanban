@@ -1,9 +1,11 @@
 import React, { type FC, type FormEvent, useState } from 'react';
-import styles from '@/widgets/Aside/ui/Aside/Aside.module.scss';
+
 import { Button, Field, Modal } from '@/shared/ui';
 import { useAuthContext } from '@/features/Authorize';
 import { boardApi } from '@/features/Board';
 import { useNotificationContext } from '@/features/Notification';
+
+import styles from './CreateBoardModal.module.scss';
 
 interface Props {
   setCreateBoardModalShown: React.Dispatch<React.SetStateAction<boolean>>;

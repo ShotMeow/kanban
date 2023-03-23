@@ -1,7 +1,9 @@
 import React, { type FC } from 'react';
-import styles from '@/widgets/Header/ui/Header/Header.module.scss';
+
 import { Button, Modal } from '@/shared/ui';
 import { useAuthContext } from '@/features/Authorize';
+
+import styles from './LogoutModal.module.scss';
 
 interface Props {
   setLogoutModalShown: React.Dispatch<React.SetStateAction<boolean>>;

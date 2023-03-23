@@ -1,8 +1,10 @@
 import React, { type FC, useState } from 'react';
-import styles from '@/features/Authorize/ui/SignIn/SignIn.module.scss';
+import { useAuthContext } from '../../context';
+
 import { Button, Field, Modal } from '@/shared/ui';
-import { useAuthContext } from '@/features/Authorize';
 import { useNotificationContext } from '@/features/Notification';
+
+import styles from './ForgotPasswordModal.module.scss';
 
 interface Props {
   setForgotPasswordModal: React.Dispatch<React.SetStateAction<boolean>>;

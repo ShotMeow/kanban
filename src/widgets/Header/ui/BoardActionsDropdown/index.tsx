@@ -1,9 +1,12 @@
 import React, { type FC, useState } from 'react';
-import styles from '@/widgets/Header/ui/Header/Header.module.scss';
-import { Dropdown, RenameIcon, TrashIcon } from '@/shared/ui';
 import { AnimatePresence } from 'framer-motion';
-import { ChangeBoardModal } from '@/widgets/Header/ui/ChangeBoardModal';
-import { DeleteBoardModal } from '@/widgets/Header/ui/DeleteBoardModal';
+
+import { ChangeBoardModal } from '../ChangeBoardModal';
+import { DeleteBoardModal } from '../DeleteBoardModal';
+
+import { Dropdown, RenameIcon, TrashIcon } from '@/shared/ui';
+
+import styles from './BoardActionsDropdown.module.scss';
 
 interface Props {
   setDropdownShown: React.Dispatch<React.SetStateAction<boolean>>;

@@ -1,9 +1,9 @@
 import React, { type FC } from 'react';
-import { KanbanIcon } from '../Icons/Kanban';
-
-import styles from './Logo.module.scss';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+
+import { KanbanIcon } from '../Icons/Kanban';
+import styles from './Logo.module.scss';
 
 const MotionLink = motion(Link);
 

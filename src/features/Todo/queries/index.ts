@@ -6,6 +6,7 @@ import {
   getTodosFromBoardCollectionOfUser,
 } from '../api';
 import { type AddTodoType, type ChangeTodoType, type DeleteTodoType, type GetTodoType } from '../types';
+
 import { rtkApi } from '@/shared/libs/redux-toolkit';
 
 export const todoApi = rtkApi.injectEndpoints({

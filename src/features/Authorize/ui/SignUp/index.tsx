@@ -1,10 +1,12 @@
 import React, { type FC, type FormEvent, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+import { useAuthContext } from '../../context';
+
+import { useNotificationContext } from '@/features/Notification';
 import { Button, Checkbox, Field } from '@/shared/ui';
 
 import styles from './SignUp.module.scss';
-import { useAuthContext } from '../../context';
-import { useNavigate } from 'react-router-dom';
-import { useNotificationContext } from '@/features/Notification';
 
 interface Props {
   setIsSignIn: React.Dispatch<React.SetStateAction<boolean>>;

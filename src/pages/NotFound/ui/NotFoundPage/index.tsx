@@ -1,7 +1,8 @@
 import React, { type FC } from 'react';
 
-import styles from './NotFoundPage.module.scss';
 import { Logo } from '@/shared/ui';
+
+import styles from './NotFoundPage.module.scss';
 
 export const NotFoundPage: FC = () => {
   return (

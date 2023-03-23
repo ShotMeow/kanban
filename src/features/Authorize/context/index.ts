@@ -1,5 +1,6 @@
 import { createContext, useContext } from 'react';
-import { type TAuthContext } from '@/features/Authorize/types';
+
+import { type TAuthContext } from '../types';
 
 export const AuthContext = createContext<TAuthContext>({
   isAuthenticated: null,

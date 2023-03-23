@@ -1,0 +1,9 @@
+.dropdown {
+  @apply w-48;
+  > button {
+    @apply flex items-center gap-2;
+    > * {
+      @apply flex-shrink-0;
+    }
+  }
+}

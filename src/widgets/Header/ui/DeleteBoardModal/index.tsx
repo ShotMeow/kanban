@@ -1,10 +1,12 @@
 import React, { type FC } from 'react';
+import { useSelector } from 'react-redux';
+
 import { boardApi, getCurrentBoard } from '@/features/Board';
 import { useNotificationContext } from '@/features/Notification';
-import { useSelector } from 'react-redux';
 import { useAuthContext } from '@/features/Authorize';
-import styles from '@/widgets/Header/ui/Header/Header.module.scss';
 import { Button, Modal } from '@/shared/ui';
+
+import styles from './DeleteBoardModal.module.scss';
 
 interface Props {
   setDeleteBoardModalShown: React.Dispatch<React.SetStateAction<boolean>>;

@@ -1,4 +1,5 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
+
 import { type BoardSliceType, type BoardType } from '../types';
 
 const initialState: BoardSliceType = {

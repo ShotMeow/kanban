@@ -1,10 +1,9 @@
 import React, { type FC, useState } from 'react';
 
-import styles from './AuthorizePage.module.scss';
+import { SignIn, SignUp } from '@/features/Authorize';
 
 import kanbanSrc from '../../images/kanban_todo_app.jpg';
-
-import { SignIn, SignUp } from '@/features/Authorize';
+import styles from './AuthorizePage.module.scss';
 
 export const AuthorizePage: FC = () => {
   const [isSignIn, setIsSignIn] = useState<boolean>(true);

@@ -1,8 +1,9 @@
 import React, { type FC, type HTMLInputTypeAttribute, type InputHTMLAttributes, useState } from 'react';
+import classNames from 'classnames';
+
+import { ClosedEyeIcon, OpenedEyeIcon } from '../Icons/Eye';
 
 import styles from './Field.module.scss';
-import { ClosedEyeIcon, OpenedEyeIcon } from '@/shared/ui/Icons/Eye';
-import classNames from 'classnames';
 
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
   title: string;

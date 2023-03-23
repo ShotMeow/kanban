@@ -1,5 +1,6 @@
 import { createContext, useContext } from 'react';
-import { type NotificationContextType } from '@/features/Notification/types';
+
+import { type NotificationContextType } from '../types';
 
 export const NotificationContext = createContext<NotificationContextType>({
   setError: () => {},

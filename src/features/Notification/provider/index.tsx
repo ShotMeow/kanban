@@ -1,7 +1,8 @@
 import { type FC, type PropsWithChildren, useState } from 'react';
-import { NotificationContext } from '@/features/Notification/context';
 import { AnimatePresence } from 'framer-motion';
-import { Message } from '@/features/Notification/ui/Message';
+
+import { NotificationContext } from '../context';
+import { Message } from '../ui/Message';
 
 export const NotificationContextProvider: FC<PropsWithChildren> = ({ children }) => {
   const [error, setError] = useState<string | null>(null);

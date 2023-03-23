@@ -1,12 +1,14 @@
 import React, { type FC, useRef, useState } from 'react';
-
-import styles from './Header.module.scss';
-import { Button, LogoutIcon, OtherButton } from '@/shared/ui';
 import { AnimatePresence } from 'framer-motion';
 import { useSelector } from 'react-redux';
+
+import { BoardActionsDropdown } from '../BoardActionsDropdown';
+import { LogoutModal } from '../LogoutModal';
+
+import { Button, LogoutIcon, OtherButton } from '@/shared/ui';
 import { getCurrentBoard } from '@/features/Board';
-import { BoardActionsDropdown } from '@/widgets/Header/ui/BoardActionsDropdown';
-import { LogoutModal } from '@/widgets/Header/ui/LogoutModal';
+
+import styles from './Header.module.scss';
 
 export const Header: FC = () => {
   const [dropdownShown, setDropdownShown] = useState<boolean>(false);

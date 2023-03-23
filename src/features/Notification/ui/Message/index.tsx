@@ -1,11 +1,11 @@
 import React, { type FC, type PropsWithChildren, useEffect } from 'react';
 import { createPortal } from 'react-dom';
-
-import styles from './Message.module.scss';
 import classNames from 'classnames';
+import { motion } from 'framer-motion';
+
 import { CheckIcon } from '@/shared/ui/Icons/Check';
 
-import { motion } from 'framer-motion';
+import styles from './Message.module.scss';
 
 interface Props {
   success?: boolean;

@@ -1,14 +1,16 @@
 import React, { type FC, type FormEvent, useState } from 'react';
-
-import styles from './SignIn.module.scss';
-import { Button, Checkbox, Field } from '@/shared/ui';
 import { Link, useNavigate } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
+
 import { getOAuthProviderIcon } from '../../utils/getOAuthProviderIcon';
 import { useAuthContext } from '../../context';
-import { ALLOWED_OAUTH_PROVIDERS } from '@/features/Authorize/provider';
+import { ALLOWED_OAUTH_PROVIDERS } from '../../provider';
+import { ForgotPasswordModal } from '../ForgotPasswordModal';
+
 import { useNotificationContext } from '@/features/Notification';
-import { ForgotPasswordModal } from '@/features/Authorize/ui/ForgotPasswordModal';
+import { Button, Checkbox, Field } from '@/shared/ui';
+
+import styles from './SignIn.module.scss';
 
 interface Props {
   setIsSignIn: React.Dispatch<React.SetStateAction<boolean>>;

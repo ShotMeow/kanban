@@ -1,8 +1,9 @@
 import React, { type ButtonHTMLAttributes, forwardRef } from 'react';
 import classNames from 'classnames';
 
+import { Spinner } from '../Spinner';
+
 import styles from './Button.module.scss';
-import { Spinner } from '@/shared/ui';
 
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
   disabled?: boolean;

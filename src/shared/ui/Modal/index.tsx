@@ -1,10 +1,10 @@
 import React, { type FC, type HTMLAttributes, type PropsWithChildren, useEffect, useRef } from 'react';
-
-import styles from './Modal.module.scss';
 import { motion } from 'framer-motion';
 import { createPortal } from 'react-dom';
 import { createFocusTrap } from 'focus-trap';
 import classNames from 'classnames';
+
+import styles from './Modal.module.scss';
 
 interface Props extends HTMLAttributes<HTMLDivElement> {
   onShownChange: React.Dispatch<React.SetStateAction<boolean>>;

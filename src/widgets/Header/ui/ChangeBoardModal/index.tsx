@@ -1,10 +1,12 @@
 import React, { type FC, useState } from 'react';
+import { useSelector } from 'react-redux';
+
 import { boardApi, getCurrentBoard } from '@/features/Board';
 import { useNotificationContext } from '@/features/Notification';
-import { useSelector } from 'react-redux';
 import { useAuthContext } from '@/features/Authorize';
-import styles from '@/widgets/Header/ui/Header/Header.module.scss';
 import { Button, Field, Modal } from '@/shared/ui';
+
+import styles from './ChangeBoardModal.module.scss';
 
 interface Props {
   setChangeBoardModalShown: React.Dispatch<React.SetStateAction<boolean>>;
