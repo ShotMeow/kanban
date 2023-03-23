@@ -1,39 +1,19 @@
-import React, { type FC, type FormEvent, useState } from 'react';
+import React, { type FC, useState } from 'react';
 
 import styles from './Aside.module.scss';
-import { BoardIcon, Button, Field, Logo, Message, Modal } from '@/shared/ui';
+import { BoardIcon, Logo } from '@/shared/ui';
 import { AnimatePresence, motion } from 'framer-motion';
-import { useAuthContext } from '@/features/Authorize';
-import { boardApi } from '@/features/Board/queries';
 import { useDispatch, useSelector } from 'react-redux';
 import { getBoards, getCurrentBoard } from '@/features/Board';
 import { setCurrentBoard } from '@/features/Board/slice';
 import classNames from 'classnames';
+import { CreateBoardModal } from '@/widgets/Aside/ui/CreateBoardModal';
 
 export const Aside: FC = () => {
   const [createBoardModalShown, setCreateBoardModalShown] = useState<boolean>(false);
-  const [boardTitle, setBoardTitle] = useState<string>('');
-  const { user } = useAuthContext();
-  const [addBoard] = boardApi.useAddBoardMutation();
   const dispatch = useDispatch();
   const boards = useSelector(getBoards);
   const currentBoard = useSelector(getCurrentBoard);
-
-  const [errorMessage, setErrorMessage] = useState<string | null>(null);
-  const [successMessage, setSuccessMessage] = useState<string | null>(null);
-
-  const handleAddBoard = (event: FormEvent<HTMLFormElement>): void => {
-    event.preventDefault();
-
-    addBoard({ userId: user?.uid || '', boardTitle })
-      .then(() => {
-        setSuccessMessage(`The board «${boardTitle}» was created successfully`);
-        setCreateBoardModalShown(false);
-      })
-      .catch(() => {
-        setErrorMessage('The board was not created. Try again later');
-      });
-  };
 
   return (
     <>
@@ -71,38 +51,11 @@ export const Aside: FC = () => {
         </ul>
       </aside>
       <AnimatePresence>
-        {errorMessage && (
-          <Message messageVisibleHandler={setErrorMessage} error>
-            {errorMessage}
-          </Message>
-        )}
-        {successMessage && (
-          <Message messageVisibleHandler={setSuccessMessage} success>
-            {successMessage}
-          </Message>
-        )}
-      </AnimatePresence>
-      <AnimatePresence>
         {createBoardModalShown && (
-          <Modal className={styles.modal} onShownChange={setCreateBoardModalShown} shown={createBoardModalShown}>
-            <form
-              onSubmit={(event) => {
-                handleAddBoard(event);
-              }}
-            >
-              <h3>Create New Board</h3>
-              <Field
-                required
-                value={boardTitle}
-                onChange={(event) => {
-                  setBoardTitle(event.currentTarget.value);
-                }}
-                title="Title"
-                placeholder="e.g. Platform Launch"
-              />
-              <Button primary>Create Board</Button>
-            </form>
-          </Modal>
+          <CreateBoardModal
+            createBoardModalShown={createBoardModalShown}
+            setCreateBoardModalShown={setCreateBoardModalShown}
+          />
         )}
       </AnimatePresence>
     </>

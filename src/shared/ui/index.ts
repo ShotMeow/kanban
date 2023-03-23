@@ -4,7 +4,7 @@ export { OtherButton } from './OtherButton';
 export { Field } from './Field';
 export { Checkbox } from './Checkbox';
 export { GoogleIcon, FacebookIcon, GithubIcon, TwitterIcon } from './Icons/Socials';
-export { Message } from './Message';
+export { Message } from '../../features/Notification/ui/Message';
 export { Spinner } from './Spinner';
 export { Dropdown } from './Dropdown';
 export { LogoutIcon } from './Icons/Logout';

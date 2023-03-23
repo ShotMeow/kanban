@@ -1,11 +1,14 @@
 import React, { type FC, type FormEvent, useState } from 'react';
 
 import styles from './SignIn.module.scss';
-import { Button, Checkbox, Field, Message, Modal } from '@/shared/ui';
+import { Button, Checkbox, Field } from '@/shared/ui';
 import { Link, useNavigate } from 'react-router-dom';
-import { useAuthContext, ALLOWED_OAUTH_PROVIDERS } from '../../providers';
 import { AnimatePresence } from 'framer-motion';
 import { getOAuthProviderIcon } from '../../utils/getOAuthProviderIcon';
+import { useAuthContext } from '../../context';
+import { ALLOWED_OAUTH_PROVIDERS } from '@/features/Authorize/provider';
+import { useNotificationContext } from '@/features/Notification';
+import { ForgotPasswordModal } from '@/features/Authorize/ui/ForgotPasswordModal';
 
 interface Props {
   setIsSignIn: React.Dispatch<React.SetStateAction<boolean>>;
@@ -18,12 +21,10 @@ export const SignIn: FC<Props> = ({ setIsSignIn }) => {
   const [password, setPassword] = useState<string>('');
 
   const [forgotPasswordModal, setForgotPasswordModal] = useState<boolean>(false);
-  const [forgotPasswordEmail, setForgotPasswordEmail] = useState<string>('');
 
-  const [errorMessage, setErrorMessage] = useState<string | null>(null);
-  const [successMessage, setSuccessMessage] = useState<string | null>(null);
+  const { setSuccess, setError } = useNotificationContext();
 
-  const { loginWithEmailAndPassword, loginWithOauthPopup, sendPasswordReset } = useAuthContext();
+  const { loginWithEmailAndPassword, loginWithOauthPopup } = useAuthContext();
 
   const navigate = useNavigate();
   const handleSubmit = (event: FormEvent<HTMLFormElement>): void => {
@@ -32,11 +33,12 @@ export const SignIn: FC<Props> = ({ setIsSignIn }) => {
     loginWithEmailAndPassword(email, password, isRememberMe)
       .then(() => {
         setTimeout(() => {
+          setSuccess('You have successfully logged in');
           navigate('/');
         });
       })
       .catch(() => {
-        setErrorMessage('Email or Password entered incorrectly');
+        setError('Email or Password entered incorrectly');
       })
       .finally(() => {
         setIsLoading(false);
@@ -47,24 +49,11 @@ export const SignIn: FC<Props> = ({ setIsSignIn }) => {
     setIsLoading(true);
     await loginWithOauthPopup(item, isRememberMe)
       .then(() => {
+        setSuccess('You have successfully logged in');
         navigate('/');
       })
       .catch(() => {
-        setErrorMessage('Service is not working. Try again later');
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
-  };
-
-  const handlePasswordReset = async (): Promise<void> => {
-    setIsLoading(true);
-    await sendPasswordReset(forgotPasswordEmail)
-      .then(() => {
-        setSuccessMessage(`A password reset email has been sent to ${forgotPasswordEmail}`);
-      })
-      .catch(() => {
-        setErrorMessage('Email not found. Try to register');
+        setError('Service is not working. Try again later');
       })
       .finally(() => {
         setIsLoading(false);
@@ -148,41 +137,11 @@ export const SignIn: FC<Props> = ({ setIsSignIn }) => {
         </p>
       </form>
       <AnimatePresence>
-        {errorMessage && (
-          <Message messageVisibleHandler={setErrorMessage} error>
-            {errorMessage}
-          </Message>
-        )}
-        {successMessage && (
-          <Message messageVisibleHandler={setSuccessMessage} success>
-            {successMessage}
-          </Message>
-        )}
-      </AnimatePresence>
-      <AnimatePresence>
         {forgotPasswordModal && (
-          <Modal className={styles.modal} onShownChange={setForgotPasswordModal} shown={forgotPasswordModal}>
-            <form
-              onSubmit={async (event) => {
-                event.preventDefault();
-                await handlePasswordReset();
-              }}
-            >
-              <h3>Send password reset</h3>
-              <Field
-                required
-                title="E-mail"
-                type="email"
-                value={forgotPasswordEmail}
-                onChange={(event) => {
-                  setForgotPasswordEmail(event.currentTarget.value);
-                }}
-              />
-              <Button disabled={isLoading} primary>
-                Send
-              </Button>
-            </form>
-          </Modal>
+          <ForgotPasswordModal
+            forgotPasswordModal={forgotPasswordModal}
+            setForgotPasswordModal={setForgotPasswordModal}
+          />
         )}
       </AnimatePresence>
     </>

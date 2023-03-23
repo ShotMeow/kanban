@@ -1,4 +1,4 @@
-import React, { createContext, type FC, useContext, useEffect, useState } from 'react';
+import React, { type FC, useEffect, useState } from 'react';
 import {
   getAuth,
   signInWithEmailAndPassword,
@@ -18,6 +18,7 @@ import {
 } from 'firebase/auth';
 import { type TAuthContext } from '../types';
 import { type FirebaseApp } from 'firebase/app';
+import { AuthContext } from '../context';
 
 interface TProps {
   children: React.ReactNode;
@@ -29,23 +30,6 @@ export const ALLOWED_OAUTH_PROVIDERS: Record<string, any> = {
   [ProviderId.GITHUB]: new GithubAuthProvider(),
   [ProviderId.FACEBOOK]: new FacebookAuthProvider(),
   [ProviderId.TWITTER]: new TwitterAuthProvider(),
-};
-
-export const AuthContext = createContext<TAuthContext>({
-  isAuthenticated: null,
-  loginWithEmailAndPassword: async () => await Promise.reject({}),
-  registerUserWithEmailAndPassword: async () => {
-    await Promise.reject({});
-  },
-  loginWithOauthPopup: async () => await Promise.reject({}),
-  sendPasswordReset: async () => {
-    await Promise.reject({});
-  },
-  logout: () => void 0,
-});
-
-export const useAuthContext = (): TAuthContext => {
-  return useContext<TAuthContext>(AuthContext);
 };
 
 export const AuthContextProvider: FC<TProps> = (props) => {
