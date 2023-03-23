@@ -26,8 +26,7 @@ export const Aside: FC = () => {
     event.preventDefault();
 
     addBoard({ userId: user?.uid || '', boardTitle })
-      .then((data) => {
-        console.log(data);
+      .then(() => {
         setSuccessMessage(`The board «${boardTitle}» was created successfully`);
         setCreateBoardModalShown(false);
       })
