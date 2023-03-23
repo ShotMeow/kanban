@@ -9,12 +9,12 @@ import {
   ProviderId,
   signInWithPopup,
   sendPasswordResetEmail,
-  sendEmailVerification,
   TwitterAuthProvider,
   FacebookAuthProvider,
   GoogleAuthProvider,
   GithubAuthProvider,
   type UserCredential,
+  type User,
 } from 'firebase/auth';
 import { type TAuthContext } from '../types';
 import { type FirebaseApp } from 'firebase/app';
@@ -50,7 +50,7 @@ export const useAuthContext = (): TAuthContext => {
 
 export const AuthContextProvider: FC<TProps> = (props) => {
   const [isAuthenticated, setIsAuthenticated] = useState<TAuthContext['isAuthenticated']>(null);
-  const [user, setUser] = useState<any>(null);
+  const [user, setUser] = useState<User>();
   const [auth] = useState(getAuth(props.firebaseApp));
 
   useEffect(() => {
@@ -60,11 +60,11 @@ export const AuthContextProvider: FC<TProps> = (props) => {
     auth.useDeviceLanguage();
 
     auth.onAuthStateChanged((user) => {
-      if (user?.emailVerified || user?.providerData.length) {
+      if (user) {
         setUser(user);
         setIsAuthenticated(true);
       } else {
-        setUser(null);
+        setUser(undefined);
         setIsAuthenticated(false);
       }
     });
@@ -95,11 +95,15 @@ export const AuthContextProvider: FC<TProps> = (props) => {
       });
   };
 
-  const registerUserWithEmailAndPassword = async (email: string, password: string): Promise<void> => {
+  const registerUserWithEmailAndPassword = async (
+    email: string,
+    password: string,
+    rememberMe?: boolean
+  ): Promise<void> => {
+    void auth.setPersistence(rememberMe ? browserSessionPersistence : inMemoryPersistence);
     await createUserWithEmailAndPassword(auth, email, password)
-      .then(async (credentials): Promise<void> => {
-        await sendEmailVerification(credentials.user);
-        await signOut(auth);
+      .then((result) => {
+        return result;
       })
       .catch((error) => {
         throw error;
@@ -108,7 +112,7 @@ export const AuthContextProvider: FC<TProps> = (props) => {
 
   const loginWithOauthPopup = async (providerId: string, rememberMe?: boolean): Promise<UserCredential> => {
     void auth.setPersistence(rememberMe ? browserSessionPersistence : inMemoryPersistence);
-    setUser(null);
+    setUser(undefined);
     setIsAuthenticated(null);
     return await signInWithPopup(auth, ALLOWED_OAUTH_PROVIDERS[providerId])
       .then((result) => {

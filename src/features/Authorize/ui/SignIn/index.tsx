@@ -30,12 +30,10 @@ export const SignIn: FC<Props> = ({ setIsSignIn }) => {
     event.preventDefault();
     setIsLoading(true);
     loginWithEmailAndPassword(email, password, isRememberMe)
-      .then((credentials) => {
-        if (credentials.user.emailVerified) {
+      .then(() => {
+        setTimeout(() => {
           navigate('/');
-        } else {
-          setErrorMessage('Email is not verified.');
-        }
+        });
       })
       .catch(() => {
         setErrorMessage('Email or Password entered incorrectly');

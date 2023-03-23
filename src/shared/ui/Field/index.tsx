@@ -10,7 +10,6 @@ interface Props extends InputHTMLAttributes<HTMLInputElement> {
 
 export const Field: FC<Props> = ({ type = 'text', title, value, ...props }) => {
   const [fieldType, setFieldType] = useState<HTMLInputTypeAttribute>(type);
-
   return (
     <label className={styles.field}>
       <span>{title}</span>

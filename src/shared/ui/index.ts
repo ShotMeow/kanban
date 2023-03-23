@@ -9,3 +9,6 @@ export { Spinner } from './Spinner';
 export { Dropdown } from './Dropdown';
 export { LogoutIcon } from './Icons/Logout';
 export { Modal } from './Modal';
+export { BoardIcon } from './Icons/Board';
+export { TrashIcon } from './Icons/Trash';
+export { RenameIcon } from './Icons/Rename';

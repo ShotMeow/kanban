@@ -1,3 +1,49 @@
 .aside {
   @apply bg-gray-dark h-full p-8 border-r border-gray-stroke;
+
+  > h3 {
+    @apply uppercase text-gray text-sm mt-14 tracking-widest font-semibold;
+  }
+
+  > ul {
+    @apply flex flex-col gap-6 my-8;
+
+    > li {
+      &.active {
+        @apply relative;
+        > button {
+          @apply relative text-white z-20;
+        }
+        > .background {
+          @apply absolute z-0 -left-10 -top-2 bg-primary rounded-r-full;
+          height: calc(100% + 15px);
+          width: calc(100% + 60px);
+        }
+      }
+
+      > button {
+        @apply flex items-center gap-3 text-gray text-start overflow-hidden;
+
+        > * {
+          @apply flex-shrink-0;
+        }
+      }
+    }
+
+    > li:last-child {
+      > button {
+        @apply text-primary;
+      }
+    }
+  }
+}
+
+.modal {
+  > form {
+    @apply flex flex-col gap-4 mx-20 w-full;
+
+    > h3 {
+      @apply text-xl font-semibold;
+    }
+  }
 }

@@ -8,7 +8,6 @@ import { SignIn, SignUp } from '@/features/Authorize';
 
 export const AuthorizePage: FC = () => {
   const [isSignIn, setIsSignIn] = useState<boolean>(true);
-
   return (
     <main className={styles.authorize}>
       <div className={styles.actions}>

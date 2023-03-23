@@ -1,10 +1,10 @@
-import { type UserCredential } from 'firebase/auth';
+import { type UserCredential, type User } from 'firebase/auth';
 
 type TLoginWithEmailAndPasswordResult = UserCredential;
 
 export interface TAuthContext {
   isAuthenticated: boolean | null;
-  user?: any;
+  user?: User;
   loginWithEmailAndPassword: (
     email: string,
     password: string,

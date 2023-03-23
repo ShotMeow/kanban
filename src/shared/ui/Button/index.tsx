@@ -27,8 +27,7 @@ export const Button = forwardRef<HTMLButtonElement, Props>(
         ref={ref}
         {...props}
       >
-        {disabled && <Spinner />}
-        {children}
+        {disabled ? <Spinner /> : children}
       </button>
     );
   }

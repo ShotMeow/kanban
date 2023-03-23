@@ -23,6 +23,7 @@
     "prefer-promise-reject-errors": "off",
     "no-void": "off",
     "@typescript-eslint/no-invalid-void-type": "off",
-    "@typescript-eslint/no-misused-promises": "off"
+    "@typescript-eslint/no-misused-promises": "off",
+    "@typescript-eslint/restrict-template-expressions": "off"
   }
 }

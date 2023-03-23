@@ -1,4 +1,12 @@
 .layout {
   @apply grid h-full;
-  grid-template-columns: 1fr 5fr;
+  grid-template-columns: 1fr;
+
+  @media (min-width: theme("screens.lg")) {
+    grid-template-columns: 2fr 5fr;
+  }
+
+  @media (min-width: theme("screens.2xl")) {
+    grid-template-columns: 1fr 5fr;
+  }
 }

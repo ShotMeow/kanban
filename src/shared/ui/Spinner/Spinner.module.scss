@@ -1,6 +1,6 @@
 .spinner {
   @apply w-20 h-20 border-8 rounded-full;
-  border-color: theme('colors.primary') transparent theme('colors.primary') transparent;
+  border-color: theme("colors.primary") transparent theme("colors.primary") transparent;
   animation: spin-anim 1.2s linear infinite;
 }
 
@@ -12,4 +12,3 @@
     transform: rotate(360deg);
   }
 }
-

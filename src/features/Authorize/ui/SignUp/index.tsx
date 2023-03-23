@@ -1,18 +1,20 @@
 import React, { type FC, type FormEvent, useState } from 'react';
-import { Button, Field, Message } from '@/shared/ui';
+import { Button, Checkbox, Field, Message } from '@/shared/ui';
 
 import styles from './SignUp.module.scss';
 import { useAuthContext } from '@/features/Authorize';
 import { AnimatePresence } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 
 interface Props {
   setIsSignIn: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export const SignUp: FC<Props> = ({ setIsSignIn }) => {
+  const [isRememberMe, setIsRememberMe] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-
-  const { registerUserWithEmailAndPassword } = useAuthContext();
+  const navigate = useNavigate();
+  const { registerUserWithEmailAndPassword, loginWithEmailAndPassword } = useAuthContext();
 
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
@@ -28,10 +30,12 @@ export const SignUp: FC<Props> = ({ setIsSignIn }) => {
       setIsLoading(true);
       registerUserWithEmailAndPassword(email, password)
         .then(() => {
-          setSuccessMessage(`A message with verification has been sent to ${email}`);
+          void loginWithEmailAndPassword(email, password, isRememberMe).then(() => {
+            navigate('/');
+          });
         })
         .catch(() => {
-          setErrorMessage('This email is already busy');
+          setErrorMessage('This email is already busy or password is too simple');
         })
         .finally(() => {
           setIsLoading(false);
@@ -81,6 +85,9 @@ export const SignUp: FC<Props> = ({ setIsSignIn }) => {
             title="Repeat password"
             type="password"
           />
+        </div>
+        <div className={styles.actions}>
+          <Checkbox isActive={isRememberMe} setIsActive={setIsRememberMe} title="Remember me" />
         </div>
         <Button disabled={isLoading} primary>
           Create an account

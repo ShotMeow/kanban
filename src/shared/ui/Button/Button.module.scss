@@ -1,18 +1,26 @@
 .button {
-  @apply rounded-full px-8 py-3 font-semibold relative;
+  @apply rounded-full px-8 py-3 font-semibold relative flex items-center justify-center gap-2 transition-all;
   &.primary {
     @apply bg-primary text-white;
+
+    &:hover {
+      @apply ring-2 ring-primary bg-transparent text-white;
+    }
   }
 
   &.secondary {
     @apply bg-white text-primary;
+
+    &:hover {
+      @apply ring-2 ring-primary bg-transparent text-white;
+    }
   }
 
   &.disabled {
     @apply bg-opacity-60 text-white/80;
 
     > div {
-      @apply w-5 h-5 border-opacity-80 border-white border-4 absolute;
+      @apply w-6 h-6 border-opacity-80 border-white border-4;
       border-color: rgba(255, 255, 255, 0.8) transparent rgba(255, 255, 255, 0.8) transparent;
     }
   }
