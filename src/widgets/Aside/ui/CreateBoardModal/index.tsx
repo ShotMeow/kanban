@@ -49,7 +49,9 @@ export const CreateBoardModal: FC<Props> = ({ setCreateBoardModalShown, createBo
           title="Title"
           placeholder="e.g. Platform Launch"
         />
-        <Button primary>Create Board</Button>
+        <Button type="submit" primary>
+          Create Board
+        </Button>
       </form>
     </Modal>
   );

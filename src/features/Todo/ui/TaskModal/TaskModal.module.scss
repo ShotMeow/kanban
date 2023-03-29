@@ -1,8 +1,8 @@
 .modal {
   > div {
-    @apply items-start w-full mx-40 space-y-4;
+    @apply items-start space-y-4;
     > .heading {
-      @apply flex items-center justify-between relative;
+      @apply flex items-center justify-between gap-20 relative;
       > h2 {
         @apply text-xl font-semibold;
       }

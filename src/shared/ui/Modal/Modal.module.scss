@@ -5,4 +5,5 @@
 
 .modal {
   @apply bg-gray-dark p-6 rounded-md shadow-base flex flex-col items-center gap-4;
+  max-width: 620px;
 }

@@ -1,5 +1,5 @@
 .other {
-  @apply w-8 h-8 rounded-full flex items-center justify-center transition-all;
+  @apply w-8 h-8 rounded-full flex items-center justify-center transition-all flex-shrink-0;
 
   &:hover {
     @apply bg-dark;

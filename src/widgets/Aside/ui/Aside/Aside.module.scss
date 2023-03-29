@@ -1,5 +1,9 @@
 .aside {
-  @apply bg-gray-dark h-full p-8 border-r border-gray-stroke;
+  @apply bg-gray-dark p-8 border-r border-gray-stroke w-full h-full;
+
+  @media (min-width: theme("screens.lg")) {
+    min-width: 20vw;
+  }
 
   > h3 {
     @apply uppercase text-gray text-sm mt-14 tracking-widest font-semibold;
@@ -22,10 +26,14 @@
       }
 
       > button {
-        @apply flex items-center gap-3 text-gray text-start overflow-hidden;
+        @apply flex items-center gap-3 text-gray text-start overflow-hidden w-full;
 
         > * {
           @apply flex-shrink-0;
+        }
+
+        > span {
+          @apply line-clamp-1 overflow-hidden w-full;
         }
       }
     }
