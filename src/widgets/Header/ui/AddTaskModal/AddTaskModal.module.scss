@@ -1,0 +1,9 @@
+.modal {
+  > form {
+    @apply mx-20 w-full flex flex-col gap-4;
+
+    > h3 {
+      @apply text-xl;
+    }
+  }
+}

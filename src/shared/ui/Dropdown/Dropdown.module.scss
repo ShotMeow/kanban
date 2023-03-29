@@ -1,3 +1,6 @@
 .dropdown {
-  @apply absolute right-0 top-10 bg-black px-6 py-3 rounded-md space-y-2;
+  @apply absolute right-0 z-50;
+  > div {
+    @apply absolute right-0 top-10 bg-black px-6 py-3 rounded-md space-y-2;
+  }
 }

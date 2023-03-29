@@ -1,0 +1,11 @@
+.task {
+  @apply bg-gray-dark p-4 rounded-md shadow-base cursor-pointer;
+
+  > h3 {
+    @apply text-lg font-semibold;
+  }
+
+  > p {
+    @apply text-gray;
+  }
+}

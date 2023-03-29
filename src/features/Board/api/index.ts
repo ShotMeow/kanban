@@ -1,10 +1,22 @@
-import { getFirestore, addDoc, collection, deleteDoc, doc, getDocs, updateDoc } from 'firebase/firestore';
+import {
+  getFirestore,
+  addDoc,
+  collection,
+  deleteDoc,
+  doc,
+  getDocs,
+  updateDoc,
+  arrayRemove,
+  arrayUnion,
+} from 'firebase/firestore';
 
 import {
   type AddBoardType,
+  type AddColumnToBoardType,
   type BoardType,
   type ChangeBoardType,
   type DeleteBoardType,
+  type DeleteColumnFromBoardType,
   type GetBoardType,
 } from '../types';
 
@@ -52,4 +64,36 @@ export const deleteBoardCollectionOfUser = async ({ userId, boardId }: DeleteBoa
 
   const docRef = doc(doc(db, 'users', userId), 'boards', boardId);
   await deleteDoc(docRef);
+};
+
+export const addColumnToBoardCollectionOfUser = async ({
+  userId,
+  boardId,
+  columnColor,
+  columnTitle,
+}: AddColumnToBoardType): Promise<void> => {
+  const db = getFirestore();
+
+  const docRef = doc(doc(db, 'users', userId), 'boards', boardId);
+  await updateDoc(docRef, {
+    columns: arrayUnion({
+      title: columnTitle,
+      color: columnColor,
+    }),
+  });
+};
+
+export const deleteColumnFromBoardCollectionOfUser = async ({
+  userId,
+  boardId,
+  columnTitle,
+}: DeleteColumnFromBoardType): Promise<void> => {
+  const db = getFirestore();
+
+  const docRef = doc(doc(db, 'users', userId), 'boards', boardId);
+  await updateDoc(docRef, {
+    columns: arrayRemove({
+      title: columnTitle,
+    }),
+  });
 };

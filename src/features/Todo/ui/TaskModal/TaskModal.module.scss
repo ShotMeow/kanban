@@ -1,0 +1,11 @@
+.modal {
+  > div {
+    @apply items-start w-full mx-40 space-y-4;
+    > .heading {
+      @apply flex items-center justify-between relative;
+      > h2 {
+        @apply text-xl font-semibold;
+      }
+    }
+  }
+}

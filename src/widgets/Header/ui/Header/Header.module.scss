@@ -18,6 +18,10 @@
 
     > .board {
       @apply flex items-center gap-4;
+
+      > .other {
+        @apply relative;
+      }
     }
   }
 }

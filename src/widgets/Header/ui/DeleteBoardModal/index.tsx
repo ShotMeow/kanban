@@ -41,7 +41,6 @@ export const DeleteBoardModal: FC<Props> = ({ setDeleteBoardModalShown, deleteBo
         <h3>Do you really want delete «{currentBoard?.title}» board?</h3>
         <div className={styles.actions}>
           <Button
-            type="button"
             onClick={() => {
               setDeleteBoardModalShown(false);
             }}

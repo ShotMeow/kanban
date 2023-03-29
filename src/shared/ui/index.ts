@@ -12,3 +12,5 @@ export { Modal } from './Modal';
 export { BoardIcon } from './Icons/Board';
 export { TrashIcon } from './Icons/Trash';
 export { RenameIcon } from './Icons/Rename';
+export { TextArea } from './TextArea';
+export { Select } from './Select';

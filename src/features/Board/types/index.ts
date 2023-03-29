@@ -1,6 +1,12 @@
 export interface BoardType {
   id: string;
   title: string;
+  columns?: ColumnType[];
+}
+
+export interface ColumnType {
+  color: string;
+  title: string;
 }
 
 export interface GetBoardType {
@@ -12,6 +18,13 @@ export interface AddBoardType {
   boardTitle: string;
 }
 
+export interface AddColumnToBoardType {
+  userId: string;
+  boardId: string;
+  columnTitle: string;
+  columnColor: string;
+}
+
 export interface ChangeBoardType {
   userId: string;
   boardId: string;
@@ -21,6 +34,12 @@ export interface ChangeBoardType {
 export interface DeleteBoardType {
   userId: string;
   boardId: string;
+}
+
+export interface DeleteColumnFromBoardType {
+  userId: string;
+  boardId: string;
+  columnTitle: string;
 }
 
 export interface BoardSliceType {

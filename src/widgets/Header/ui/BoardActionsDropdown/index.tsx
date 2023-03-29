@@ -28,6 +28,7 @@ export const BoardActionsDropdown: FC<Props> = ({ setDropdownShown, dropdownShow
           <RenameIcon /> <span>Rename</span>
         </button>
         <button
+          className={styles.delete}
           onClick={() => {
             setDeleteBoardModalShown(true);
           }}

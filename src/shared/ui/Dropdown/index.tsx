@@ -1,7 +1,6 @@
 import React, { type FC, type HTMLAttributes, type PropsWithChildren, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { createFocusTrap } from 'focus-trap';
-import classNames from 'classnames';
 
 import styles from './Dropdown.module.scss';
 
@@ -39,11 +38,24 @@ export const Dropdown: FC<PropsWithChildren<Props>> = ({ children, onShownChange
   }, [onShownChange]);
 
   useEffect(() => {
+    const documentKeydownListener = (event: KeyboardEvent): void => {
+      if (event.key === 'Escape') {
+        onShownChange(false);
+      }
+    };
+    document.addEventListener('keydown', documentKeydownListener);
+    return () => {
+      document.removeEventListener('keydown', documentKeydownListener);
+    };
+  }, [onShownChange]);
+
+  useEffect(() => {
     onShownChange(shown);
   }, [shown, onShownChange]);
 
   return (
     <motion.div
+      className={styles.dropdown}
       initial={{ opacity: 0, y: -40, scale: 0 }}
       animate={{ opacity: 1, y: -20, scale: 1 }}
       exit={{ opacity: 0 }}
@@ -53,12 +65,7 @@ export const Dropdown: FC<PropsWithChildren<Props>> = ({ children, onShownChange
           event.stopPropagation();
         }}
         ref={ref}
-        className={classNames(
-          {
-            [styles.dropdown]: true,
-          },
-          className
-        )}
+        className={className}
         {...props}
       >
         {children}

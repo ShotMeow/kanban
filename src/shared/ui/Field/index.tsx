@@ -6,14 +6,22 @@ import { ClosedEyeIcon, OpenedEyeIcon } from '../Icons/Eye';
 import styles from './Field.module.scss';
 
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
-  title: string;
+  title?: string;
 }
 
 export const Field: FC<Props> = ({ type = 'text', title, value, ...props }) => {
   const [fieldType, setFieldType] = useState<HTMLInputTypeAttribute>(type);
+
   return (
-    <label className={styles.field}>
-      <span>{title}</span>
+    <label
+      className={classNames(
+        {
+          [styles.color]: type === 'color',
+        },
+        styles.field
+      )}
+    >
+      {title && <span>{title}</span>}
       <input value={value} type={fieldType} {...props} />
       {type === 'password' && (
         <button

@@ -1,0 +1,15 @@
+.modal {
+  > form {
+    @apply flex flex-col items-center gap-4 mx-20 w-full;
+
+    > h3 {
+      @apply self-start text-xl font-semibold;
+    }
+    > .actions {
+      @apply flex gap-4;
+      > button {
+        @apply py-2 px-10;
+      }
+    }
+  }
+}

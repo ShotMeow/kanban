@@ -9,10 +9,13 @@ import { Button, LogoutIcon, OtherButton } from '@/shared/ui';
 import { getCurrentBoard } from '@/features/Board';
 
 import styles from './Header.module.scss';
+import { AddTaskModal } from '@/widgets/Header/ui/AddTaskModal';
 
 export const Header: FC = () => {
   const [dropdownShown, setDropdownShown] = useState<boolean>(false);
   const [logoutModalShown, setLogoutModalShown] = useState<boolean>(false);
+  const [addTaskModalShown, setAddTaskModalShown] = useState<boolean>(false);
+
   const currentBoard = useSelector(getCurrentBoard);
 
   const targetRef = useRef<HTMLButtonElement>(null);
@@ -24,7 +27,15 @@ export const Header: FC = () => {
         <div className={styles.actions}>
           {currentBoard && (
             <div className={styles.board}>
-              <Button primary>+ Add New Task</Button>
+              <Button
+                onClick={(event) => {
+                  event.stopPropagation();
+                  setAddTaskModalShown(true);
+                }}
+                primary
+              >
+                + Add New Task
+              </Button>
               <div className={styles.other}>
                 <OtherButton
                   onClick={(event) => {
@@ -56,6 +67,11 @@ export const Header: FC = () => {
       <AnimatePresence>
         {logoutModalShown && (
           <LogoutModal logoutModalShown={logoutModalShown} setLogoutModalShown={setLogoutModalShown} />
+        )}
+      </AnimatePresence>
+      <AnimatePresence>
+        {addTaskModalShown && (
+          <AddTaskModal setAddTaskModalShown={setAddTaskModalShown} addTaskModalShown={addTaskModalShown} />
         )}
       </AnimatePresence>
     </>

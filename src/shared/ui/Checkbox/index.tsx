@@ -8,7 +8,7 @@ import styles from './Checkbox.module.scss';
 interface Props {
   isActive: boolean;
   setIsActive: React.Dispatch<React.SetStateAction<boolean>>;
-  title: string;
+  title?: string;
 }
 
 export const Checkbox: FC<Props> = ({ title, isActive, setIsActive }) => {
@@ -33,7 +33,7 @@ export const Checkbox: FC<Props> = ({ title, isActive, setIsActive }) => {
           })}
         />
       </button>
-      <span>{title}</span>
+      {title && <span>{title}</span>}
     </label>
   );
 };

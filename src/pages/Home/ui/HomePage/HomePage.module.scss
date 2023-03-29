@@ -1,0 +1,29 @@
+.home {
+  @apply p-6 w-full h-full;
+  > .columns {
+    @apply h-full flex gap-6;
+    > li {
+      @apply h-full w-80 flex flex-col gap-6;
+
+      > h2 {
+        @apply flex items-center gap-4 uppercase text-gray font-semibold;
+        > div {
+          @apply h-4 w-4 rounded-full;
+        }
+      }
+
+      > ul {
+        @apply space-y-4;
+      }
+
+      &:last-child {
+        > span {
+          @apply h-24;
+        }
+        > button {
+          @apply h-full bg-black/60 rounded-lg w-full flex items-center justify-center text-gray font-semibold;
+        }
+      }
+    }
+  }
+}

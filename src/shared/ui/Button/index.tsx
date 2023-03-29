@@ -12,7 +12,7 @@ interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 export const Button = forwardRef<HTMLButtonElement, Props>(
-  ({ disabled, primary, secondary, children, className, ...props }, ref) => {
+  ({ disabled, primary, secondary, children, className, type = 'button', ...props }, ref) => {
     return (
       <button
         className={classNames(
@@ -24,6 +24,7 @@ export const Button = forwardRef<HTMLButtonElement, Props>(
           styles.button,
           className
         )}
+        type={type}
         disabled={disabled}
         ref={ref}
         {...props}

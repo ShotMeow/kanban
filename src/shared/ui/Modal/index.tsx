@@ -40,11 +40,32 @@ export const Modal: FC<PropsWithChildren<Props>> = ({ children, onShownChange, c
   }, [onShownChange]);
 
   useEffect(() => {
+    const documentKeydownListener = (event: KeyboardEvent): void => {
+      if (event.key === 'Escape') {
+        onShownChange(false);
+        event.stopPropagation();
+      }
+    };
+    document.addEventListener('keydown', documentKeydownListener);
+    return () => {
+      document.removeEventListener('keydown', documentKeydownListener);
+    };
+  }, [onShownChange]);
+
+  useEffect(() => {
     onShownChange(shown);
   }, [shown, onShownChange]);
 
   return createPortal(
-    <motion.div className={styles.frame} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+    <motion.div
+      onClick={() => {
+        onShownChange(false);
+      }}
+      className={styles.frame}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+    >
       <motion.div
         onClick={(event) => {
           event.stopPropagation();

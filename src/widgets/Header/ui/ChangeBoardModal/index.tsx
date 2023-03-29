@@ -51,7 +51,6 @@ export const ChangeBoardModal: FC<Props> = ({ setChangeBoardModalShown, changeBo
         )}
         <div className={styles.actions}>
           <Button
-            type="button"
             onClick={() => {
               setChangeBoardModalShown(false);
             }}

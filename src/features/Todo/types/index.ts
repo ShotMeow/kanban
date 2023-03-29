@@ -2,8 +2,14 @@ export interface TodoType {
   id: string;
   title: string;
   description: string;
-  subtasks: string[];
+  subtasks: SubtaskType[];
   status: string;
+}
+
+export interface SubtaskType {
+  id: number;
+  value: string;
+  isSuccess: boolean;
 }
 
 export interface GetTodoType {

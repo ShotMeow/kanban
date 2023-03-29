@@ -9,10 +9,10 @@ import { boardApi } from '@/features/Board';
 export const App: FC = () => {
   const { user } = useAuthContext();
 
-  const { refetch } = boardApi.useGetBoardsQuery({ userId: user?.uid || '' });
+  const { refetch: boardsRefetch } = boardApi.useGetBoardsQuery({ userId: user?.uid || '' });
 
   useEffect(() => {
-    void refetch();
+    void boardsRefetch();
   }, [user]);
 
   return (

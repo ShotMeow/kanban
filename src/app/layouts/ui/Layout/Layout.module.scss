@@ -2,6 +2,10 @@
   @apply grid h-full;
   grid-template-columns: 1fr;
 
+  > div {
+    @apply flex flex-col;
+  }
+
   @media (min-width: theme("screens.lg")) {
     grid-template-columns: 2fr 5fr;
   }
