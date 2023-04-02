@@ -1,6 +1,6 @@
 .modal {
   > form {
-    @apply flex flex-col gap-4 mx-20 w-full;
+    @apply flex flex-col gap-4 w-full;
 
     > h3 {
       @apply text-xl font-bold;

@@ -9,9 +9,10 @@ import styles from './Modal.module.scss';
 interface Props extends HTMLAttributes<HTMLDivElement> {
   onShownChange: React.Dispatch<React.SetStateAction<boolean>>;
   shown: boolean;
+  title?: string;
 }
 
-export const Modal: FC<PropsWithChildren<Props>> = ({ children, onShownChange, className, shown }) => {
+export const Modal: FC<PropsWithChildren<Props>> = ({ children, onShownChange, title, className, shown }) => {
   const ref = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -28,18 +29,6 @@ export const Modal: FC<PropsWithChildren<Props>> = ({ children, onShownChange, c
   }, [shown]);
 
   useEffect(() => {
-    const documentClickListener = (): void => {
-      onShownChange(false);
-    };
-
-    document.addEventListener('click', documentClickListener);
-
-    return () => {
-      document.removeEventListener('click', documentClickListener);
-    };
-  }, [onShownChange]);
-
-  useEffect(() => {
     const documentKeydownListener = (event: KeyboardEvent): void => {
       if (event.key === 'Escape') {
         onShownChange(false);
@@ -51,10 +40,6 @@ export const Modal: FC<PropsWithChildren<Props>> = ({ children, onShownChange, c
       document.removeEventListener('keydown', documentKeydownListener);
     };
   }, [onShownChange]);
-
-  useEffect(() => {
-    onShownChange(shown);
-  }, [shown, onShownChange]);
 
   return createPortal(
     <motion.div
@@ -81,6 +66,18 @@ export const Modal: FC<PropsWithChildren<Props>> = ({ children, onShownChange, c
         animate={{ scale: 1 }}
         exit={{ scale: 0 }}
       >
+        {title && (
+          <header>
+            <h3>{title}</h3>
+            <button
+              onClick={() => {
+                onShownChange(false);
+              }}
+            >
+              ×
+            </button>
+          </header>
+        )}
         {children}
       </motion.div>
     </motion.div>,

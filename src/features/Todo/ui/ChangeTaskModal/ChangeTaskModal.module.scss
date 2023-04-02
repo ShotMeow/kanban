@@ -1,10 +1,7 @@
 .modal {
   > form {
-    @apply flex flex-col items-center gap-4 mx-20 w-full;
+    @apply flex flex-col items-center gap-4 w-full;
 
-    > h3 {
-      @apply self-start text-xl font-semibold;
-    }
     > .actions {
       @apply flex gap-4;
       > button {

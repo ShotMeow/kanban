@@ -1,5 +1,5 @@
 .subtask {
-  @apply cursor-pointer flex items-center gap-2 bg-dark px-4 py-2 rounded-md drop-shadow-2xl;
+  @apply cursor-pointer flex items-center gap-2 bg-dark px-4 py-2 rounded-md drop-shadow-2xl line-clamp-1;
   > p {
     @apply text-white;
   }

@@ -4,8 +4,11 @@
     > .heading {
       @apply flex items-center justify-between gap-20 relative;
       > h2 {
-        @apply text-xl font-semibold;
+        @apply text-xl font-semibold line-clamp-1;
       }
+    }
+    > p {
+      @apply break-all;
     }
   }
 }

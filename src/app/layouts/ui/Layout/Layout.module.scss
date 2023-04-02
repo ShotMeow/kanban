@@ -1,16 +1,12 @@
 .layout {
-  @apply grid h-full;
-  grid-template-columns: 1fr;
+  @apply flex h-full;
 
   > div {
     @apply flex flex-col;
-  }
 
-  @media (min-width: theme("screens.lg")) {
-    grid-template-columns: 2fr 5fr;
-  }
-
-  @media (min-width: theme("screens.2xl")) {
-    grid-template-columns: 1fr 5fr;
+    > div {
+      @apply absolute top-20 left-96 p-8;
+      height: calc(100% - 100px);
+    }
   }
 }

@@ -34,14 +34,18 @@ export const ForgotPasswordModal: FC<Props> = ({ setForgotPasswordModal, forgotP
   };
 
   return (
-    <Modal className={styles.modal} onShownChange={setForgotPasswordModal} shown={forgotPasswordModal}>
+    <Modal
+      title="Send password reset"
+      className={styles.modal}
+      onShownChange={setForgotPasswordModal}
+      shown={forgotPasswordModal}
+    >
       <form
         onSubmit={async (event) => {
           event.preventDefault();
           await handlePasswordReset();
         }}
       >
-        <h3>Send password reset</h3>
         <Field
           required
           title="E-mail"

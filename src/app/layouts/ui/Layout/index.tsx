@@ -11,7 +11,7 @@ export const Layout: FC<PropsWithChildren> = ({ children }) => {
       <Aside />
       <div>
         <Header />
-        {children}
+        <div>{children}</div>
       </div>
     </div>
   );

@@ -1,5 +1,5 @@
 .select {
-  @apply flex flex-col gap-2 relative w-full;
+  @apply flex flex-col gap-2 w-full;
 
   &.disabled {
     > div > button {

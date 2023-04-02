@@ -1,9 +1,6 @@
 .aside {
-  @apply bg-gray-dark p-8 border-r border-gray-stroke w-full h-full;
-
-  @media (min-width: theme("screens.lg")) {
-    min-width: 20vw;
-  }
+  @apply bg-gray-dark p-8 border-r border-gray-stroke w-full h-full fixed z-20;
+  width: 20vw;
 
   > h3 {
     @apply uppercase text-gray text-sm mt-14 tracking-widest font-semibold;

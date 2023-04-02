@@ -53,14 +53,18 @@ export const ChangeTaskModal: FC<Props> = ({ setChangeTaskModalShown, changeTask
   };
 
   return (
-    <Modal className={styles.modal} onShownChange={setChangeTaskModalShown} shown={changeTaskModalShown}>
+    <Modal
+      title={task.title}
+      className={styles.modal}
+      onShownChange={setChangeTaskModalShown}
+      shown={changeTaskModalShown}
+    >
       <form
         onSubmit={(event) => {
           event.preventDefault();
           handleChangeTask();
         }}
       >
-        <h3>{task.title}</h3>
         <Field
           required
           onChange={(event) => {

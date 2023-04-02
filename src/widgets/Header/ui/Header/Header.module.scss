@@ -1,8 +1,9 @@
 .header {
-  @apply bg-gray-dark py-6 px-8 border-b border-gray-stroke flex flex-col items-start justify-between gap-4 w-full;
+  @apply bg-gray-dark py-6 px-8 border-b border-gray-stroke flex flex-col items-start justify-between gap-4 fixed z-20;
 
   @media (min-width: theme("screens.lg")) {
-    min-width: 80vw;
+    left: 20vw;
+    width: 80vw;
   }
 
   @media (min-width: theme("screens.sm")) {
