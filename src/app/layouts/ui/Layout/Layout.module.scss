@@ -5,7 +5,8 @@
     @apply flex flex-col;
 
     > div {
-      @apply absolute top-20 left-96 p-8;
+      @apply absolute top-20 p-8;
+      left: 20vw;
       height: calc(100% - 65px);
     }
   }
