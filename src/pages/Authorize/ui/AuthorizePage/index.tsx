@@ -2,7 +2,8 @@ import React, { type FC, useState } from 'react';
 
 import { SignIn, SignUp } from '@/features/Authorize';
 
-import kanbanSrc from '../../images/kanban_todo_app.jpg';
+import kanbanImageSrc from '@/shared/images/kanban_todo_app.jpg';
+
 import styles from './AuthorizePage.module.scss';
 
 export const AuthorizePage: FC = () => {
@@ -17,7 +18,7 @@ export const AuthorizePage: FC = () => {
           <h1>Kanban Todo Application</h1>
           <p>Keeping a list of tasks has become even easier</p>
         </div>
-        <img src={kanbanSrc} alt="Kanban Application Preview" />
+        <img src={kanbanImageSrc} alt="Kanban Application Preview" />
       </div>
     </main>
   );

@@ -5,8 +5,8 @@ import { useAuthContext } from '@/features/Authorize';
 import { useNotificationContext } from '@/features/Notification';
 import { Button, Modal } from '@/shared/ui';
 import styles from './DeleteTaskModal.module.scss';
-import { todoApi } from '@/features/Todo/queries';
-import { type TodoType } from '@/features/Todo/types';
+import { taskApi } from '@/features/Task/queries';
+import { type TodoType } from '@/features/Task/types';
 
 interface Props {
   setDeleteTaskModalShown: React.Dispatch<React.SetStateAction<boolean>>;
@@ -15,7 +15,7 @@ interface Props {
 }
 
 export const DeleteTaskModal: FC<Props> = ({ setDeleteTaskModalShown, deleteTaskModalShown, task }) => {
-  const [deleteTodo] = todoApi.useDeleteTodoMutation();
+  const [deleteTodo] = taskApi.useDeleteTodoMutation();
   const currentBoard = useSelector(getCurrentBoard);
   const { user } = useAuthContext();
   const { setError, setSuccess } = useNotificationContext();

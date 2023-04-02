@@ -2,14 +2,13 @@ import React, { type FC, useRef, useState } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import { useSelector } from 'react-redux';
 
-import { BoardActionsDropdown } from '../BoardActionsDropdown';
-import { LogoutModal } from '../LogoutModal';
-
 import { Button, LogoutIcon, OtherButton } from '@/shared/ui';
-import { getCurrentBoard } from '@/features/Board';
 
+import { getCurrentBoard, BoardActionsDropdown } from '@/features/Board';
+import { AddTaskModal } from '@/features/Task';
+
+import { LogoutModal } from '../LogoutModal';
 import styles from './Header.module.scss';
-import { AddTaskModal } from '@/widgets/Header/ui/AddTaskModal';
 
 export const Header: FC = () => {
   const [dropdownShown, setDropdownShown] = useState<boolean>(false);

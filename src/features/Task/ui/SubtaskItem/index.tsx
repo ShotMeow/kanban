@@ -3,8 +3,8 @@ import { Checkbox } from '@/shared/ui';
 
 import styles from './SubtaskItem.module.scss';
 import { useSelector } from 'react-redux';
-import { todoApi } from '@/features/Todo/queries';
-import { type SubtaskType, type TodoType } from '@/features/Todo/types';
+import { taskApi } from '@/features/Task/queries';
+import { type SubtaskType, type TodoType } from '@/features/Task/types';
 import { useAuthContext } from '@/features/Authorize';
 import { getCurrentBoard } from '@/features/Board';
 import classNames from 'classnames';
@@ -18,7 +18,7 @@ export const SubtaskItem: FC<Props> = ({ subtask, todo }) => {
   const { user } = useAuthContext();
   const currentBoard = useSelector(getCurrentBoard);
 
-  const [changeTodo] = todoApi.useChangeTodoMutation();
+  const [changeTodo] = taskApi.useChangeTodoMutation();
   const [isActive, setIsActive] = useState<boolean>(subtask.isSuccess);
 
   useEffect(() => {

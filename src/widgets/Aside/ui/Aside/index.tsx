@@ -4,9 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import classNames from 'classnames';
 
 import { BoardIcon, Logo } from '@/shared/ui';
-import { getBoards, getCurrentBoard } from '@/features/Board';
-import { setCurrentBoard } from '@/features/Board/slice';
-import { CreateBoardModal } from '@/widgets/Aside/ui/CreateBoardModal';
+import { getBoards, getCurrentBoard, CreateBoardModal, setCurrentBoard } from '@/features/Board';
 
 import styles from './Aside.module.scss';
 

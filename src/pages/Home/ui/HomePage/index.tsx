@@ -1,22 +1,22 @@
 import React, { type FC, useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
+import { useSelector } from 'react-redux';
 
-import { AddColumnModal } from '@/pages/Home/ui/AddColumnModal';
+import { getCurrentBoard } from '@/features/Board';
+import { getTodos, TaskCard, taskApi } from '@/features/Task';
+import { useAuthContext } from '@/features/Authorize';
+
+import { AddColumnModal } from '../AddColumnModal';
 
 import styles from './HomePage.module.scss';
-import { useSelector } from 'react-redux';
-import { getCurrentBoard } from '@/features/Board';
-import { getTodos } from '@/features/Todo/selectors';
-import { TaskCard } from '@/features/Todo/ui/TaskCard';
-import { todoApi } from '@/features/Todo/queries';
-import { useAuthContext } from '@/features/Authorize';
+
 export const HomePage: FC = () => {
   const [addColumnModalShown, setAddColumnModalShown] = useState<boolean>(false);
   const { user } = useAuthContext();
   const currentBoard = useSelector(getCurrentBoard);
   const todos = useSelector(getTodos);
 
-  const { refetch: todosRefetch } = todoApi.useGetTodoQuery({
+  const { refetch: todosRefetch } = taskApi.useGetTodoQuery({
     userId: user?.uid || '',
     boardId: currentBoard?.id || '',
   });

@@ -2,13 +2,13 @@ import React, { type FC, useEffect, useState } from 'react';
 
 import styles from './TaskModal.module.scss';
 import { Modal, OtherButton, Select } from '@/shared/ui';
-import { type TodoType } from '@/features/Todo/types';
-import { SubtasksSection } from '@/features/Todo/ui/SubtasksSection';
+import { type TodoType } from '@/features/Task/types';
+import { SubtasksSection } from '@/features/Task/ui/SubtasksSection';
 import { AnimatePresence } from 'framer-motion';
-import { TaskDropdown } from '@/features/Todo/ui/TaskDropdown';
+import { TaskDropdown } from '@/features/Task/ui/TaskDropdown';
 import { getBoardStatuses, getCurrentBoard } from '@/features/Board';
 import { useSelector } from 'react-redux';
-import { todoApi } from '@/features/Todo/queries';
+import { taskApi } from '@/features/Task/queries';
 import { useAuthContext } from '@/features/Authorize';
 
 interface Props {
@@ -24,7 +24,7 @@ export const TaskModal: FC<Props> = ({ isShown, setIsShown, task }) => {
 
   const [status, setStatus] = useState<string>(task.status);
 
-  const [changeTodo] = todoApi.useChangeTodoMutation();
+  const [changeTodo] = taskApi.useChangeTodoMutation();
 
   useEffect(() => {
     if (status !== task.status) {

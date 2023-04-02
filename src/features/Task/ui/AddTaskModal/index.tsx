@@ -4,11 +4,11 @@ import styles from './AddTaskModal.module.scss';
 import { Button, Field, Modal, Select, TextArea } from '@/shared/ui';
 import { useSelector } from 'react-redux';
 import { getBoardStatuses, getCurrentBoard } from '@/features/Board';
-import { SubtaskList } from '@/widgets/Header/ui/SubtaskList';
-import { todoApi } from '@/features/Todo/queries';
+import { SubtaskList } from '@/features/Task/ui/SubtaskList';
+import { taskApi } from '@/features/Task/queries';
 import { useAuthContext } from '@/features/Authorize';
 import { useNotificationContext } from '@/features/Notification';
-import { type SubtaskType } from '@/features/Todo/types';
+import { type SubtaskType } from '@/features/Task/types';
 
 interface Props {
   setAddTaskModalShown: React.Dispatch<React.SetStateAction<boolean>>;
@@ -35,7 +35,7 @@ export const AddTaskModal: FC<Props> = ({ setAddTaskModalShown, addTaskModalShow
 
   const [currentStatus, setCurrentStatus] = useState<string>(getBoardStatuses(currentBoard?.columns || [])[0]);
   const { user } = useAuthContext();
-  const [addTodo] = todoApi.useAddTodoMutation();
+  const [addTodo] = taskApi.useAddTodoMutation();
   const { setSuccess, setError } = useNotificationContext();
 
   const handleSubmit = (): void => {

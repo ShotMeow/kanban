@@ -9,7 +9,7 @@ import { type AddTodoType, type ChangeTodoType, type DeleteTodoType, type GetTod
 
 import { rtkApi } from '@/shared/libs/redux-toolkit';
 
-export const todoApi = rtkApi.injectEndpoints({
+export const taskApi = rtkApi.injectEndpoints({
   endpoints: (builder) => ({
     getTodo: builder.query({
       async queryFn({ userId, boardId }: GetTodoType) {
@@ -24,28 +24,28 @@ export const todoApi = rtkApi.injectEndpoints({
           dispatch(clearTodos());
         }
       },
-      providesTags: ['Todo'],
+      providesTags: ['Task'],
     }),
     addTodo: builder.mutation({
       async queryFn({ userId, boardId, task }: AddTodoType) {
         await addTodoToBoardCollectionOfUser({ userId, boardId, task });
         return { data: 'OK' };
       },
-      invalidatesTags: ['Todo'],
+      invalidatesTags: ['Task'],
     }),
     changeTodo: builder.mutation({
       async queryFn({ userId, boardId, todoId, todo }: ChangeTodoType) {
         await changeTodoFromCollectionOfUser({ userId, boardId, todoId, todo });
         return { data: 'OK' };
       },
-      invalidatesTags: ['Todo'],
+      invalidatesTags: ['Task'],
     }),
     deleteTodo: builder.mutation({
       async queryFn({ userId, boardId, todoId }: DeleteTodoType) {
         await deleteTodoFromBoardCollectionOfUser({ userId, boardId, todoId });
         return { data: 'OK' };
       },
-      invalidatesTags: ['Todo'],
+      invalidatesTags: ['Task'],
     }),
   }),
 });

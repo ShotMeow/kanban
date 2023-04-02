@@ -7,9 +7,9 @@ import { useAuthContext } from '@/features/Authorize';
 import { Button, Field, Modal, Select, TextArea } from '@/shared/ui';
 
 import styles from './ChangeTaskModal.module.scss';
-import { todoApi } from '@/features/Todo/queries';
-import { type SubtaskType, type TodoType } from '@/features/Todo/types';
-import { SubtaskList } from '@/widgets/Header/ui/SubtaskList';
+import { taskApi } from '@/features/Task/queries';
+import { type SubtaskType, type TodoType } from '@/features/Task/types';
+import { SubtaskList } from '@/features/Task/ui/SubtaskList';
 
 interface Props {
   setChangeTaskModalShown: React.Dispatch<React.SetStateAction<boolean>>;
@@ -18,7 +18,7 @@ interface Props {
 }
 
 export const ChangeTaskModal: FC<Props> = ({ setChangeTaskModalShown, changeTaskModalShown, task }) => {
-  const [changeTodo] = todoApi.useChangeTodoMutation();
+  const [changeTodo] = taskApi.useChangeTodoMutation();
 
   const currentBoard = useSelector(getCurrentBoard);
 

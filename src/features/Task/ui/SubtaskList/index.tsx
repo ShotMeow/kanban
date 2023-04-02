@@ -1,9 +1,11 @@
 import React, { type FC, type HTMLAttributes } from 'react';
 
-import styles from './SubtaskList.module.scss';
 import { Button, Field } from '@/shared/ui';
+
 import { getRandomPlaceholder } from '../../utils';
-import { type SubtaskType } from '@/features/Todo/types';
+import { type SubtaskType } from '../../types';
+
+import styles from './SubtaskList.module.scss';
 
 interface Props extends HTMLAttributes<HTMLDivElement> {
   subtasks: SubtaskType[];

@@ -3,7 +3,7 @@ import { FLUSH, PAUSE, PERSIST, persistReducer, persistStore, PURGE, REGISTER, R
 import storage from 'redux-persist/lib/storage';
 
 import { BoardSlice } from '@/features/Board';
-import { TodoSlice } from '@/features/Todo';
+import { TodoSlice } from '@/features/Task';
 
 import { rtkApi } from '@/shared/libs/redux-toolkit';
 

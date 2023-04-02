@@ -1,12 +1,13 @@
 import React, { type FC, useState } from 'react';
+import { useSelector } from 'react-redux';
 
 import { Button, Field, Modal } from '@/shared/ui';
 
-import styles from './AddColumnModal.module.scss';
 import { boardApi, getCurrentBoard } from '@/features/Board';
 import { useAuthContext } from '@/features/Authorize';
-import { useSelector } from 'react-redux';
 import { useNotificationContext } from '@/features/Notification';
+
+import styles from './AddColumnModal.module.scss';
 
 interface Props {
   setAddColumnModalShown: React.Dispatch<React.SetStateAction<boolean>>;

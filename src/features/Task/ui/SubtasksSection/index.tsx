@@ -1,8 +1,8 @@
 import React, { type FC } from 'react';
 
 import styles from './SubtasksSection.module.scss';
-import { type SubtaskType, type TodoType } from '@/features/Todo/types';
-import { SubtaskItem } from '@/features/Todo/ui/SubtaskItem';
+import { type SubtaskType, type TodoType } from '@/features/Task/types';
+import { SubtaskItem } from '@/features/Task/ui/SubtaskItem';
 
 interface Props {
   subtasks: SubtaskType[];

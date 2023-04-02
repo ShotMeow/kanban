@@ -1,8 +1,8 @@
 import React, { type FC, useState } from 'react';
-import { type TodoType } from '@/features/Todo/types';
+import { type TodoType } from '@/features/Task/types';
 
 import styles from './TaskCard.module.scss';
-import { TaskModal } from '@/features/Todo/ui/TaskModal';
+import { TaskModal } from '@/features/Task/ui/TaskModal';
 import { AnimatePresence } from 'framer-motion';
 
 interface Props {
