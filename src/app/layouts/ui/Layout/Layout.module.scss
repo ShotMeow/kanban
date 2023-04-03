@@ -1,13 +1,12 @@
 .layout {
-  @apply flex h-full;
+  @apply grid h-full;
+  grid-template-columns: 1fr 3fr;
 
   > div {
     @apply flex flex-col;
 
     > div {
-      @apply absolute top-20 p-8;
-      left: 20vw;
-      height: calc(100% - 65px);
+      @apply px-8 py-4 h-full;
     }
   }
 }

@@ -8,6 +8,10 @@ import { useAuthContext } from '@/features/Authorize';
 
 import { AddColumnModal } from '../AddColumnModal';
 
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import 'swiper/css/free-mode';
+
 import styles from './HomePage.module.scss';
 
 export const HomePage: FC = () => {
@@ -28,9 +32,9 @@ export const HomePage: FC = () => {
   return (
     <main className={styles.home}>
       {currentBoard && (
-        <ul className={styles.columns}>
+        <Swiper spaceBetween={20} slidesPerView={'auto'} className={styles.columns}>
           {currentBoard?.columns?.map((column) => (
-            <li key={column.title}>
+            <SwiperSlide className={styles.column} key={column.title}>
               <h2>
                 <div style={{ backgroundColor: column.color }} /> {column.title}
               </h2>
@@ -45,9 +49,9 @@ export const HomePage: FC = () => {
                     ))}
                 </ul>
               )}
-            </li>
+            </SwiperSlide>
           ))}
-          <li>
+          <SwiperSlide className={styles.column}>
             <motion.button
               onClick={(event) => {
                 event.stopPropagation();
@@ -58,8 +62,8 @@ export const HomePage: FC = () => {
             >
               + New Column
             </motion.button>
-          </li>
-        </ul>
+          </SwiperSlide>
+        </Swiper>
       )}
       <AnimatePresence>
         {addColumnModalShown && (
