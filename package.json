@@ -8,11 +8,12 @@
     "build": "tsc && vite build",
     "preview": "vite preview",
     "prettier": "prettier --write ./src",
+    "prettier-check": "prettier --check ./src",
     "eslint": "eslint --ext .js,.ts,.tsx ./src"
   },
   "pre-commit": [
     "eslint",
-    "prettier"
+    "prettier-check"
   ],
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.3",
