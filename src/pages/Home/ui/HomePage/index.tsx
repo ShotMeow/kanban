@@ -13,6 +13,7 @@ import 'swiper/css';
 import 'swiper/css/free-mode';
 
 import styles from './HomePage.module.scss';
+import {getCurrentTasks} from "@/pages/Home/utils/getCurrentTasks";
 
 export const HomePage: FC = () => {
   const [addColumnModalShown, setAddColumnModalShown] = useState<boolean>(false);
@@ -36,12 +37,11 @@ export const HomePage: FC = () => {
           {currentBoard?.columns?.map((column) => (
             <SwiperSlide className={styles.column} key={column.title}>
               <h2>
-                <div style={{ backgroundColor: column.color }} /> {column.title}
+                <div style={{ backgroundColor: column.color }} /> {column.title} {todos && `(${getCurrentTasks(todos, column).length})`}
               </h2>
               {todos && (
                 <ul>
-                  {todos
-                    ?.filter((todo) => todo.status === column.title)
+                  {getCurrentTasks(todos, column)
                     .map((task) => (
                       <li key={task.id}>
                         <TaskCard task={task} />
