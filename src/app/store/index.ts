@@ -2,14 +2,14 @@ import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { FLUSH, PAUSE, PERSIST, persistReducer, persistStore, PURGE, REGISTER, REHYDRATE } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
-import { BoardSlice } from '@/features/Board';
-import { TodoSlice } from '@/features/Task';
+import { BoardReducer } from '@/features/Board';
 
 import { rtkApi } from '@/shared/libs/redux-toolkit';
+import { ColumnReducer } from '@/features/Column';
 
 const reducer = combineReducers({
-  board: BoardSlice,
-  todo: TodoSlice,
+  board: BoardReducer,
+  column: ColumnReducer,
   [rtkApi.reducerPath]: rtkApi.reducer,
 });
 

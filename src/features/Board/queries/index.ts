@@ -1,19 +1,10 @@
 import {
   addBoardCollectionToUser,
-  addColumnToBoardCollectionOfUser,
   changeBoardCollectionOfUser,
   deleteBoardCollectionOfUser,
-  deleteColumnFromBoardCollectionOfUser,
   getBoardCollectionsOfUser,
 } from '../api';
-import {
-  type AddBoardType,
-  type AddColumnToBoardType,
-  type ChangeBoardType,
-  type DeleteBoardType,
-  type DeleteColumnFromBoardType,
-  type GetBoardType,
-} from '../types';
+import { type AddBoardType, type ChangeBoardType, type DeleteBoardType, type GetBoardType } from '../types';
 import { clearBoards, setBoards } from '../slice';
 
 import { rtkApi } from '@/shared/libs/redux-toolkit';
@@ -33,18 +24,18 @@ export const boardApi = rtkApi.injectEndpoints({
           dispatch(clearBoards());
         }
       },
-      providesTags: ['Board', 'Column'],
+      providesTags: ['Board'],
     }),
     addBoard: builder.mutation({
-      async queryFn({ userId, boardTitle }: AddBoardType) {
-        await addBoardCollectionToUser({ userId, boardTitle });
+      async queryFn({ userId, board }: AddBoardType) {
+        await addBoardCollectionToUser({ userId, board });
         return { data: 'OK' };
       },
       invalidatesTags: ['Board'],
     }),
     changeBoard: builder.mutation({
-      async queryFn({ userId, boardId, boardTitle }: ChangeBoardType) {
-        await changeBoardCollectionOfUser({ userId, boardTitle, boardId });
+      async queryFn({ userId, boardId, board }: ChangeBoardType) {
+        await changeBoardCollectionOfUser({ userId, board, boardId });
         return { data: 'OK' };
       },
       invalidatesTags: ['Board'],
@@ -55,20 +46,6 @@ export const boardApi = rtkApi.injectEndpoints({
         return { data: 'OK' };
       },
       invalidatesTags: ['Board'],
-    }),
-    addColumn: builder.mutation({
-      async queryFn({ userId, boardId, columnTitle, columnColor }: AddColumnToBoardType) {
-        await addColumnToBoardCollectionOfUser({ userId, boardId, columnColor, columnTitle });
-        return { data: 'OK' };
-      },
-      invalidatesTags: ['Column'],
-    }),
-    removeColumn: builder.mutation({
-      async queryFn({ userId, boardId, columnTitle }: DeleteColumnFromBoardType) {
-        await deleteColumnFromBoardCollectionOfUser({ userId, boardId, columnTitle });
-        return { data: 'OK' };
-      },
-      invalidatesTags: ['Column'],
     }),
   }),
 });

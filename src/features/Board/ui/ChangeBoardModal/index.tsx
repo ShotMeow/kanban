@@ -22,7 +22,13 @@ export const ChangeBoardModal: FC<Props> = ({ setChangeBoardModalShown, changeBo
   const { setError, setSuccess } = useNotificationContext();
 
   const handleChangeBoard = (): void => {
-    changeBoard({ userId: user?.uid || '', boardId: currentBoard?.id || '', boardTitle })
+    changeBoard({
+      userId: user?.uid || '',
+      boardId: currentBoard?.id || '',
+      board: {
+        title: boardTitle,
+      },
+    })
       .then(() => {
         setSuccess(`The board «${currentBoard?.title}» was successfully changed`);
         setChangeBoardModalShown(false);

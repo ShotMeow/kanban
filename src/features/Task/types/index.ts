@@ -1,4 +1,4 @@
-export interface TodoType {
+export interface TaskType {
   id: string;
   title: string;
   description: string;
@@ -12,30 +12,42 @@ export interface SubtaskType {
   isSuccess: boolean;
 }
 
-export interface GetTodoType {
+export interface GetTaskType {
   userId: string;
   boardId: string;
+  columnId: string;
 }
 
-export interface AddTodoType {
+export interface AddTaskType {
   userId: string;
   boardId: string;
-  task: Omit<TodoType, 'id'>;
+  columnId: string;
+  task: Omit<TaskType, 'id'>;
 }
 
-export interface ChangeTodoType {
+export interface ChangeTaskType {
   userId: string;
   boardId: string;
-  todoId: string;
-  todo: Partial<Omit<TodoType, 'id'>>;
+  columnId: string;
+  taskId: string;
+  task: Partial<Omit<TaskType, 'id'>>;
 }
 
-export interface DeleteTodoType {
+export interface DeleteTaskType {
   userId: string;
   boardId: string;
-  todoId: string;
+  columnId: string;
+  taskId: string;
 }
 
-export interface TodoSliceType {
-  todos: TodoType[] | null;
+export interface MoveTaskToOtherColumnType {
+  userId: string;
+  boardId: string;
+  columnFromId: string;
+  columnToId: string;
+  task: TaskType;
+}
+
+export interface TaskSliceType {
+  tasks: TaskType[] | null;
 }

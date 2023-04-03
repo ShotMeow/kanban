@@ -1,19 +1,23 @@
 import React, { type FC, useState } from 'react';
+import { AnimatePresence } from 'framer-motion';
+
+import { Dropdown, RenameIcon, TrashIcon } from '@/shared/ui';
+import { type ColumnType } from '@/features/Column';
+
+import { DeleteTaskModal } from '../DeleteTaskModal';
+import { ChangeTaskModal } from '../ChangeTaskModal';
+import { type TaskType } from '../../types';
 
 import styles from './TaskDropdown.module.scss';
-import { Dropdown, RenameIcon, TrashIcon } from '@/shared/ui';
-import { AnimatePresence } from 'framer-motion';
-import { DeleteTaskModal } from '@/features/Task/ui/DeleteTaskModal';
-import { type TodoType } from '@/features/Task/types';
-import { ChangeTaskModal } from '@/features/Task/ui/ChangeTaskModal';
 
 interface Props {
   shown: boolean;
   onShownChange: React.Dispatch<React.SetStateAction<boolean>>;
-  task: TodoType;
+  task: TaskType;
+  column: ColumnType;
 }
 
-export const TaskDropdown: FC<Props> = ({ shown, onShownChange, task }) => {
+export const TaskDropdown: FC<Props> = ({ shown, onShownChange, task, column }) => {
   const [deleteModalShown, setDeleteModalShown] = useState<boolean>(false);
   const [changeModalShown, setChangeModalShown] = useState<boolean>(false);
 
@@ -49,6 +53,7 @@ export const TaskDropdown: FC<Props> = ({ shown, onShownChange, task }) => {
             setDeleteTaskModalShown={setDeleteModalShown}
             deleteTaskModalShown={deleteModalShown}
             task={task}
+            column={column}
           />
         )}
       </AnimatePresence>

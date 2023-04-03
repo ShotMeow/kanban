@@ -1,19 +1,28 @@
 import { addDoc, collection, deleteDoc, doc, getDocs, getFirestore, updateDoc } from '@firebase/firestore';
 
-import { type AddTodoType, type ChangeTodoType, type DeleteTodoType, type GetTodoType, type TodoType } from '../types';
+import {
+  type AddTaskType,
+  type ChangeTaskType,
+  type DeleteTaskType,
+  type GetTaskType,
+  type MoveTaskToOtherColumnType,
+  type TaskType,
+} from '../types';
 
-export const getTodosFromBoardCollectionOfUser = async ({ userId, boardId }: GetTodoType): Promise<TodoType[]> => {
+export const getTaskCollectionsOfColumn = async ({ userId, boardId, columnId }: GetTaskType): Promise<TaskType[]> => {
   const db = getFirestore();
 
-  const todos: TodoType[] = [];
+  const tasks: TaskType[] = [];
 
   try {
-    const querySnapshot = await getDocs(collection(doc(doc(db, 'users', userId), 'boards', boardId), 'todos'));
+    const querySnapshot = await getDocs(
+      collection(doc(doc(doc(db, 'users', userId), 'boards', boardId), 'columns', columnId), 'tasks')
+    );
 
     querySnapshot.forEach((doc) => {
-      const data = doc.data() as Omit<TodoType, 'id'>;
+      const data = doc.data() as Omit<TaskType, 'id'>;
 
-      todos.push({
+      tasks.push({
         id: doc.id,
         ...data,
       });
@@ -22,38 +31,70 @@ export const getTodosFromBoardCollectionOfUser = async ({ userId, boardId }: Get
     return await Promise.reject(error);
   }
 
-  return todos;
+  return tasks;
 };
 
-export const addTodoToBoardCollectionOfUser = async ({ userId, boardId, task }: AddTodoType): Promise<void> => {
+export const addTaskToBoardCollectionOfUser = async ({
+  userId,
+  boardId,
+  columnId,
+  task,
+}: AddTaskType): Promise<void> => {
   const db = getFirestore();
 
-  await addDoc(collection(doc(doc(db, 'users', userId), 'boards', boardId), 'todos'), {
+  await addDoc(collection(doc(doc(doc(db, 'users', userId), 'boards', boardId), 'columns', columnId), 'tasks'), {
     ...task,
   });
 };
 
-export const changeTodoFromCollectionOfUser = async ({
+export const changeTaskFromCollectionOfUser = async ({
   userId,
   boardId,
-  todoId,
-  todo,
-}: ChangeTodoType): Promise<void> => {
+  columnId,
+  taskId,
+  task,
+}: ChangeTaskType): Promise<void> => {
   const db = getFirestore();
 
-  const docRef = doc(doc(doc(db, 'users', userId), 'boards', boardId), 'todos', todoId);
+  const docRef = doc(doc(doc(doc(db, 'users', userId), 'boards', boardId), 'columns', columnId), 'tasks', taskId);
   await updateDoc(docRef, {
-    ...todo,
+    ...task,
   });
 };
 
-export const deleteTodoFromBoardCollectionOfUser = async ({
+export const deleteTaskFromBoardCollectionOfUser = async ({
   userId,
   boardId,
-  todoId,
-}: DeleteTodoType): Promise<void> => {
+  columnId,
+  taskId,
+}: DeleteTaskType): Promise<void> => {
   const db = getFirestore();
 
-  const docRef = doc(doc(doc(db, 'users', userId), 'boards', boardId), 'todos', todoId);
+  const docRef = doc(doc(doc(doc(db, 'users', userId), 'boards', boardId), 'columns', columnId), 'tasks', taskId);
   await deleteDoc(docRef);
+};
+
+export const moveTaskToOtherColumn = async ({
+  userId,
+  boardId,
+  columnFromId,
+  columnToId,
+  task,
+}: MoveTaskToOtherColumnType): Promise<void> => {
+  const db = getFirestore();
+
+  const docOldRef = doc(
+    doc(doc(doc(db, 'users', userId), 'boards', boardId), 'columns', columnFromId),
+    'tasks',
+    task.id
+  );
+  await deleteDoc(docOldRef);
+
+  const docNewRef = collection(doc(doc(doc(db, 'users', userId), 'boards', boardId), 'columns', columnToId), 'tasks');
+  await addDoc(docNewRef, {
+    title: task.title,
+    description: task.description,
+    status: task.status,
+    subtasks: task.subtasks,
+  });
 };

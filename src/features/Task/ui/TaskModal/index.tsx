@@ -1,42 +1,49 @@
 import React, { type FC, useEffect, useState } from 'react';
+import { AnimatePresence } from 'framer-motion';
+import { useSelector } from 'react-redux';
+
+import { Modal, OtherButton, Select } from '@/shared/ui';
+import { getBoardStatuses, getCurrentBoard } from '@/features/Board';
+import { useAuthContext } from '@/features/Authorize';
+import { getColumns, type ColumnType } from '@/features/Column';
+
+import { SubtasksSection } from '../SubtasksSection';
+import { TaskDropdown } from '../TaskDropdown';
+import { taskApi } from '../../queries';
+import { type TaskType } from '../../types';
 
 import styles from './TaskModal.module.scss';
-import { Modal, OtherButton, Select } from '@/shared/ui';
-import { type TodoType } from '@/features/Task/types';
-import { SubtasksSection } from '@/features/Task/ui/SubtasksSection';
-import { AnimatePresence } from 'framer-motion';
-import { TaskDropdown } from '@/features/Task/ui/TaskDropdown';
-import { getBoardStatuses, getCurrentBoard } from '@/features/Board';
-import { useSelector } from 'react-redux';
-import { taskApi } from '@/features/Task/queries';
-import { useAuthContext } from '@/features/Authorize';
 
 interface Props {
   isShown: boolean;
   setIsShown: React.Dispatch<React.SetStateAction<boolean>>;
-  task: TodoType;
+  task: TaskType;
+  column: ColumnType;
 }
 
-export const TaskModal: FC<Props> = ({ isShown, setIsShown, task }) => {
+export const TaskModal: FC<Props> = ({ isShown, setIsShown, task, column }) => {
   const [actionsShown, actionsShownChange] = useState<boolean>(false);
   const currentBoard = useSelector(getCurrentBoard);
   const { user } = useAuthContext();
 
   const [status, setStatus] = useState<string>(task.status);
 
-  const [changeTodo] = taskApi.useChangeTodoMutation();
+  const columns = useSelector(getColumns);
+  const [moveTask] = taskApi.useMoveTaskMutation();
 
   useEffect(() => {
     if (status !== task.status) {
-      void changeTodo({
+      void moveTask({
         userId: user?.uid || '',
         boardId: currentBoard?.id || '',
-        todoId: task.id,
-        todo: {
+        columnFromId: column.id,
+        columnToId: columns?.find((column) => column.title === status)?.id || '',
+        task: {
           ...task,
           status,
         },
       });
+      setIsShown(false);
     }
   }, [status]);
 
@@ -53,16 +60,18 @@ export const TaskModal: FC<Props> = ({ isShown, setIsShown, task }) => {
               }}
             />
             <AnimatePresence>
-              {actionsShown && <TaskDropdown task={task} onShownChange={actionsShownChange} shown={actionsShown} />}
+              {actionsShown && (
+                <TaskDropdown column={column} task={task} onShownChange={actionsShownChange} shown={actionsShown} />
+              )}
             </AnimatePresence>
           </div>
           <p>{task.description}</p>
-          <SubtasksSection todo={task} subtasks={task.subtasks} />
+          <SubtasksSection column={column} task={task} subtasks={task.subtasks} />
           <Select
             title="Status"
             currentValue={status}
             setCurrentValue={setStatus}
-            options={getBoardStatuses(currentBoard?.columns || [])}
+            options={getBoardStatuses(columns || [])}
           />
         </div>
       </Modal>

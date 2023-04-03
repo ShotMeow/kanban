@@ -1,48 +1,53 @@
-import { clearTodos, setTodos } from '../slice';
 import {
-  addTodoToBoardCollectionOfUser,
-  changeTodoFromCollectionOfUser,
-  deleteTodoFromBoardCollectionOfUser,
-  getTodosFromBoardCollectionOfUser,
+  addTaskToBoardCollectionOfUser,
+  changeTaskFromCollectionOfUser,
+  deleteTaskFromBoardCollectionOfUser,
+  getTaskCollectionsOfColumn,
+  moveTaskToOtherColumn,
 } from '../api';
-import { type AddTodoType, type ChangeTodoType, type DeleteTodoType, type GetTodoType } from '../types';
+import {
+  type AddTaskType,
+  type ChangeTaskType,
+  type DeleteTaskType,
+  type GetTaskType,
+  type MoveTaskToOtherColumnType,
+} from '../types';
 
 import { rtkApi } from '@/shared/libs/redux-toolkit';
 
 export const taskApi = rtkApi.injectEndpoints({
   endpoints: (builder) => ({
-    getTodo: builder.query({
-      async queryFn({ userId, boardId }: GetTodoType) {
-        const todos = await getTodosFromBoardCollectionOfUser({ userId, boardId });
-        return { data: todos };
-      },
-      async onQueryStarted(_, { dispatch, queryFulfilled }) {
-        try {
-          const { data } = await queryFulfilled;
-          data && dispatch(setTodos(data));
-        } catch (error) {
-          dispatch(clearTodos());
-        }
+    getTasks: builder.query({
+      async queryFn({ userId, boardId, columnId }: GetTaskType) {
+        const tasks = await getTaskCollectionsOfColumn({ userId, boardId, columnId });
+        return { data: tasks };
       },
       providesTags: ['Task'],
     }),
-    addTodo: builder.mutation({
-      async queryFn({ userId, boardId, task }: AddTodoType) {
-        await addTodoToBoardCollectionOfUser({ userId, boardId, task });
+    addTask: builder.mutation({
+      async queryFn({ userId, boardId, columnId, task }: AddTaskType) {
+        await addTaskToBoardCollectionOfUser({ userId, boardId, columnId, task });
         return { data: 'OK' };
       },
       invalidatesTags: ['Task'],
     }),
-    changeTodo: builder.mutation({
-      async queryFn({ userId, boardId, todoId, todo }: ChangeTodoType) {
-        await changeTodoFromCollectionOfUser({ userId, boardId, todoId, todo });
+    changeTask: builder.mutation({
+      async queryFn({ userId, boardId, columnId, taskId, task }: ChangeTaskType) {
+        await changeTaskFromCollectionOfUser({ userId, boardId, columnId, taskId, task });
         return { data: 'OK' };
       },
       invalidatesTags: ['Task'],
     }),
-    deleteTodo: builder.mutation({
-      async queryFn({ userId, boardId, todoId }: DeleteTodoType) {
-        await deleteTodoFromBoardCollectionOfUser({ userId, boardId, todoId });
+    deleteTask: builder.mutation({
+      async queryFn({ userId, boardId, columnId, taskId }: DeleteTaskType) {
+        await deleteTaskFromBoardCollectionOfUser({ userId, boardId, columnId, taskId });
+        return { data: 'OK' };
+      },
+      invalidatesTags: ['Task'],
+    }),
+    moveTask: builder.mutation({
+      async queryFn({ userId, boardId, columnFromId, columnToId, task }: MoveTaskToOtherColumnType) {
+        await moveTaskToOtherColumn({ userId, boardId, columnFromId, columnToId, task });
         return { data: 'OK' };
       },
       invalidatesTags: ['Task'],

@@ -1,15 +1,18 @@
 import React, { type FC } from 'react';
 
+import { type ColumnType } from '@/features/Column';
+
+import { type SubtaskType, type TaskType } from '../../types';
+import { SubtaskItem } from '../SubtaskItem';
 import styles from './SubtasksSection.module.scss';
-import { type SubtaskType, type TodoType } from '@/features/Task/types';
-import { SubtaskItem } from '@/features/Task/ui/SubtaskItem';
 
 interface Props {
   subtasks: SubtaskType[];
-  todo: TodoType;
+  task: TaskType;
+  column: ColumnType;
 }
 
-export const SubtasksSection: FC<Props> = ({ subtasks, todo }) => {
+export const SubtasksSection: FC<Props> = ({ subtasks, task, column }) => {
   return (
     <div className={styles.subtasks}>
       <h2>
@@ -18,7 +21,7 @@ export const SubtasksSection: FC<Props> = ({ subtasks, todo }) => {
       <ul>
         {subtasks.map((subtask) => (
           <li key={subtask.id}>
-            <SubtaskItem todo={todo} subtask={subtask} />
+            <SubtaskItem column={column} task={task} subtask={subtask} />
           </li>
         ))}
       </ul>

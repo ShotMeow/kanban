@@ -6,6 +6,7 @@ import { Button, LogoutIcon, OtherButton } from '@/shared/ui';
 
 import { getCurrentBoard, BoardActionsDropdown } from '@/features/Board';
 import { AddTaskModal } from '@/features/Task';
+import { getColumns } from '@/features/Column';
 
 import { LogoutModal } from '../LogoutModal';
 import styles from './Header.module.scss';
@@ -16,6 +17,7 @@ export const Header: FC = () => {
   const [addTaskModalShown, setAddTaskModalShown] = useState<boolean>(false);
 
   const currentBoard = useSelector(getCurrentBoard);
+  const columns = useSelector(getColumns);
 
   const targetRef = useRef<HTMLButtonElement>(null);
 
@@ -26,15 +28,17 @@ export const Header: FC = () => {
         <div className={styles.actions}>
           {currentBoard && (
             <div className={styles.board}>
-              <Button
-                onClick={(event) => {
-                  event.stopPropagation();
-                  setAddTaskModalShown(true);
-                }}
-                primary
-              >
-                + Add New Task
-              </Button>
+              {columns && (
+                <Button
+                  onClick={(event) => {
+                    event.stopPropagation();
+                    setAddTaskModalShown(true);
+                  }}
+                  primary
+                >
+                  + Add New Task
+                </Button>
+              )}
               <div className={styles.other}>
                 <OtherButton
                   onClick={(event) => {

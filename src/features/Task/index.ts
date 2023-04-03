@@ -1,6 +1,5 @@
-export { default as TodoSlice } from './slice';
 export { AddTaskModal } from './ui/AddTaskModal';
-export { getTodos } from './selectors';
+export { getTasks } from './selectors';
 export { TaskCard } from './ui/TaskCard';
 export { taskApi } from './queries';
-export { type TodoType } from './types';
+export { type TaskType } from './types';

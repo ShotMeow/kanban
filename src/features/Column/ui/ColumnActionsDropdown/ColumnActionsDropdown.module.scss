@@ -1,0 +1,13 @@
+.dropdown {
+  @apply w-48;
+  > button {
+    @apply flex items-center gap-2;
+
+    &.delete {
+      @apply text-warning;
+    }
+    > * {
+      @apply flex-shrink-0;
+    }
+  }
+}

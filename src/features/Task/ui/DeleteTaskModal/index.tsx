@@ -1,27 +1,32 @@
 import React, { type FC } from 'react';
-import { getCurrentBoard } from '@/features/Board';
 import { useSelector } from 'react-redux';
+
+import { getCurrentBoard } from '@/features/Board';
 import { useAuthContext } from '@/features/Authorize';
 import { useNotificationContext } from '@/features/Notification';
 import { Button, Modal } from '@/shared/ui';
+import { type ColumnType } from '@/features/Column';
+
+import { type TaskType } from '../../types';
+import { taskApi } from '../../queries';
+
 import styles from './DeleteTaskModal.module.scss';
-import { taskApi } from '@/features/Task/queries';
-import { type TodoType } from '@/features/Task/types';
 
 interface Props {
   setDeleteTaskModalShown: React.Dispatch<React.SetStateAction<boolean>>;
   deleteTaskModalShown: boolean;
-  task: TodoType;
+  task: TaskType;
+  column: ColumnType;
 }
 
-export const DeleteTaskModal: FC<Props> = ({ setDeleteTaskModalShown, deleteTaskModalShown, task }) => {
-  const [deleteTodo] = taskApi.useDeleteTodoMutation();
+export const DeleteTaskModal: FC<Props> = ({ setDeleteTaskModalShown, deleteTaskModalShown, task, column }) => {
+  const [deleteTask] = taskApi.useDeleteTaskMutation();
   const currentBoard = useSelector(getCurrentBoard);
   const { user } = useAuthContext();
   const { setError, setSuccess } = useNotificationContext();
 
-  const handleDeleteBoard = (): void => {
-    deleteTodo({ userId: user?.uid || '', boardId: currentBoard?.id || '', todoId: task.id })
+  const handleDeleteTask = (): void => {
+    deleteTask({ userId: user?.uid || '', boardId: currentBoard?.id || '', columnId: column.id, taskId: task.id })
       .then(() => {
         setSuccess(`Task «${task.title}» was successfully deleted`);
         setDeleteTaskModalShown(false);
@@ -36,7 +41,7 @@ export const DeleteTaskModal: FC<Props> = ({ setDeleteTaskModalShown, deleteTask
       <form
         onSubmit={(event) => {
           event.preventDefault();
-          handleDeleteBoard();
+          handleDeleteTask();
         }}
       >
         <h3>Do you really want delete «{currentBoard?.title}» board?</h3>

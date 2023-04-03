@@ -1,14 +1,17 @@
 import React, { type FC, useState } from 'react';
-
-import styles from './AddTaskModal.module.scss';
-import { Button, Field, Modal, Select, TextArea } from '@/shared/ui';
 import { useSelector } from 'react-redux';
+
+import { Button, Field, Modal, Select, TextArea } from '@/shared/ui';
 import { getBoardStatuses, getCurrentBoard } from '@/features/Board';
-import { SubtaskList } from '@/features/Task/ui/SubtaskList';
-import { taskApi } from '@/features/Task/queries';
 import { useAuthContext } from '@/features/Authorize';
 import { useNotificationContext } from '@/features/Notification';
-import { type SubtaskType } from '@/features/Task/types';
+import { getColumns } from '@/features/Column';
+
+import { type SubtaskType } from '../../types';
+import { SubtaskList } from '../SubtaskList';
+import { taskApi } from '../../queries';
+
+import styles from './AddTaskModal.module.scss';
 
 interface Props {
   setAddTaskModalShown: React.Dispatch<React.SetStateAction<boolean>>;
@@ -33,24 +36,26 @@ export const AddTaskModal: FC<Props> = ({ setAddTaskModalShown, addTaskModalShow
   const [titleValue, setTitleValue] = useState<string>('');
   const [descriptionValue, setDescriptionValue] = useState<string>('');
 
-  const [currentStatus, setCurrentStatus] = useState<string>(getBoardStatuses(currentBoard?.columns || [])[0]);
+  const columns = useSelector(getColumns);
+  const [status, setStatus] = useState<string>(getBoardStatuses(columns || [])[0]);
   const { user } = useAuthContext();
-  const [addTodo] = taskApi.useAddTodoMutation();
+  const [addTask] = taskApi.useAddTaskMutation();
   const { setSuccess, setError } = useNotificationContext();
 
   const handleSubmit = (): void => {
-    addTodo({
+    addTask({
       userId: user?.uid || '',
       boardId: currentBoard?.id || '',
+      columnId: columns?.find((column) => column.title === status)?.id || '',
       task: {
         title: titleValue,
         description: descriptionValue,
         subtasks,
-        status: currentStatus,
+        status,
       },
     })
       .then(() => {
-        setSuccess(`${titleValue} successfully added to ${currentBoard?.title} column`);
+        setSuccess(`${titleValue} successfully added to ${status} column`);
         setAddTaskModalShown(false);
       })
       .catch(() => {
@@ -88,9 +93,9 @@ export const AddTaskModal: FC<Props> = ({ setAddTaskModalShown, addTaskModalShow
         <SubtaskList subtasks={subtasks} setSubtasks={setSubtasks} />
         <Select
           title="Status"
-          currentValue={currentStatus}
-          setCurrentValue={setCurrentStatus}
-          options={getBoardStatuses(currentBoard?.columns || [])}
+          currentValue={status}
+          setCurrentValue={setStatus}
+          options={getBoardStatuses(columns || [])}
         />
         <Button type="submit" primary>
           Create Task

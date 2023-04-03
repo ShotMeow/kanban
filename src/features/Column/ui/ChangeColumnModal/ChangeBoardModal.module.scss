@@ -1,0 +1,14 @@
+.modal {
+  > form {
+    @apply flex flex-col items-center gap-4;
+    > .fields {
+      @apply flex gap-2;
+    }
+    > .actions {
+      @apply flex gap-4;
+      > button {
+        @apply py-2 px-10;
+      }
+    }
+  }
+}

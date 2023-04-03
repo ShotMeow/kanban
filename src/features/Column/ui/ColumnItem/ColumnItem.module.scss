@@ -1,0 +1,36 @@
+.column {
+  @apply space-y-4;
+
+  &:hover {
+    > header > button {
+      @apply opacity-100;
+    }
+  }
+
+  > header {
+    @apply flex items-center justify-between;
+    > h2 {
+      @apply flex items-center gap-4 uppercase text-gray font-semibold;
+      > div {
+        @apply h-4 w-4 rounded-full;
+      }
+    }
+
+    > button {
+      @apply opacity-0;
+    }
+  }
+
+  > ul {
+    @apply space-y-4;
+  }
+
+  &:last-child {
+    > span {
+      @apply h-24;
+    }
+    > button {
+      @apply h-full bg-black/60 rounded-lg w-full flex items-center justify-center text-gray font-semibold;
+    }
+  }
+}

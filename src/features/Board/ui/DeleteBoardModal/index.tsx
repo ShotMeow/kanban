@@ -1,11 +1,12 @@
 import React, { type FC } from 'react';
 import { useSelector } from 'react-redux';
 
-import { boardApi, getCurrentBoard } from '@/features/Board';
 import { useNotificationContext } from '@/features/Notification';
 import { useAuthContext } from '@/features/Authorize';
 import { Button, Modal } from '@/shared/ui';
 
+import { boardApi } from '../../queries';
+import { getCurrentBoard } from '../../selectors';
 import styles from './DeleteBoardModal.module.scss';
 
 interface Props {

@@ -2,9 +2,9 @@ import React, { type FC, type FormEvent, useState } from 'react';
 
 import { Button, Field, Modal } from '@/shared/ui';
 import { useAuthContext } from '@/features/Authorize';
-import { boardApi } from '@/features/Board';
 import { useNotificationContext } from '@/features/Notification';
 
+import { boardApi } from '../../queries';
 import styles from './CreateBoardModal.module.scss';
 
 interface Props {
@@ -22,7 +22,12 @@ export const CreateBoardModal: FC<Props> = ({ setCreateBoardModalShown, createBo
   const handleAddBoard = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
 
-    addBoard({ userId: user?.uid || '', boardTitle })
+    addBoard({
+      userId: user?.uid || '',
+      board: {
+        title: boardTitle,
+      },
+    })
       .then(() => {
         setSuccess(`The board «${boardTitle}» was created successfully`);
         setCreateBoardModalShown(false);

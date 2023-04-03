@@ -5,20 +5,22 @@ import { getBoardStatuses, getCurrentBoard } from '@/features/Board';
 import { useNotificationContext } from '@/features/Notification';
 import { useAuthContext } from '@/features/Authorize';
 import { Button, Field, Modal, Select, TextArea } from '@/shared/ui';
+import { getColumns } from '@/features/Column';
+
+import { taskApi } from '../../queries';
+import { type SubtaskType, type TaskType } from '../../types';
+import { SubtaskList } from '../SubtaskList';
 
 import styles from './ChangeTaskModal.module.scss';
-import { taskApi } from '@/features/Task/queries';
-import { type SubtaskType, type TodoType } from '@/features/Task/types';
-import { SubtaskList } from '@/features/Task/ui/SubtaskList';
 
 interface Props {
   setChangeTaskModalShown: React.Dispatch<React.SetStateAction<boolean>>;
   changeTaskModalShown: boolean;
-  task: TodoType;
+  task: TaskType;
 }
 
 export const ChangeTaskModal: FC<Props> = ({ setChangeTaskModalShown, changeTaskModalShown, task }) => {
-  const [changeTodo] = taskApi.useChangeTodoMutation();
+  const [changeTask] = taskApi.useChangeTaskMutation();
 
   const currentBoard = useSelector(getCurrentBoard);
 
@@ -31,12 +33,15 @@ export const ChangeTaskModal: FC<Props> = ({ setChangeTaskModalShown, changeTask
   const { user } = useAuthContext();
   const { setError, setSuccess } = useNotificationContext();
 
+  const columns = useSelector(getColumns);
+
   const handleChangeTask = (): void => {
-    void changeTodo({
+    void changeTask({
       userId: user?.uid || '',
       boardId: currentBoard?.id || '',
-      todoId: task.id,
-      todo: {
+      columnId: columns?.find((column) => column.title === currentStatus)?.id || '',
+      taskId: task.id,
+      task: {
         title: titleValue,
         description: descriptionValue,
         status: currentStatus,
@@ -88,7 +93,7 @@ export const ChangeTaskModal: FC<Props> = ({ setChangeTaskModalShown, changeTask
           title="Status"
           currentValue={currentStatus}
           setCurrentValue={setCurrentStatus}
-          options={getBoardStatuses(currentBoard?.columns || [])}
+          options={getBoardStatuses(columns || [])}
         />
         <div className={styles.actions}>
           <Button

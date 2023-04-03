@@ -1,11 +1,10 @@
 import React, { type FC, useState } from 'react';
 import { AnimatePresence } from 'framer-motion';
 
-import { ChangeBoardModal } from '../ChangeBoardModal';
-import { DeleteBoardModal } from '../DeleteBoardModal';
-
 import { Dropdown, RenameIcon, TrashIcon } from '@/shared/ui';
 
+import { ChangeBoardModal } from '../ChangeBoardModal';
+import { DeleteBoardModal } from '../DeleteBoardModal';
 import styles from './BoardActionsDropdown.module.scss';
 
 interface Props {

@@ -1,15 +1,18 @@
 import React, { type FC, useState } from 'react';
-import { type TodoType } from '@/features/Task/types';
-
-import styles from './TaskCard.module.scss';
-import { TaskModal } from '@/features/Task/ui/TaskModal';
 import { AnimatePresence } from 'framer-motion';
 
+import { type ColumnType } from '@/features/Column';
+
+import { TaskModal } from '../TaskModal';
+import { type TaskType } from '../../types';
+import styles from './TaskCard.module.scss';
+
 interface Props {
-  task: TodoType;
+  task: TaskType;
+  column: ColumnType;
 }
 
-export const TaskCard: FC<Props> = ({ task }) => {
+export const TaskCard: FC<Props> = ({ task, column }) => {
   const [taskModalShown, setTaskModalShown] = useState<boolean>(false);
   return (
     <>
@@ -26,7 +29,9 @@ export const TaskCard: FC<Props> = ({ task }) => {
         </p>
       </article>
       <AnimatePresence>
-        {taskModalShown && <TaskModal isShown={taskModalShown} setIsShown={setTaskModalShown} task={task} />}
+        {taskModalShown && (
+          <TaskModal column={column} isShown={taskModalShown} setIsShown={setTaskModalShown} task={task} />
+        )}
       </AnimatePresence>
     </>
   );

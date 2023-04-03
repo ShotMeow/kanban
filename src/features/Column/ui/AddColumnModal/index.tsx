@@ -3,10 +3,11 @@ import { useSelector } from 'react-redux';
 
 import { Button, Field, Modal } from '@/shared/ui';
 
-import { boardApi, getCurrentBoard } from '@/features/Board';
+import { getCurrentBoard } from '@/features/Board';
 import { useAuthContext } from '@/features/Authorize';
 import { useNotificationContext } from '@/features/Notification';
 
+import { columnApi } from '../../queries';
 import styles from './AddColumnModal.module.scss';
 
 interface Props {
@@ -15,7 +16,7 @@ interface Props {
 }
 
 export const AddColumnModal: FC<Props> = ({ setAddColumnModalShown, addColumnModalShown }) => {
-  const [addColumn] = boardApi.useAddColumnMutation();
+  const [addColumn] = columnApi.useAddColumnMutation();
   const [color, setColor] = useState<string>('#000000');
   const [title, setTitle] = useState<string>('');
 
@@ -28,8 +29,10 @@ export const AddColumnModal: FC<Props> = ({ setAddColumnModalShown, addColumnMod
     addColumn({
       userId: user?.uid || '',
       boardId: currentBoard?.id || '',
-      columnTitle: title,
-      columnColor: color,
+      column: {
+        title,
+        color,
+      },
     })
       .then(() => {
         setSuccess(`The column ${title} in the ${currentBoard?.title} has been created successfully`);
