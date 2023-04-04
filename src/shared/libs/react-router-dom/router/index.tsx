@@ -10,6 +10,7 @@ import { PrivateRoute } from '@/features/Authorize';
 
 export const router = createBrowserRouter([
   {
+    index: true,
     path: '/',
     element: (
       <PrivateRoute>
@@ -24,7 +25,7 @@ export const router = createBrowserRouter([
     element: <AuthorizePage />,
   },
   {
-    path: '/*',
+    path: '*',
     element: <NotFoundPage />,
   },
 ]);
