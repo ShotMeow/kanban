@@ -25,7 +25,6 @@ export const SignUp: FC<Props> = ({ setIsSignIn }) => {
   const { setSuccess, setError } = useNotificationContext();
   const handleSubmit = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
-
     if (password === passwordRepeat) {
       setIsLoading(true);
       registerUserWithEmailAndPassword(email, password)
@@ -89,7 +88,7 @@ export const SignUp: FC<Props> = ({ setIsSignIn }) => {
       <div className={styles.actions}>
         <Checkbox isActive={isRememberMe} setIsActive={setIsRememberMe} title="Remember me" />
       </div>
-      <Button disabled={isLoading} primary>
+      <Button type="submit" disabled={isLoading} primary>
         Create an account
       </Button>
       <p className={styles.state}>
