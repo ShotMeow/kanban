@@ -28,7 +28,7 @@ export const Header: FC = () => {
         <div className={styles.actions}>
           {currentBoard && (
             <div className={styles.board}>
-              {columns && (
+              {Boolean(columns?.length) && (
                 <Button
                   onClick={(event) => {
                     event.stopPropagation();
