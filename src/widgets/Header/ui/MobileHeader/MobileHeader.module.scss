@@ -1,0 +1,46 @@
+.header {
+  @apply bg-gray-dark py-6 px-8 border-b border-gray-stroke flex flex-row items-center justify-between gap-10;
+  width: 100vw;
+
+  @media (min-width: theme("screens.lg")) {
+    @apply hidden;
+  }
+
+  > .board {
+    @apply relative;
+    > button {
+      @apply flex items-center gap-4 w-32;
+      > h1 {
+        @apply flex items-center gap-4 text-lg font-bold overflow-hidden overflow-ellipsis whitespace-nowrap;
+
+        > svg {
+          @apply text-primary flex-shrink-0;
+        }
+      }
+
+      &.active > svg {
+        @apply rotate-180;
+      }
+
+      > svg {
+        @apply text-primary flex-shrink-0;
+      }
+    }
+  }
+
+  > .actions {
+    @apply flex items-center gap-4 flex-shrink-0 justify-between;
+
+    > .board {
+      @apply flex items-center gap-4;
+
+      > button {
+        @apply text-2xl py-0 px-5;
+      }
+
+      > .other {
+        @apply relative;
+      }
+    }
+  }
+}

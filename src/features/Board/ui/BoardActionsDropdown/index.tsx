@@ -1,7 +1,7 @@
 import React, { type FC, useState } from 'react';
 import { AnimatePresence } from 'framer-motion';
 
-import { Dropdown, RenameIcon, TrashIcon } from '@/shared/ui';
+import { Dropdown, LogoutIcon, RenameIcon, TrashIcon } from '@/shared/ui';
 
 import { ChangeBoardModal } from '../ChangeBoardModal';
 import { DeleteBoardModal } from '../DeleteBoardModal';
@@ -9,10 +9,11 @@ import styles from './BoardActionsDropdown.module.scss';
 
 interface Props {
   setDropdownShown: React.Dispatch<React.SetStateAction<boolean>>;
+  setLogoutModalShown: React.Dispatch<React.SetStateAction<boolean>>;
   dropdownShown: boolean;
 }
 
-export const BoardActionsDropdown: FC<Props> = ({ setDropdownShown, dropdownShown }) => {
+export const BoardActionsDropdown: FC<Props> = ({ setDropdownShown, setLogoutModalShown, dropdownShown }) => {
   const [changeBoardModalShown, setChangeBoardModalShown] = useState<boolean>(false);
   const [deleteBoardModalShown, setDeleteBoardModalShown] = useState<boolean>(false);
 
@@ -33,6 +34,14 @@ export const BoardActionsDropdown: FC<Props> = ({ setDropdownShown, dropdownShow
           }}
         >
           <TrashIcon /> <span>Delete</span>
+        </button>
+        <button
+          className={styles.logout}
+          onClick={() => {
+            setLogoutModalShown(true);
+          }}
+        >
+          <LogoutIcon /> <span>Logout</span>
         </button>
       </Dropdown>
       <AnimatePresence>

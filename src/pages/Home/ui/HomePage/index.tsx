@@ -32,7 +32,18 @@ export const HomePage: FC = () => {
   return (
     <main className={styles.home}>
       {currentBoard && (
-        <Swiper spaceBetween={20} slidesPerView={'auto'} className={styles.columns}>
+        <Swiper
+          spaceBetween={20}
+          breakpoints={{
+            0: {
+              slidesPerView: 1,
+            },
+            576: {
+              slidesPerView: 'auto',
+            },
+          }}
+          className={styles.columns}
+        >
           {columns?.map((column) => (
             <SwiperSlide className={styles.column} key={column.title}>
               <ColumnItem column={column} />

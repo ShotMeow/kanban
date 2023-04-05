@@ -5,6 +5,10 @@
       @apply flex gap-4;
       > button {
         @apply py-2 px-10;
+
+        @media (max-width: theme("screens.lg")) {
+          @apply px-6;
+        }
       }
     }
   }

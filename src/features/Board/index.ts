@@ -5,3 +5,4 @@ export { getBoardStatuses } from './utils';
 export { BoardActionsDropdown } from './ui/BoardActionsDropdown';
 export { CreateBoardModal } from './ui/CreateBoardModal';
 export { setCurrentBoard } from './slice';
+export { BoardSelectDropdown } from './ui/BoardSelectDropdown';

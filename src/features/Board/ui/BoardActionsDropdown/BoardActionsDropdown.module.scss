@@ -2,10 +2,22 @@
   @apply w-48;
   > button {
     @apply flex items-center gap-2;
+    &:hover {
+      @apply text-primary;
+    }
 
-    &.delete {
+    &.delete:hover {
       @apply text-warning;
     }
+
+    &.logout:hover {
+      @apply text-primary;
+
+      @media (min-width: theme("screens.lg")) {
+        @apply hidden;
+      }
+    }
+
     > * {
       @apply flex-shrink-0;
     }

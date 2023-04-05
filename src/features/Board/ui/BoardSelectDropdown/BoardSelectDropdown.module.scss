@@ -1,0 +1,19 @@
+.dropdown {
+  @apply -left-20 w-48;
+  > ul {
+    @apply flex flex-col items-start gap-4 overflow-hidden relative;
+
+    button {
+      @apply text-left overflow-hidden whitespace-nowrap w-32;
+
+      &.active {
+        @apply font-bold;
+      }
+
+      &:hover,
+      &.active {
+        @apply text-primary;
+      }
+    }
+  }
+}

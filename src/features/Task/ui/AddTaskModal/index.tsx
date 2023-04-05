@@ -64,14 +64,13 @@ export const AddTaskModal: FC<Props> = ({ setAddTaskModalShown, addTaskModalShow
   };
 
   return (
-    <Modal className={styles.modal} onShownChange={setAddTaskModalShown} shown={addTaskModalShown}>
+    <Modal title="Add New Task" className={styles.modal} onShownChange={setAddTaskModalShown} shown={addTaskModalShown}>
       <form
         onSubmit={(event) => {
           event.preventDefault();
           handleSubmit();
         }}
       >
-        <h3>Add New Task</h3>
         <Field
           required
           onChange={(event) => {

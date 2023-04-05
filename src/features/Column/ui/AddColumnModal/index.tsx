@@ -43,14 +43,18 @@ export const AddColumnModal: FC<Props> = ({ setAddColumnModalShown, addColumnMod
       });
   };
   return (
-    <Modal className={styles.modal} shown={addColumnModalShown} onShownChange={setAddColumnModalShown}>
+    <Modal
+      title="Add Column"
+      className={styles.modal}
+      shown={addColumnModalShown}
+      onShownChange={setAddColumnModalShown}
+    >
       <form
         onSubmit={(event) => {
           event.preventDefault();
           handleSubmit();
         }}
       >
-        <h3>Add Column</h3>
         <Field
           onChange={(event) => {
             setTitle(event.currentTarget.value);

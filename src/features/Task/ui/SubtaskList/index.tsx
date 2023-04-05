@@ -38,36 +38,40 @@ export const SubtaskList: FC<Props> = ({ subtasks, setSubtasks, ...props }) => {
 
   return (
     <div className={styles.subtasks} {...props}>
-      <h2>Subtasks</h2>
-      <ul>
-        {subtasks.map((subtask, index) => (
-          <li key={subtask.id}>
-            <Field
-              required
-              onChange={(event) => {
-                handleChangeSubtask(event.currentTarget.value, subtask.id);
-              }}
-              value={subtask.value}
-              placeholder={`e.g. ${getRandomPlaceholder(index)}`}
-            />
-            <button
-              type="button"
-              onClick={() => {
-                handleDeleteSubtask(subtask.id);
-              }}
-            >
-              ×
-            </button>
-          </li>
-        ))}
-      </ul>
+      {Boolean(subtasks.length) && (
+        <>
+          <h2>Subtasks</h2>
+          <ul>
+            {subtasks.map((subtask, index) => (
+              <li key={subtask.id}>
+                <Field
+                  required
+                  onChange={(event) => {
+                    handleChangeSubtask(event.currentTarget.value, subtask.id);
+                  }}
+                  value={subtask.value}
+                  placeholder={`e.g. ${getRandomPlaceholder(index)}`}
+                />
+                <button
+                  type="button"
+                  onClick={() => {
+                    handleDeleteSubtask(subtask.id);
+                  }}
+                >
+                  ×
+                </button>
+              </li>
+            ))}
+          </ul>
+        </>
+      )}
       <Button
         onClick={() => {
           handleAddSubtask();
         }}
         secondary
       >
-        + Add New Subtask
+        {subtasks.length ? '+ Add New Subtask' : '+ Add Subtask'}
       </Button>
     </div>
   );
