@@ -10,8 +10,11 @@
       @apply text-warning;
     }
 
-    &.logout:hover {
-      @apply text-primary;
+    &.logout {
+      &,
+      &:hover {
+        @apply text-primary;
+      }
 
       @media (min-width: theme("screens.lg")) {
         @apply hidden;
