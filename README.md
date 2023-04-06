@@ -26,7 +26,7 @@ This project uses the following dependencies:
 - React Router: routing library built on top of react.
 - TypeScript: a typed superset of JavaScript that compiles to plain JavaScript.
 - Redux Toolkit: a Predictable State Container for JS Apps.
-- Redux Persist: the most mature, stable, and powerful professional grade CSS extension language in the world.
+- Redux Persist: persist and rehydrate a redux store.
 - Firebase: cloud platform for backend.
 - Framer Motion: production-ready motion library for React.
 - Swiper: the most modern free mobile touch slider with hardware accelerated transitions and amazing native behavior.
