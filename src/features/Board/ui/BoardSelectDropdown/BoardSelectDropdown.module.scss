@@ -1,10 +1,10 @@
 .dropdown {
-  @apply -left-20 w-48;
+  @apply -left-20 w-56;
   > ul {
     @apply flex flex-col items-start gap-4 overflow-hidden relative;
 
     button {
-      @apply text-left overflow-hidden whitespace-nowrap w-32;
+      @apply text-left overflow-hidden whitespace-nowrap w-44 flex items-center;
 
       &.active {
         @apply font-bold;
