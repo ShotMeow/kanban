@@ -9,7 +9,16 @@
   > .board {
     @apply relative;
     > button {
-      @apply flex items-center gap-4 w-32;
+      @apply flex items-center gap-4 sm:w-96;
+
+      @media (max-width: 650px) {
+        @apply w-60;
+      }
+
+      @media (max-width: 400px) {
+        @apply w-32;
+      }
+
       > h1 {
         @apply flex items-center gap-4 text-lg font-bold overflow-hidden overflow-ellipsis whitespace-nowrap;
 
