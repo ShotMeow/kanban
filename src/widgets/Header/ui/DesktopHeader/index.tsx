@@ -4,8 +4,8 @@ import { useSelector } from 'react-redux';
 
 import { Button, LogoutIcon, OtherButton } from '@/shared/ui';
 
-import { getCurrentBoard, BoardActionsDropdown } from '@/features/Board';
-import { getColumns } from '@/features/Column';
+import { getCurrentBoard, BoardActionsDropdown } from '@/entities/Board';
+import { getColumns } from '@/entities/Column';
 
 import styles from './DesktopHeader.module.scss';
 

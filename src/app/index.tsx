@@ -4,7 +4,7 @@ import { RouterProvider } from 'react-router-dom';
 import { router } from '@/shared/libs/react-router-dom';
 
 import { useAuthContext } from '@/features/Authorize';
-import { boardApi } from '@/features/Board';
+import { boardApi } from '@/entities/Board';
 
 export const App: FC = () => {
   const { user } = useAuthContext();

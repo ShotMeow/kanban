@@ -1,14 +1,15 @@
 import React, { type FC, useState } from 'react';
-
-import styles from './MobileHeader.module.scss';
-import { Button, OtherButton } from '@/shared/ui';
-import { AnimatePresence } from 'framer-motion';
-import { BoardActionsDropdown, BoardSelectDropdown, getCurrentBoard } from '@/features/Board';
 import { useSelector } from 'react-redux';
-import { getColumns } from '@/features/Column';
+import { AnimatePresence } from 'framer-motion';
+import classNames from 'classnames';
+
+import { Button, OtherButton } from '@/shared/ui';
 import { KanbanIcon } from '@/shared/ui/Icons/Kanban';
 import { ArrowIcon } from '@/shared/ui/Icons/Arrow';
-import classNames from 'classnames';
+import { BoardActionsDropdown, BoardSelectDropdown, getCurrentBoard } from '@/entities/Board';
+import { getColumns } from '@/entities/Column';
+
+import styles from './MobileHeader.module.scss';
 
 interface Props {
   setLogoutModalShown: React.Dispatch<React.SetStateAction<boolean>>;

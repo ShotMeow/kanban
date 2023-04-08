@@ -1,0 +1,14 @@
+.modal {
+  > div {
+    @apply items-start space-y-4;
+    > .heading {
+      @apply flex items-center justify-between gap-8 relative;
+      > h2 {
+        @apply text-xl font-semibold line-clamp-3;
+      }
+    }
+    > p {
+      @apply break-all;
+    }
+  }
+}

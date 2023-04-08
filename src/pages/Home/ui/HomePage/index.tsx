@@ -2,8 +2,8 @@ import React, { type FC, useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useSelector } from 'react-redux';
 
-import { getCurrentBoard } from '@/features/Board';
-import { ColumnItem, getColumns, columnApi, AddColumnModal } from '@/features/Column';
+import { getCurrentBoard } from '@/entities/Board';
+import { ColumnItem, getColumns, columnApi, AddColumnModal } from '@/entities/Column';
 import { useAuthContext } from '@/features/Authorize';
 
 import { Swiper, SwiperSlide } from 'swiper/react';

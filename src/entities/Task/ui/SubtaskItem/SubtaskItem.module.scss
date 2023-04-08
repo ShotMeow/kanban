@@ -1,0 +1,14 @@
+.subtask {
+  @apply cursor-pointer flex items-center gap-4 bg-dark px-4 py-2 rounded-md drop-shadow-2xl line-clamp-1;
+  > p {
+    @apply text-white;
+  }
+
+  &.success {
+    @apply line-through decoration-gray;
+
+    > p {
+      @apply text-gray;
+    }
+  }
+}
