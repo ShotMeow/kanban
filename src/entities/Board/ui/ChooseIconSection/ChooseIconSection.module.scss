@@ -18,5 +18,9 @@
         @apply scale-125;
       }
     }
+
+    @media (max-width: theme("screens.sm")) {
+      @apply grid-cols-4;
+    }
   }
 }
