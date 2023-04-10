@@ -3,12 +3,17 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { useDispatch, useSelector } from 'react-redux';
 import classNames from 'classnames';
 
-import { BoardIcon, Logo } from '@/shared/ui';
+import { BoardIcon, HideIcon, Logo } from '@/shared/ui';
 import { getBoards, getCurrentBoard, CreateBoardModal, setCurrentBoard } from '@/entities/Board';
 
 import styles from './Aside.module.scss';
 
-export const Aside: FC = () => {
+interface Props {
+  isSmallestAside: boolean;
+  setIsSmallestAside: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export const Aside: FC<Props> = ({ isSmallestAside, setIsSmallestAside }) => {
   const [createBoardModalShown, setCreateBoardModalShown] = useState<boolean>(false);
   const dispatch = useDispatch();
   const boards = useSelector(getBoards);
@@ -16,38 +21,57 @@ export const Aside: FC = () => {
 
   return (
     <>
-      <aside className={styles.aside}>
-        <Logo />
-        <h3>All boards ({boards?.length || 0})</h3>
-        <ul>
-          {boards?.map((board) => (
-            <li
-              className={classNames({
-                [styles.active]: currentBoard?.id === board.id,
-              })}
-              key={board.id}
-            >
+      <aside
+        className={classNames(
+          {
+            [styles.smallest]: isSmallestAside,
+          },
+          styles.aside
+        )}
+      >
+        <div className={styles.top}>
+          <Logo />
+          <h3>All boards ({boards?.length || 0})</h3>
+          <ul>
+            {boards?.map((board) => (
+              <li
+                className={classNames({
+                  [styles.active]: currentBoard?.id === board.id,
+                })}
+                key={board.id}
+              >
+                <motion.button
+                  whileTap={{ scale: 0.95 }}
+                  onClick={() => dispatch(setCurrentBoard({ boardId: board.id }))}
+                >
+                  {board.icon ? <img src={board.icon} alt="Icon" /> : <BoardIcon />} <span>{board.title}</span>
+                </motion.button>
+                <div className={styles.background} />
+              </li>
+            ))}
+            <li>
               <motion.button
                 whileTap={{ scale: 0.95 }}
-                onClick={() => dispatch(setCurrentBoard({ boardId: board.id }))}
+                onClick={(event) => {
+                  event.stopPropagation();
+                  setCreateBoardModalShown(true);
+                }}
               >
-                {board.icon ? <img src={board.icon} alt="Icon" /> : <BoardIcon />} <span>{board.title}</span>
+                <BoardIcon /> <span>+ Create New Board</span>
               </motion.button>
-              <div className={styles.background} />
             </li>
-          ))}
-          <li>
-            <motion.button
-              whileTap={{ scale: 0.95 }}
-              onClick={(event) => {
-                event.stopPropagation();
-                setCreateBoardModalShown(true);
-              }}
-            >
-              <BoardIcon /> <span>+ Create New Board</span>
-            </motion.button>
-          </li>
-        </ul>
+          </ul>
+        </div>
+        <div className={styles.bottom}>
+          <motion.button
+            whileTap={{ scale: 0.95 }}
+            onClick={() => {
+              setIsSmallestAside(!isSmallestAside);
+            }}
+          >
+            <HideIcon /> <span>Hide Sidebar</span>
+          </motion.button>
+        </div>
       </aside>
       <AnimatePresence>
         {createBoardModalShown && (

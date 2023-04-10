@@ -46,7 +46,7 @@ export const HomePage: FC = () => {
           className={styles.columns}
         >
           {columns?.map((column) => (
-            <SwiperSlide className={styles.column} key={column.title}>
+            <SwiperSlide className={styles.column} key={column.id}>
               <ColumnItem column={column} />
             </SwiperSlide>
           ))}

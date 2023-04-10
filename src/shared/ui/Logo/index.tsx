@@ -11,7 +11,7 @@ export const Logo: FC = () => {
   return (
     <MotionLink whileTap={{ scale: 0.95 }} to="/" className={styles.logo}>
       <KanbanIcon className={styles.icon} />
-      Kanban
+      <span>Kanban</span>
     </MotionLink>
   );
 };

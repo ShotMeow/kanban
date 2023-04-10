@@ -1,61 +1,97 @@
 .aside {
-  @apply bg-gray-dark p-8 border-r border-gray-stroke h-full;
-  width: 20vw;
+  @apply bg-gray-dark p-8 border-r border-gray-stroke h-full flex flex-col justify-between transition-all;
+  width: 25vw;
 
   @media (max-width: theme("screens.lg")) {
     @apply hidden;
   }
 
-  > h3 {
-    @apply uppercase text-gray text-sm mt-14 tracking-widest font-semibold;
-  }
+  &.smallest {
+    width: 90px;
 
-  > ul {
-    @apply flex flex-col gap-6 my-8;
-
-    > li {
-      &.active {
-        @apply relative;
-        > button {
-          @apply relative text-white z-20;
-
-          > img,
-          svg {
-            @apply opacity-100;
-          }
-        }
-        > .background {
-          @apply absolute z-0 -left-10 -top-2 bg-primary rounded-r-full;
-          height: calc(100% + 15px);
-          width: calc(100% + 60px);
-        }
+    > .top {
+      > a > span {
+        @apply opacity-0 invisible;
       }
-
-      > button {
-        @apply flex items-center gap-3 text-gray text-start overflow-hidden w-full;
-
-        > img,
-        svg {
-          @apply opacity-40;
-        }
-
-        > * {
-          @apply flex-shrink-0;
-        }
-
-        > span {
-          @apply line-clamp-1 overflow-hidden w-full;
-        }
+      > h3 {
+        @apply opacity-0 invisible;
       }
     }
 
-    > li:last-child {
-      > button {
-        @apply text-primary;
+    > .bottom > button > span {
+      @apply opacity-0 invisible;
+    }
+  }
 
-        > svg {
-          @apply opacity-100;
+  > .top {
+    > a > span {
+      @apply transition-all;
+    }
+    > h3 {
+      @apply uppercase text-gray text-sm mt-14 tracking-widest font-semibold whitespace-nowrap transition-all;
+    }
+
+    > ul {
+      @apply flex flex-col gap-6 my-8;
+
+      > li {
+        &.active {
+          @apply relative;
+          > button {
+            @apply relative text-white z-20;
+
+            > img,
+            svg {
+              @apply opacity-100;
+            }
+          }
+          > .background {
+            @apply absolute z-0 -left-10 -top-2 bg-primary rounded-r-full;
+            height: calc(100% + 15px);
+            width: calc(100% + 60px);
+          }
         }
+
+        > button {
+          @apply flex items-center gap-3 text-gray text-start overflow-hidden w-full;
+
+          > img,
+          svg {
+            @apply opacity-40;
+          }
+
+          > * {
+            @apply flex-shrink-0;
+          }
+
+          > span {
+            @apply line-clamp-1 overflow-hidden w-full;
+          }
+        }
+      }
+
+      > li:last-child {
+        > button {
+          @apply text-primary;
+
+          > svg {
+            @apply opacity-100;
+          }
+        }
+      }
+    }
+  }
+
+  > .bottom {
+    > button {
+      @apply flex items-center gap-4 text-gray whitespace-nowrap;
+
+      > span {
+        @apply transition-all;
+      }
+
+      > svg {
+        @apply flex-shrink-0;
       }
     }
   }

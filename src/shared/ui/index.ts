@@ -14,3 +14,4 @@ export { TrashIcon } from './Icons/Trash';
 export { RenameIcon } from './Icons/Rename';
 export { TextArea } from './TextArea';
 export { Select } from './Select';
+export { HideIcon } from './Icons/Hide';

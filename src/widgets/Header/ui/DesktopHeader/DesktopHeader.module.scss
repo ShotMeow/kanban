@@ -1,17 +1,17 @@
 .header {
-  @apply bg-gray-dark py-6 px-8 border-b border-gray-stroke flex flex-row items-center justify-between gap-10;
-  width: 80vw;
+  @apply bg-gray-dark py-6 px-8 border-b border-gray-stroke flex flex-row items-center justify-between gap-10 w-full transition-all;
 
   @media (max-width: theme("screens.lg")) {
     @apply hidden;
   }
 
   > h1 {
-    @apply text-3xl font-bold overflow-hidden overflow-ellipsis;
+    @apply text-3xl font-bold overflow-hidden overflow-ellipsis line-clamp-1;
+    width: 50%;
   }
 
   > .actions {
-    @apply flex items-center gap-4 flex-shrink-0 justify-between;
+    @apply flex items-center gap-4 flex-shrink-0 justify-between fixed right-9 z-50;
 
     > .board {
       @apply flex items-center gap-4;
