@@ -32,8 +32,8 @@ export const taskApi = rtkApi.injectEndpoints({
       invalidatesTags: ['Task'],
     }),
     changeTask: builder.mutation({
-      async queryFn({ userId, boardId, columnId, taskId, task }: ChangeTaskType) {
-        await changeTaskFromCollectionOfUser({ userId, boardId, columnId, taskId, task });
+      async queryFn({ userId, boardId, columnId, newColumnId, taskId, task }: ChangeTaskType) {
+        await changeTaskFromCollectionOfUser({ userId, boardId, columnId, newColumnId, taskId, task });
         return { data: 'OK' };
       },
       invalidatesTags: ['Task'],

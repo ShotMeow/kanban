@@ -42,7 +42,9 @@ export const addTaskToBoardCollectionOfUser = async ({
 }: AddTaskType): Promise<void> => {
   const db = getFirestore();
 
-  await addDoc(collection(doc(doc(doc(db, 'users', userId), 'boards', boardId), 'columns', columnId), 'tasks'), {
+  const collectionRef = collection(doc(doc(doc(db, 'users', userId), 'boards', boardId), 'columns', columnId), 'tasks');
+
+  await addDoc(collectionRef, {
     ...task,
   });
 };
@@ -51,15 +53,29 @@ export const changeTaskFromCollectionOfUser = async ({
   userId,
   boardId,
   columnId,
+  newColumnId,
   taskId,
   task,
 }: ChangeTaskType): Promise<void> => {
   const db = getFirestore();
 
-  const docRef = doc(doc(doc(doc(db, 'users', userId), 'boards', boardId), 'columns', columnId), 'tasks', taskId);
-  await updateDoc(docRef, {
-    ...task,
-  });
+  if (newColumnId) {
+    const docRef = doc(doc(doc(doc(db, 'users', userId), 'boards', boardId), 'columns', columnId), 'tasks', taskId);
+    await deleteDoc(docRef);
+
+    const collectionRef = collection(
+      doc(doc(doc(db, 'users', userId), 'boards', boardId), 'columns', newColumnId),
+      'tasks'
+    );
+    await addDoc(collectionRef, {
+      ...task,
+    });
+  } else {
+    const docRef = doc(doc(doc(doc(db, 'users', userId), 'boards', boardId), 'columns', columnId), 'tasks', taskId);
+    await updateDoc(docRef, {
+      ...task,
+    });
+  }
 };
 
 export const deleteTaskFromBoardCollectionOfUser = async ({

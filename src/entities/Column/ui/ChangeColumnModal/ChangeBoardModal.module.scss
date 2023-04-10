@@ -2,7 +2,11 @@
   > form {
     @apply flex flex-col items-center gap-4;
     > .fields {
-      @apply flex gap-2;
+      @apply flex gap-2 w-full;
+
+      input[type="color"] {
+        @apply w-full;
+      }
     }
     > .actions {
       @apply flex gap-4;

@@ -20,12 +20,13 @@ interface Props {
 export const SubtaskItem: FC<Props> = ({ subtask, task, column }) => {
   const { user } = useAuthContext();
   const currentBoard = useSelector(getCurrentBoard);
-
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [changeTask] = taskApi.useChangeTaskMutation();
   const [isActive, setIsActive] = useState<boolean>(subtask.isSuccess);
 
   useEffect(() => {
     if (isActive !== subtask.isSuccess) {
+      setIsLoading(true);
       const subtasksArray: SubtaskType[] = task.subtasks.map((todoSubtask) => {
         const localSubtask = { ...todoSubtask };
         if (localSubtask.id === subtask.id) localSubtask.isSuccess = !todoSubtask.isSuccess;
@@ -41,6 +42,10 @@ export const SubtaskItem: FC<Props> = ({ subtask, task, column }) => {
           ...task,
           subtasks: subtasksArray,
         },
+      }).finally(() => {
+        setTimeout(() => {
+          setIsLoading(false);
+        }, 200);
       });
     }
   }, [isActive]);
@@ -54,7 +59,7 @@ export const SubtaskItem: FC<Props> = ({ subtask, task, column }) => {
         styles.subtask
       )}
     >
-      <Checkbox isActive={subtask.isSuccess} setIsActive={setIsActive} />
+      <Checkbox disabled={isLoading} isActive={subtask.isSuccess} setIsActive={setIsActive} />
       <p>{subtask.value}</p>
     </label>
   );

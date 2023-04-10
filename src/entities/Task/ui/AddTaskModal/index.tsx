@@ -2,7 +2,7 @@ import React, { type FC, useState } from 'react';
 import { useSelector } from 'react-redux';
 
 import { Button, Field, Modal, Select, TextArea } from '@/shared/ui';
-import { getBoardStatuses, getCurrentBoard } from '@/entities/Board';
+import { getCurrentBoard } from '@/entities/Board';
 import { useAuthContext } from '@/features/Authorize';
 import { useNotificationContext } from '@/features/Notification';
 import { getColumns } from '@/entities/Column';
@@ -37,12 +37,14 @@ export const AddTaskModal: FC<Props> = ({ setAddTaskModalShown, addTaskModalShow
   const [descriptionValue, setDescriptionValue] = useState<string>('');
 
   const columns = useSelector(getColumns);
-  const [status, setStatus] = useState<string>(getBoardStatuses(columns || [])[0]);
+  const [status, setStatus] = useState<string>(columns ? columns[0].title : '');
   const { user } = useAuthContext();
   const [addTask] = taskApi.useAddTaskMutation();
   const { setSuccess, setError } = useNotificationContext();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const handleSubmit = (): void => {
+    setIsLoading(true);
     addTask({
       userId: user?.uid || '',
       boardId: currentBoard?.id || '',
@@ -55,11 +57,14 @@ export const AddTaskModal: FC<Props> = ({ setAddTaskModalShown, addTaskModalShow
       },
     })
       .then(() => {
-        setSuccess(`${titleValue} successfully added to ${status} column`);
+        setSuccess(`«${titleValue}» successfully added to «${status}» column`);
         setAddTaskModalShown(false);
       })
       .catch(() => {
-        setError(`Todo ${titleValue} couldn't added`);
+        setError(`Task «${titleValue}» couldn't added`);
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   };
 
@@ -90,13 +95,8 @@ export const AddTaskModal: FC<Props> = ({ setAddTaskModalShown, addTaskModalShow
           placeholder="e.g. It’s always good to take a break. This 15 minute break will recharge the batteries a little."
         />
         <SubtaskList subtasks={subtasks} setSubtasks={setSubtasks} />
-        <Select
-          title="Status"
-          currentValue={status}
-          setCurrentValue={setStatus}
-          options={getBoardStatuses(columns || [])}
-        />
-        <Button type="submit" primary>
+        {columns && <Select title="Status" currentValue={status} setCurrentValue={setStatus} options={columns} />}
+        <Button disabled={isLoading} type="submit" primary>
           Create Task
         </Button>
       </form>

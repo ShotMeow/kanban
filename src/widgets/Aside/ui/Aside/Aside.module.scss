@@ -57,7 +57,7 @@
 
           > img,
           svg {
-            @apply opacity-40;
+            @apply opacity-20 text-white;
           }
 
           > * {
@@ -75,7 +75,7 @@
           @apply text-primary;
 
           > svg {
-            @apply opacity-100;
+            @apply opacity-100 text-primary;
           }
         }
       }

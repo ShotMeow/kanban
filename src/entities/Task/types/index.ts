@@ -29,6 +29,7 @@ export interface ChangeTaskType {
   userId: string;
   boardId: string;
   columnId: string;
+  newColumnId?: string;
   taskId: string;
   task: Partial<Omit<TaskType, 'id'>>;
 }

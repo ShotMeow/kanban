@@ -19,6 +19,7 @@
       appearance: none;
 
       > svg {
+        @apply transition-all duration-300;
         &.active {
           @apply rotate-180;
         }

@@ -45,7 +45,12 @@ export const ChangeColumnModal: FC<Props> = ({ column, setChangeColumnModalShown
   };
 
   return (
-    <Modal className={styles.modal} onShownChange={setChangeColumnModalShown} shown={changeColumnModalShown}>
+    <Modal
+      title={column.title}
+      className={styles.modal}
+      onShownChange={setChangeColumnModalShown}
+      shown={changeColumnModalShown}
+    >
       <form
         onSubmit={(event) => {
           event.preventDefault();

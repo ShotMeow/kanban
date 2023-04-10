@@ -39,7 +39,7 @@ export const ColumnItem: FC<Props> = ({ column }) => {
         <OtherButton
           onClick={(event) => {
             event.stopPropagation();
-            setDropdownShown(true);
+            setDropdownShown(!dropdownShown);
           }}
         />
         <AnimatePresence>

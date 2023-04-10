@@ -27,8 +27,11 @@ export const HomePage: FC = () => {
 
   useEffect(() => {
     void columnsRefetch();
-    void iconsRefetch();
   }, [user, currentBoard]);
+
+  useEffect(() => {
+    void iconsRefetch();
+  }, []);
 
   return (
     <main className={styles.home}>

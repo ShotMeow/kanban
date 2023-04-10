@@ -3,7 +3,7 @@ import { AnimatePresence } from 'framer-motion';
 import { useSelector } from 'react-redux';
 
 import { Modal, OtherButton, Select } from '@/shared/ui';
-import { getBoardStatuses, getCurrentBoard } from '@/entities/Board';
+import { getCurrentBoard } from '@/entities/Board';
 import { useAuthContext } from '@/features/Authorize';
 import { getColumns, type ColumnType } from '@/entities/Column';
 
@@ -67,12 +67,7 @@ export const TaskModal: FC<Props> = ({ isShown, setIsShown, task, column }) => {
           </div>
           <p>{task.description}</p>
           <SubtasksSection column={column} task={task} subtasks={task.subtasks} />
-          <Select
-            title="Status"
-            currentValue={status}
-            setCurrentValue={setStatus}
-            options={getBoardStatuses(columns || [])}
-          />
+          {columns && <Select title="Status" currentValue={status} setCurrentValue={setStatus} options={columns} />}
         </div>
       </Modal>
     </>

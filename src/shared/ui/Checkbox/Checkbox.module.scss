@@ -2,7 +2,12 @@
   @apply flex items-center gap-4 text-gray text-sm;
 
   > button {
-    @apply w-5 h-5 bg-gray-dark border border-gray-stroke rounded-sm flex items-center justify-center;
+    @apply w-5 h-5 bg-gray-dark border border-gray-stroke rounded-sm flex items-center justify-center transition-all;
+
+    > div {
+      @apply w-3 h-3 text-white border-2;
+      border-color: #fff transparent #fff transparent;
+    }
 
     > svg {
       @apply hidden;

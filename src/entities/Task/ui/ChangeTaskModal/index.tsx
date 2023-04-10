@@ -1,7 +1,7 @@
 import React, { type FC, useState } from 'react';
 import { useSelector } from 'react-redux';
 
-import { getBoardStatuses, getCurrentBoard } from '@/entities/Board';
+import { getCurrentBoard } from '@/entities/Board';
 import { useNotificationContext } from '@/features/Notification';
 import { useAuthContext } from '@/features/Authorize';
 import { Button, Field, Modal, Select, TextArea } from '@/shared/ui';
@@ -32,14 +32,17 @@ export const ChangeTaskModal: FC<Props> = ({ setChangeTaskModalShown, changeTask
 
   const { user } = useAuthContext();
   const { setError, setSuccess } = useNotificationContext();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const columns = useSelector(getColumns);
 
   const handleChangeTask = (): void => {
+    setIsLoading(true);
     void changeTask({
       userId: user?.uid || '',
       boardId: currentBoard?.id || '',
-      columnId: columns?.find((column) => column.title === currentStatus)?.id || '',
+      columnId: columns?.find((column) => column.title === task.status)?.id || '',
+      newColumnId: columns?.find((column) => column.title === currentStatus)?.id || '',
       taskId: task.id,
       task: {
         title: titleValue,
@@ -54,6 +57,9 @@ export const ChangeTaskModal: FC<Props> = ({ setChangeTaskModalShown, changeTask
       })
       .catch(() => {
         setError('The task could not be changed. Try again later');
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   };
 
@@ -89,12 +95,9 @@ export const ChangeTaskModal: FC<Props> = ({ setChangeTaskModalShown, changeTask
           placeholder="e.g. It’s always good to take a break. This 15 minute break will recharge the batteries a little."
         />
         <SubtaskList subtasks={subtasks} setSubtasks={setSubtasks} />
-        <Select
-          title="Status"
-          currentValue={currentStatus}
-          setCurrentValue={setCurrentStatus}
-          options={getBoardStatuses(columns || [])}
-        />
+        {columns && (
+          <Select title="Status" currentValue={currentStatus} setCurrentValue={setCurrentStatus} options={columns} />
+        )}
         <div className={styles.actions}>
           <Button
             onClick={() => {
@@ -104,7 +107,7 @@ export const ChangeTaskModal: FC<Props> = ({ setChangeTaskModalShown, changeTask
           >
             Cancel
           </Button>
-          <Button type="submit" primary>
+          <Button disabled={isLoading} type="submit" primary>
             Change
           </Button>
         </div>
