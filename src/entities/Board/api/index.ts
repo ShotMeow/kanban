@@ -1,5 +1,5 @@
-import { getFirestore, addDoc, collection, deleteDoc, doc, getDocs, updateDoc } from 'firebase/firestore';
-
+import { addDoc, collection, deleteDoc, doc, getDocs, getFirestore, updateDoc } from 'firebase/firestore';
+import { getDownloadURL, getStorage, ref } from 'firebase/storage';
 import {
   type AddBoardType,
   type BoardType,
@@ -49,4 +49,41 @@ export const deleteBoardCollectionOfUser = async ({ userId, boardId }: DeleteBoa
 
   const docRef = doc(doc(db, 'users', userId), 'boards', boardId);
   await deleteDoc(docRef);
+};
+
+export const getIconsFromFirebaseStorage = async (): Promise<string[]> => {
+  const icons = [
+    'beaker',
+    'bell',
+    'chart-pie',
+    'chart-square-bar',
+    'chip',
+    'clock',
+    'currency-dollar',
+    'film',
+    'fire',
+    'flag',
+    'globe',
+    'photograph',
+    'presentation-chart-bar',
+    'presentation-chart-line',
+    'speakerphone',
+    'star',
+    'terminal',
+    'translate',
+    'trash',
+    'truck',
+    'video-camera',
+  ];
+
+  const storage = getStorage();
+
+  const paths: string[] = [];
+  for (const icon of icons) {
+    const svgRef = ref(storage, `icons/heroicons-solid_${icon}.svg`);
+    const path = await getDownloadURL(svgRef);
+    paths.push(path);
+  }
+
+  return paths;
 };

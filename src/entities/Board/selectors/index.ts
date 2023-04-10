@@ -3,3 +3,4 @@ import { type BoardType } from '../types';
 
 export const getBoards = (state: RootState): BoardType[] | null => state.board.boards;
 export const getCurrentBoard = (state: RootState): BoardType | null => state.board.currentBoard;
+export const getIcons = (state: RootState): string[] | null => state.board.icons;

@@ -2,7 +2,7 @@ import React, { type FC, useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useSelector } from 'react-redux';
 
-import { getCurrentBoard } from '@/entities/Board';
+import { boardApi, getCurrentBoard } from '@/entities/Board';
 import { ColumnItem, getColumns, columnApi, AddColumnModal } from '@/entities/Column';
 import { useAuthContext } from '@/features/Authorize';
 
@@ -14,7 +14,6 @@ import styles from './HomePage.module.scss';
 
 export const HomePage: FC = () => {
   const [addColumnModalShown, setAddColumnModalShown] = useState<boolean>(false);
-
   const columns = useSelector(getColumns);
 
   const { user } = useAuthContext();
@@ -24,9 +23,11 @@ export const HomePage: FC = () => {
     userId: user?.uid || '',
     boardId: currentBoard?.id || '',
   });
+  const { refetch: iconsRefetch } = boardApi.useGetIconsQuery();
 
   useEffect(() => {
     void columnsRefetch();
+    void iconsRefetch();
   }, [user, currentBoard]);
 
   return (

@@ -3,9 +3,10 @@ import {
   changeBoardCollectionOfUser,
   deleteBoardCollectionOfUser,
   getBoardCollectionsOfUser,
+  getIconsFromFirebaseStorage,
 } from '../api';
 import { type AddBoardType, type ChangeBoardType, type DeleteBoardType, type GetBoardType } from '../types';
-import { clearBoards, setBoards } from '../slice';
+import { clearBoards, setBoards, setIcons } from '../slice';
 
 import { rtkApi } from '@/shared/libs/redux-toolkit';
 
@@ -46,6 +47,21 @@ export const boardApi = rtkApi.injectEndpoints({
         return { data: 'OK' };
       },
       invalidatesTags: ['Board'],
+    }),
+    getIcons: builder.query<string[], void>({
+      async queryFn() {
+        const paths = await getIconsFromFirebaseStorage();
+        return { data: paths };
+      },
+      async onQueryStarted(_, { dispatch, queryFulfilled }) {
+        try {
+          const { data } = await queryFulfilled;
+          dispatch(setIcons(data));
+        } catch (error) {
+          dispatch(clearBoards());
+        }
+      },
+      providesTags: ['Board'],
     }),
   }),
 });

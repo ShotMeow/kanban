@@ -1,0 +1,22 @@
+.icons {
+  @apply w-full;
+  > div {
+    @apply grid grid-cols-7 gap-2 mt-2;
+
+    > button {
+      @apply p-4 flex items-center justify-center rounded-md transition-all;
+
+      &.active {
+        @apply bg-primary;
+      }
+
+      &:hover {
+        @apply bg-primary/20;
+      }
+
+      > img {
+        @apply scale-125;
+      }
+    }
+  }
+}

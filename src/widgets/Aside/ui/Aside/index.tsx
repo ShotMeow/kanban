@@ -31,7 +31,7 @@ export const Aside: FC = () => {
                 whileTap={{ scale: 0.95 }}
                 onClick={() => dispatch(setCurrentBoard({ boardId: board.id }))}
               >
-                <BoardIcon /> <span>{board.title}</span>
+                {board.icon ? <img src={board.icon} alt="Icon" /> : <BoardIcon />} <span>{board.title}</span>
               </motion.button>
               <div className={styles.background} />
             </li>

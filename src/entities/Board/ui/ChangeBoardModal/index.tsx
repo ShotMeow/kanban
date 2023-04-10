@@ -7,6 +7,8 @@ import { useAuthContext } from '@/features/Authorize';
 import { Button, Field, Modal } from '@/shared/ui';
 
 import styles from './ChangeBoardModal.module.scss';
+import { getIcons } from '@/entities/Board/selectors';
+import { ChooseIconSection } from '@/entities/Board/ui/ChooseIconSection';
 
 interface Props {
   setChangeBoardModalShown: React.Dispatch<React.SetStateAction<boolean>>;
@@ -17,6 +19,8 @@ export const ChangeBoardModal: FC<Props> = ({ setChangeBoardModalShown, changeBo
   const [changeBoard] = boardApi.useChangeBoardMutation();
   const currentBoard = useSelector(getCurrentBoard);
   const [boardTitle, setBoardTitle] = useState<string>(currentBoard?.title || '');
+  const icons = useSelector(getIcons);
+  const [selectedIcon, setSelectedIcon] = useState<string>(currentBoard?.icon || '');
 
   const { user } = useAuthContext();
   const { setError, setSuccess } = useNotificationContext();
@@ -27,6 +31,7 @@ export const ChangeBoardModal: FC<Props> = ({ setChangeBoardModalShown, changeBo
       boardId: currentBoard?.id || '',
       board: {
         title: boardTitle,
+        icon: selectedIcon,
       },
     })
       .then(() => {
@@ -55,6 +60,7 @@ export const ChangeBoardModal: FC<Props> = ({ setChangeBoardModalShown, changeBo
             value={boardTitle}
           />
         )}
+        {icons && <ChooseIconSection icons={icons} selectedIcon={selectedIcon} setSelectedIcon={setSelectedIcon} />}
         <div className={styles.actions}>
           <Button
             onClick={() => {

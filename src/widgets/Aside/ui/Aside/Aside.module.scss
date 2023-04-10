@@ -18,6 +18,11 @@
         @apply relative;
         > button {
           @apply relative text-white z-20;
+
+          > img,
+          svg {
+            @apply opacity-100;
+          }
         }
         > .background {
           @apply absolute z-0 -left-10 -top-2 bg-primary rounded-r-full;
@@ -28,6 +33,11 @@
 
       > button {
         @apply flex items-center gap-3 text-gray text-start overflow-hidden w-full;
+
+        > img,
+        svg {
+          @apply opacity-40;
+        }
 
         > * {
           @apply flex-shrink-0;
@@ -42,6 +52,10 @@
     > li:last-child {
       > button {
         @apply text-primary;
+
+        > svg {
+          @apply opacity-100;
+        }
       }
     }
   }

@@ -6,6 +6,9 @@ import { useNotificationContext } from '@/features/Notification';
 
 import { boardApi } from '../../queries';
 import styles from './CreateBoardModal.module.scss';
+import { useSelector } from 'react-redux';
+import { getIcons } from '@/entities/Board/selectors';
+import { ChooseIconSection } from '@/entities/Board/ui/ChooseIconSection';
 
 interface Props {
   setCreateBoardModalShown: React.Dispatch<React.SetStateAction<boolean>>;
@@ -16,8 +19,10 @@ export const CreateBoardModal: FC<Props> = ({ setCreateBoardModalShown, createBo
   const [boardTitle, setBoardTitle] = useState<string>('');
   const { user } = useAuthContext();
   const [addBoard] = boardApi.useAddBoardMutation();
-
   const { setSuccess, setError } = useNotificationContext();
+
+  const icons = useSelector(getIcons);
+  const [selectedIcon, setSelectedIcon] = useState<string>(icons ? icons[0] : '');
 
   const handleAddBoard = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
@@ -26,6 +31,7 @@ export const CreateBoardModal: FC<Props> = ({ setCreateBoardModalShown, createBo
       userId: user?.uid || '',
       board: {
         title: boardTitle,
+        icon: selectedIcon,
       },
     })
       .then(() => {
@@ -54,6 +60,7 @@ export const CreateBoardModal: FC<Props> = ({ setCreateBoardModalShown, createBo
           title="Title"
           placeholder="e.g. Platform Launch"
         />
+        {icons && <ChooseIconSection icons={icons} selectedIcon={selectedIcon} setSelectedIcon={setSelectedIcon} />}
         <Button type="submit" primary>
           Create Board
         </Button>

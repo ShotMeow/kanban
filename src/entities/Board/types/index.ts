@@ -1,6 +1,7 @@
 export interface BoardType {
   id: string;
   title: string;
+  icon: string;
 }
 export interface GetBoardType {
   userId: string;
@@ -24,5 +25,6 @@ export interface DeleteBoardType {
 
 export interface BoardSliceType {
   boards: BoardType[] | null;
+  icons: string[] | null;
   currentBoard: BoardType | null;
 }
