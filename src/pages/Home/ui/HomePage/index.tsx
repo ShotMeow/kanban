@@ -11,8 +11,10 @@ import 'swiper/css';
 import 'swiper/css/free-mode';
 
 import styles from './HomePage.module.scss';
+import { Loader } from '@/widgets/Loader';
 
 export const HomePage: FC = () => {
+  const [isLoading, setIsLoading] = useState(true);
   const [addColumnModalShown, setAddColumnModalShown] = useState<boolean>(false);
   const columns = useSelector(getColumns);
 
@@ -26,7 +28,10 @@ export const HomePage: FC = () => {
   const { refetch: iconsRefetch } = boardApi.useGetIconsQuery();
 
   useEffect(() => {
-    void columnsRefetch();
+    setIsLoading(true);
+    void columnsRefetch().finally(() => {
+      setIsLoading(false);
+    });
   }, [user, currentBoard]);
 
   useEffect(() => {
@@ -35,37 +40,41 @@ export const HomePage: FC = () => {
 
   return (
     <main className={styles.home}>
-      {currentBoard && (
-        <Swiper
-          spaceBetween={20}
-          breakpoints={{
-            0: {
-              slidesPerView: 1,
-            },
-            576: {
-              slidesPerView: 'auto',
-            },
-          }}
-          className={styles.columns}
-        >
-          {columns?.map((column) => (
-            <SwiperSlide className={styles.column} key={column.id}>
-              <ColumnItem column={column} />
+      {isLoading ? (
+        <Loader />
+      ) : (
+        currentBoard && (
+          <Swiper
+            spaceBetween={20}
+            breakpoints={{
+              0: {
+                slidesPerView: 1,
+              },
+              576: {
+                slidesPerView: 'auto',
+              },
+            }}
+            className={styles.columns}
+          >
+            {columns?.map((column) => (
+              <SwiperSlide className={styles.column} key={column.id}>
+                <ColumnItem column={column} />
+              </SwiperSlide>
+            ))}
+            <SwiperSlide className={styles.column}>
+              <motion.button
+                onClick={(event) => {
+                  event.stopPropagation();
+                  setAddColumnModalShown(true);
+                }}
+                whileHover={{ scale: 1.01 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                + New Column
+              </motion.button>
             </SwiperSlide>
-          ))}
-          <SwiperSlide className={styles.column}>
-            <motion.button
-              onClick={(event) => {
-                event.stopPropagation();
-                setAddColumnModalShown(true);
-              }}
-              whileHover={{ scale: 1.01 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              + New Column
-            </motion.button>
-          </SwiperSlide>
-        </Swiper>
+          </Swiper>
+        )
       )}
       <AnimatePresence>
         {addColumnModalShown && (
