@@ -5,7 +5,7 @@
     > li {
       @apply flex items-center gap-2;
       > button {
-        @apply text-4xl px-4;
+        @apply text-4xl pl-2;
         &:hover {
           @apply text-primary;
         }

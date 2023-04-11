@@ -1,18 +1,26 @@
 .home {
   @apply h-full;
   width: 76vw;
-  > .columns {
-    @apply h-full transition-all duration-300;
 
-    .column {
-      @apply h-full w-80 flex flex-col gap-6;
+  @media (max-width: theme("screens.lg")) {
+    width: 100%;
+  }
 
-      &:last-child {
-        > span {
-          @apply h-24;
-        }
-        > button {
-          @apply h-full bg-black/60 rounded-lg w-full flex items-center justify-center text-gray font-semibold;
+  > div {
+    @apply h-full;
+    > .columns {
+      @apply h-full transition-all duration-300;
+
+      .column {
+        @apply h-full w-80 flex flex-col gap-6;
+
+        &:last-child {
+          > span {
+            @apply h-24;
+          }
+          > button {
+            @apply h-full bg-black/60 rounded-lg w-full flex items-center justify-center text-gray font-semibold;
+          }
         }
       }
     }

@@ -44,36 +44,45 @@ export const HomePage: FC = () => {
         <Loader />
       ) : (
         currentBoard && (
-          <Swiper
-            spaceBetween={20}
-            breakpoints={{
-              0: {
-                slidesPerView: 1,
-              },
-              576: {
-                slidesPerView: 'auto',
-              },
+          <motion.div
+            initial={{
+              opacity: 0,
             }}
-            className={styles.columns}
+            animate={{
+              opacity: 1,
+            }}
           >
-            {columns?.map((column) => (
-              <SwiperSlide className={styles.column} key={column.id}>
-                <ColumnItem column={column} />
+            <Swiper
+              spaceBetween={20}
+              breakpoints={{
+                0: {
+                  slidesPerView: 1,
+                },
+                400: {
+                  slidesPerView: 'auto',
+                },
+              }}
+              className={styles.columns}
+            >
+              {columns?.map((column) => (
+                <SwiperSlide className={styles.column} key={column.id}>
+                  <ColumnItem column={column} />
+                </SwiperSlide>
+              ))}
+              <SwiperSlide className={styles.column}>
+                <motion.button
+                  onClick={(event) => {
+                    event.stopPropagation();
+                    setAddColumnModalShown(true);
+                  }}
+                  whileHover={{ scale: 1.01 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  + New Column
+                </motion.button>
               </SwiperSlide>
-            ))}
-            <SwiperSlide className={styles.column}>
-              <motion.button
-                onClick={(event) => {
-                  event.stopPropagation();
-                  setAddColumnModalShown(true);
-                }}
-                whileHover={{ scale: 1.01 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                + New Column
-              </motion.button>
-            </SwiperSlide>
-          </Swiper>
+            </Swiper>
+          </motion.div>
         )
       )}
       <AnimatePresence>

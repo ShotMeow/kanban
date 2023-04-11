@@ -2,7 +2,7 @@
   @apply flex flex-col gap-2 relative w-full;
 
   > textarea {
-    @apply bg-transparent border border-gray-stroke rounded-md py-1.5 px-5 focus:outline-none overflow-y-hidden h-24;
+    @apply bg-transparent border border-gray-stroke rounded-md py-1.5 px-5 focus:outline-none overflow-y-hidden h-28;
 
     &::placeholder {
       @apply text-gray;

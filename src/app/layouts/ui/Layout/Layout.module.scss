@@ -4,9 +4,11 @@
   > div {
     @apply flex flex-col w-full;
 
-    &.smallest {
-      main > div {
-        width: calc(100vw - 170px);
+    @media (min-width: theme("screens.lg")) {
+      &.smallest {
+        main > div > div {
+          width: calc(100vw - 160px);
+        }
       }
     }
 
