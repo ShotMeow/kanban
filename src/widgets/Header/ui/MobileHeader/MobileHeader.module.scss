@@ -1,5 +1,5 @@
 .header {
-  @apply bg-gray-dark py-6 px-8 border-b border-gray-stroke flex flex-row items-center justify-between gap-10;
+  @apply bg-gray-dark py-6 px-8 border-b border-gray-stroke flex flex-row items-center justify-between gap-4;
   width: 100vw;
 
   @media (min-width: theme("screens.lg")) {
@@ -38,18 +38,14 @@
   }
 
   > .actions {
-    @apply flex items-center gap-4 flex-shrink-0 justify-between;
+    @apply flex items-center gap-2 flex-shrink-0 justify-between;
 
-    > .board {
-      @apply flex items-center gap-4;
+    > button {
+      @apply text-2xl py-0 px-5;
+    }
 
-      > button {
-        @apply text-2xl py-0 px-5;
-      }
-
-      > .other {
-        @apply relative;
-      }
+    > .other {
+      @apply relative;
     }
   }
 }

@@ -50,38 +50,34 @@ export const MobileHeader: FC<Props> = ({ setLogoutModalShown, setAddTaskModalSh
         </AnimatePresence>
       </div>
       <div className={styles.actions}>
-        {currentBoard && (
-          <div className={styles.board}>
-            {Boolean(columns?.length) && (
-              <Button
-                onClick={(event) => {
-                  event.stopPropagation();
-                  setAddTaskModalShown(true);
-                }}
-                primary
-              >
-                +
-              </Button>
-            )}
-            <div className={styles.other}>
-              <OtherButton
-                onClick={(event) => {
-                  event.stopPropagation();
-                  setDropdownShown(!dropdownShown);
-                }}
-              />
-              <AnimatePresence>
-                {dropdownShown && (
-                  <BoardActionsDropdown
-                    setLogoutModalShown={setLogoutModalShown}
-                    setDropdownShown={setDropdownShown}
-                    dropdownShown={dropdownShown}
-                  />
-                )}
-              </AnimatePresence>
-            </div>
-          </div>
+        {currentBoard && Boolean(columns?.length) && (
+          <Button
+            onClick={(event) => {
+              event.stopPropagation();
+              setAddTaskModalShown(true);
+            }}
+            primary
+          >
+            +
+          </Button>
         )}
+        <div className={styles.other}>
+          <OtherButton
+            onClick={(event) => {
+              event.stopPropagation();
+              setDropdownShown(!dropdownShown);
+            }}
+          />
+          <AnimatePresence>
+            {dropdownShown && (
+              <BoardActionsDropdown
+                setLogoutModalShown={setLogoutModalShown}
+                setDropdownShown={setDropdownShown}
+                dropdownShown={dropdownShown}
+              />
+            )}
+          </AnimatePresence>
+        </div>
       </div>
     </header>
   );
