@@ -6,7 +6,7 @@
 
     @media (min-width: theme("screens.lg")) {
       &.smallest {
-        main > div > div {
+        main > div {
           width: calc(100vw - 160px);
         }
       }
