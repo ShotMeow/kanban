@@ -4,7 +4,7 @@
     > .fields {
       @apply flex gap-2 w-full;
 
-      @media (max-width: theme('screens.sm')) {
+      @media (max-width: theme("screens.sm")) {
         @apply flex-col;
       }
 

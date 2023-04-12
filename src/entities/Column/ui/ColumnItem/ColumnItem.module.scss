@@ -37,7 +37,7 @@
     }
   }
 
-  @media (max-width: theme('screens.lg')) {
+  @media (max-width: theme("screens.lg")) {
     > header > button {
       @apply opacity-100;
     }
