@@ -34,10 +34,8 @@ export const ColumnItem: FC<Props> = ({ column }) => {
     <article className={styles.column}>
       <header>
         <h2>
-          <div style={{ backgroundColor: column.color }} />{' '}
-          <span>
-            {column.title} {tasks && `(${tasks.length})`}
-          </span>
+          <div style={{ backgroundColor: column.color }} /> <span className={styles.title}>{column.title}</span>{' '}
+          <span>{tasks && `(${tasks.length})`}</span>
         </h2>
         <OtherButton
           onClick={(event) => {

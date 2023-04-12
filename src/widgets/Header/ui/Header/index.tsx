@@ -1,11 +1,11 @@
 import React, { type FC, useState } from 'react';
+import { AnimatePresence } from 'framer-motion';
 
 import { AddTaskModal } from '@/entities/Task';
+import { LogoutModal } from '@/features/Authorize';
 
 import { DesktopHeader } from '../DesktopHeader';
 import { MobileHeader } from '../MobileHeader';
-import { AnimatePresence } from 'framer-motion';
-import { LogoutModal } from '../LogoutModal';
 
 export const Header: FC = () => {
   const [logoutModalShown, setLogoutModalShown] = useState<boolean>(false);

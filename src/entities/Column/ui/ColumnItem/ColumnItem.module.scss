@@ -10,12 +10,17 @@
   > header {
     @apply flex items-center justify-between;
     > h2 {
-      @apply flex items-center gap-4 uppercase text-gray font-semibold w-44;
+      @apply flex items-center gap-2 uppercase text-gray font-semibold;
       > div {
-        @apply h-4 w-4 rounded-full;
+        @apply h-4 w-4 rounded-full flex-shrink-0;
       }
-      > span {
-        @apply line-clamp-1;
+
+      > .title {
+        @apply line-clamp-1 w-3/4;
+
+        @media (max-width: theme("screens.sm")) {
+          @apply w-28;
+        }
       }
     }
 

@@ -1,21 +1,17 @@
 import React, { type FC, useEffect, useState } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
 import { useSelector } from 'react-redux';
 
 import { boardApi, getCurrentBoard } from '@/entities/Board';
-import { ColumnItem, getColumns, columnApi, AddColumnModal } from '@/entities/Column';
+import { getColumns, columnApi } from '@/entities/Column';
 import { useAuthContext } from '@/features/Authorize';
+import { Loader } from '@/widgets/Loader';
 
-import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/css';
-import 'swiper/css/free-mode';
+import { TaskBoard } from '../TaskBoard';
 
 import styles from './HomePage.module.scss';
-import { Loader } from '@/widgets/Loader';
 
 export const HomePage: FC = () => {
   const [isLoading, setIsLoading] = useState(true);
-  const [addColumnModalShown, setAddColumnModalShown] = useState<boolean>(false);
   const columns = useSelector(getColumns);
 
   const { user } = useAuthContext();
@@ -40,58 +36,7 @@ export const HomePage: FC = () => {
 
   return (
     <main className={styles.home}>
-      {isLoading ? (
-        <Loader />
-      ) : (
-        currentBoard && (
-          <motion.div
-            initial={{
-              opacity: 0,
-            }}
-            animate={{
-              opacity: 1,
-            }}
-          >
-            <Swiper
-              breakpoints={{
-                0: {
-                  spaceBetween: 20,
-                },
-                375: {
-                  spaceBetween: 40,
-                },
-                1024: {
-                  spaceBetween: 20,
-                },
-              }}
-              slidesPerView="auto"
-              className={styles.columns}
-            >
-              {columns?.map((column) => (
-                <SwiperSlide className={styles.column} key={column.id}>
-                  <ColumnItem column={column} />
-                </SwiperSlide>
-              ))}
-              <SwiperSlide className={styles.column}>
-                <motion.button
-                  onClick={() => {
-                    setAddColumnModalShown(true);
-                  }}
-                  whileHover={{ scale: 1.01 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  + New Column
-                </motion.button>
-              </SwiperSlide>
-            </Swiper>
-          </motion.div>
-        )
-      )}
-      <AnimatePresence>
-        {addColumnModalShown && (
-          <AddColumnModal setAddColumnModalShown={setAddColumnModalShown} addColumnModalShown={addColumnModalShown} />
-        )}
-      </AnimatePresence>
+      {isLoading ? <Loader /> : currentBoard && columns && <TaskBoard columns={columns} />}
     </main>
   );
 };

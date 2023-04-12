@@ -43,36 +43,34 @@ export const AddColumnModal: FC<Props> = ({ setAddColumnModalShown, addColumnMod
       });
   };
   return (
-    <Modal
-      title="Add Column"
-      className={styles.modal}
-      shown={addColumnModalShown}
-      onShownChange={setAddColumnModalShown}
-    >
+    <Modal className={styles.modal} shown={addColumnModalShown} onShownChange={setAddColumnModalShown}>
       <form
         onSubmit={(event) => {
           event.preventDefault();
           handleSubmit();
         }}
       >
-        <Field
-          onChange={(event) => {
-            setTitle(event.currentTarget.value);
-          }}
-          value={title}
-          required
-          title="Column Title"
-          placeholder="e.g. Todo"
-        />
-        <Field
-          required
-          onChange={(event) => {
-            setColor(event.currentTarget.value);
-          }}
-          value={color}
-          title="Column Color"
-          type="color"
-        />
+        <h3>Add Column</h3>
+        <div>
+          <Field
+            onChange={(event) => {
+              setTitle(event.currentTarget.value);
+            }}
+            value={title}
+            required
+            title="Column Title"
+            placeholder="e.g. Todo"
+          />
+          <Field
+            required
+            onChange={(event) => {
+              setColor(event.currentTarget.value);
+            }}
+            value={color}
+            title="Column Color"
+            type="color"
+          />
+        </div>
         <Button type="submit" primary>
           Create Column
         </Button>

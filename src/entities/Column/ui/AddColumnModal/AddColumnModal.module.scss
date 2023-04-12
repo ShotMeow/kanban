@@ -2,6 +2,14 @@
   > form {
     @apply flex flex-col gap-4 w-full;
 
+    > div {
+      @apply flex gap-2;
+
+      @media (max-width: theme("screens.sm")) {
+        @apply flex-col;
+      }
+    }
+
     > h3 {
       @apply text-xl font-bold;
     }
