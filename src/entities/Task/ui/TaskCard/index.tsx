@@ -17,8 +17,7 @@ export const TaskCard: FC<Props> = ({ task, column }) => {
   return (
     <>
       <article
-        onClick={(event) => {
-          event.stopPropagation();
+        onClick={() => {
           setTaskModalShown(true);
         }}
         className={styles.task}

@@ -22,6 +22,14 @@
             @apply h-full bg-black/60 rounded-lg w-full flex items-center justify-center text-gray font-semibold;
           }
         }
+
+        @media (max-width: 420px) {
+          @apply w-52;
+
+          &:last-child {
+            @apply w-64;
+          }
+        }
       }
     }
   }

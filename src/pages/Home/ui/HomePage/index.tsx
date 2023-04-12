@@ -53,15 +53,18 @@ export const HomePage: FC = () => {
             }}
           >
             <Swiper
-              spaceBetween={20}
               breakpoints={{
                 0: {
-                  slidesPerView: 1,
+                  spaceBetween: 20,
                 },
-                400: {
-                  slidesPerView: 'auto',
+                375: {
+                  spaceBetween: 40,
+                },
+                1024: {
+                  spaceBetween: 20,
                 },
               }}
+              slidesPerView="auto"
               className={styles.columns}
             >
               {columns?.map((column) => (
@@ -71,8 +74,7 @@ export const HomePage: FC = () => {
               ))}
               <SwiperSlide className={styles.column}>
                 <motion.button
-                  onClick={(event) => {
-                    event.stopPropagation();
+                  onClick={() => {
                     setAddColumnModalShown(true);
                   }}
                   whileHover={{ scale: 1.01 }}

@@ -54,8 +54,7 @@ export const TaskModal: FC<Props> = ({ isShown, setIsShown, task, column }) => {
           <div className={styles.heading}>
             <h2>{task.title}</h2>
             <OtherButton
-              onClick={(event) => {
-                event.stopPropagation();
+              onClick={() => {
                 actionsShownChange(!actionsShown);
               }}
             />

@@ -28,8 +28,7 @@ export const DesktopHeader: FC<Props> = ({ setAddTaskModalShown, setLogoutModalS
           <div className={styles.board}>
             {Boolean(columns?.length) && (
               <Button
-                onClick={(event) => {
-                  event.stopPropagation();
+                onClick={() => {
                   setAddTaskModalShown(true);
                 }}
                 primary
@@ -57,8 +56,7 @@ export const DesktopHeader: FC<Props> = ({ setAddTaskModalShown, setLogoutModalS
           </div>
         )}
         <Button
-          onClick={(event) => {
-            event.stopPropagation();
+          onClick={() => {
             setLogoutModalShown(true);
           }}
           secondary

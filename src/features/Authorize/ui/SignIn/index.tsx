@@ -98,8 +98,7 @@ export const SignIn: FC<Props> = ({ setIsSignIn }) => {
           <Checkbox isActive={isRememberMe} setIsActive={setIsRememberMe} title="Remember me" />
           <button
             type="button"
-            onClick={(event) => {
-              event.stopPropagation();
+            onClick={() => {
               setForgotPasswordModal(true);
             }}
           >

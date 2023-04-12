@@ -44,13 +44,17 @@ export const CreateBoardModal: FC<Props> = ({ setCreateBoardModalShown, createBo
   };
 
   return (
-    <Modal className={styles.modal} onShownChange={setCreateBoardModalShown} shown={createBoardModalShown}>
+    <Modal
+      title="Create New Board"
+      className={styles.modal}
+      onShownChange={setCreateBoardModalShown}
+      shown={createBoardModalShown}
+    >
       <form
         onSubmit={(event) => {
           handleAddBoard(event);
         }}
       >
-        <h3>Create New Board</h3>
         <Field
           required
           value={boardTitle}

@@ -49,8 +49,7 @@ export const BoardSelectDropdown: FC<Props> = ({ setDropdownShown, dropdownShown
             <motion.button
               className={styles.active}
               whileTap={{ scale: 0.95 }}
-              onClick={(event) => {
-                event.stopPropagation();
+              onClick={() => {
                 setCreateBoardModalShown(true);
               }}
             >

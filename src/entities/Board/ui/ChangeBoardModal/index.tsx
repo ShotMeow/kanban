@@ -44,7 +44,12 @@ export const ChangeBoardModal: FC<Props> = ({ setChangeBoardModalShown, changeBo
   };
 
   return (
-    <Modal className={styles.modal} onShownChange={setChangeBoardModalShown} shown={changeBoardModalShown}>
+    <Modal
+      title={currentBoard?.title}
+      className={styles.modal}
+      onShownChange={setChangeBoardModalShown}
+      shown={changeBoardModalShown}
+    >
       <form
         onSubmit={(event) => {
           event.preventDefault();

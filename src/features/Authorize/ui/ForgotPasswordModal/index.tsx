@@ -55,7 +55,7 @@ export const ForgotPasswordModal: FC<Props> = ({ setForgotPasswordModal, forgotP
             setForgotPasswordEmail(event.currentTarget.value);
           }}
         />
-        <Button disabled={isLoading} primary>
+        <Button type="submit" disabled={isLoading} primary>
           Send
         </Button>
       </form>
