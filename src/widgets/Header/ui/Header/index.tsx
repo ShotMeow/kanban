@@ -10,6 +10,7 @@ import { MobileHeader } from '../MobileHeader';
 export const Header: FC = () => {
   const [logoutModalShown, setLogoutModalShown] = useState<boolean>(false);
   const [addTaskModalShown, setAddTaskModalShown] = useState<boolean>(false);
+
   return (
     <>
       <DesktopHeader setLogoutModalShown={setLogoutModalShown} setAddTaskModalShown={setAddTaskModalShown} />

@@ -24,6 +24,7 @@ export const Checkbox: FC<Props> = ({ title, isActive, setIsActive, disabled, ..
       )}
     >
       <button
+        aria-label="Checkbox"
         type="button"
         onClick={() => {
           setIsActive(!isActive);

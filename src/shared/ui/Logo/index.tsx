@@ -9,7 +9,7 @@ const MotionLink = motion(Link);
 
 export const Logo: FC = () => {
   return (
-    <MotionLink whileTap={{ scale: 0.95 }} to="/" className={styles.logo}>
+    <MotionLink aria-label="Logo" whileTap={{ scale: 0.95 }} to="/" className={styles.logo}>
       <KanbanIcon className={styles.icon} />
       <span>Kanban</span>
     </MotionLink>

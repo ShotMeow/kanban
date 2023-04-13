@@ -18,7 +18,6 @@ export const Aside: FC<Props> = ({ isSmallestAside, setIsSmallestAside }) => {
   const dispatch = useDispatch();
   const boards = useSelector(getBoards);
   const currentBoard = useSelector(getCurrentBoard);
-
   return (
     <>
       <aside
@@ -44,7 +43,8 @@ export const Aside: FC<Props> = ({ isSmallestAside, setIsSmallestAside }) => {
                   whileTap={{ scale: 0.95 }}
                   onClick={() => dispatch(setCurrentBoard({ boardId: board.id }))}
                 >
-                  {board.icon ? <img src={board.icon} alt="Icon" /> : <BoardIcon />} <span>{board.title}</span>
+                  {board.icon ? <img width={20} height={20} src={board.icon} alt="Icon" /> : <BoardIcon />}
+                  <span>{board.title}</span>
                 </motion.button>
                 <div className={styles.background} />
               </li>
@@ -64,6 +64,7 @@ export const Aside: FC<Props> = ({ isSmallestAside, setIsSmallestAside }) => {
         </div>
         <div className={styles.bottom}>
           <motion.button
+            aria-label="Hide Sidebar Button"
             whileTap={{ scale: 0.95 }}
             onClick={() => {
               setIsSmallestAside(!isSmallestAside);

@@ -114,6 +114,7 @@ export const SignIn: FC<Props> = ({ setIsSignIn }) => {
             {Object.keys(ALLOWED_OAUTH_PROVIDERS).map((item) => (
               <li key={item}>
                 <Link
+                  aria-label={item}
                   to="#"
                   onClick={async () => {
                     await handleOAuth(item);
