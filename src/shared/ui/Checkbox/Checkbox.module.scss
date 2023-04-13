@@ -1,6 +1,10 @@
 .checkbox {
   @apply flex items-center gap-4 text-gray text-sm;
 
+  @media (max-width: theme("screens.sm")) {
+    @apply gap-2;
+  }
+
   > button {
     @apply w-5 h-5 bg-gray-dark border border-gray-stroke rounded-sm flex items-center justify-center transition-all;
 
