@@ -15,11 +15,11 @@
         }
       }
 
-      @media (max-width: 420px) {
+      @media (max-width: theme("screens.sm")) {
         @apply w-52;
 
         &:last-child {
-          @apply w-64;
+          @apply w-full;
         }
       }
     }
