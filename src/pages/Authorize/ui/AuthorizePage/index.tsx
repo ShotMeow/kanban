@@ -18,7 +18,7 @@ export const AuthorizePage: FC = () => {
           <h1>Kanban Todo Application</h1>
           <p>Keeping a list of tasks has become even easier</p>
         </div>
-        <img src={kanbanImageSrc} alt="Kanban Application Preview" />
+        <img src={kanbanImageSrc} width={1920} height={1080} alt="Kanban Application Preview" />
       </div>
     </main>
   );
