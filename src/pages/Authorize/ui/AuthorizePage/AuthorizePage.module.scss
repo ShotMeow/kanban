@@ -31,7 +31,7 @@
     }
 
     > img {
-      @apply static rotate-0 scale-100 rounded-lg shadow-base mt-10;
+      @apply rotate-0 scale-100 cursor-grab active:cursor-grabbing rounded-lg shadow-base mt-10 static z-50 hover:shadow-2xl transition-shadow duration-500;
     }
   }
 
