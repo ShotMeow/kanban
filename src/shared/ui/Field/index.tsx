@@ -23,7 +23,7 @@ export const Field: FC<Props> = ({ type = 'text', title, value, ...props }) => {
     >
       {title && <span>{title}</span>}
       <input value={value} type={fieldType} {...props} />
-      {type === 'password' && (
+      {type === 'password' ? (
         <button
           aria-label="Shown Password Button"
           className={classNames({
@@ -40,7 +40,7 @@ export const Field: FC<Props> = ({ type = 'text', title, value, ...props }) => {
             <OpenedEyeIcon className={styles.icon} />
           )}
         </button>
-      )}
+      ) : type === "email" && <span className={styles.icon}>@</span>}
     </label>
   );
 };

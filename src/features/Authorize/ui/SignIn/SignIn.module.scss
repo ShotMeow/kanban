@@ -31,7 +31,7 @@
     > ul {
       @apply flex gap-2;
       > li > a {
-        @apply w-8 h-8 bg-gray-dark flex items-center justify-center rounded-sm;
+        @apply w-8 h-8 bg-gray-dark flex items-center justify-center rounded-sm transition-all;
 
         &:hover {
           @apply bg-primary;

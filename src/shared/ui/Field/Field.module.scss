@@ -27,6 +27,10 @@
     }
   }
 
+  > .icon {
+    @apply absolute right-5 bottom-2 text-primary;
+  }
+
   > button {
     @apply absolute right-5 bottom-3 text-primary;
 
