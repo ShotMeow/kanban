@@ -21,6 +21,7 @@ export const AuthorizePage: FC = () => {
         </div>
         <motion.img
           whileHover={{ scale: 1.01 }}
+          whileTap={{ scale: 0.99 }}
           drag
           dragConstraints={{
             top: 0,
