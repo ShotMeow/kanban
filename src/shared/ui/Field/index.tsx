@@ -40,7 +40,9 @@ export const Field: FC<Props> = ({ type = 'text', title, value, ...props }) => {
             <OpenedEyeIcon className={styles.icon} />
           )}
         </button>
-      ) : type === "email" && <span className={styles.icon}>@</span>}
+      ) : (
+        type === 'email' && <span className={styles.icon}>@</span>
+      )}
     </label>
   );
 };

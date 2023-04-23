@@ -16,6 +16,7 @@ interface Props {
 }
 
 export const CreateBoardModal: FC<Props> = ({ setCreateBoardModalShown, createBoardModalShown }) => {
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [boardTitle, setBoardTitle] = useState<string>('');
   const { user } = useAuthContext();
   const [addBoard] = boardApi.useAddBoardMutation();
@@ -26,7 +27,7 @@ export const CreateBoardModal: FC<Props> = ({ setCreateBoardModalShown, createBo
 
   const handleAddBoard = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
-
+    setIsLoading(true);
     addBoard({
       userId: user?.uid || '',
       board: {
@@ -40,6 +41,9 @@ export const CreateBoardModal: FC<Props> = ({ setCreateBoardModalShown, createBo
       })
       .catch(() => {
         setError('The board was not created. Try again later');
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   };
 
@@ -65,7 +69,7 @@ export const CreateBoardModal: FC<Props> = ({ setCreateBoardModalShown, createBo
           placeholder="e.g. Platform Launch"
         />
         {icons && <ChooseIconSection icons={icons} selectedIcon={selectedIcon} setSelectedIcon={setSelectedIcon} />}
-        <Button type="submit" primary>
+        <Button disabled={isLoading} type="submit" primary>
           Create Board
         </Button>
       </form>

@@ -1,6 +1,10 @@
 .layout {
   @apply flex h-full;
 
+  .asideSkeleton {
+    @apply bg-gray-dark border border-gray-stroke;
+  }
+
   > div {
     @apply flex flex-col w-full;
 

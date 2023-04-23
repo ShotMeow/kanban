@@ -10,6 +10,9 @@
     width: 90px;
 
     > .top {
+      > div > div {
+        @apply w-6 h-6 border-4;
+      }
       > a > span {
         @apply opacity-0 invisible;
       }
@@ -24,6 +27,7 @@
   }
 
   > .top {
+    @apply flex flex-col h-full;
     > a > span {
       @apply transition-all;
     }

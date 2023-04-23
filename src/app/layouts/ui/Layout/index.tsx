@@ -8,26 +8,24 @@ import classNames from 'classnames';
 import { columnApi } from '@/entities/Column';
 import { Loader } from '@/widgets/Loader';
 import { useSelector } from 'react-redux';
-import { boardApi, getCurrentBoard } from '@/entities/Board';
+import { getCurrentBoard } from '@/entities/Board';
 import { useAuthContext } from '@/features/Authorize';
 
 export const Layout: FC<PropsWithChildren> = ({ children }) => {
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isColumnsLoading, setIsColumnsLoading] = useState<boolean>(true);
   const [isSmallestAside, setIsSmallestAside] = useState<boolean>(false);
   const currentBoard = useSelector(getCurrentBoard);
   const { user } = useAuthContext();
 
-  boardApi.useGetIconsQuery();
-  boardApi.useGetBoardsQuery({ userId: user?.uid || '' });
   const { refetch: columnsRefetch } = columnApi.useGetColumnsQuery({
     userId: user?.uid || '',
     boardId: currentBoard?.id || '',
   });
 
   useEffect(() => {
-    setIsLoading(true);
+    setIsColumnsLoading(true);
     void columnsRefetch().finally(() => {
-      setIsLoading(false);
+      setIsColumnsLoading(false);
     });
   }, [currentBoard]);
 
@@ -40,7 +38,7 @@ export const Layout: FC<PropsWithChildren> = ({ children }) => {
         })}
       >
         <Header />
-        <div>{isLoading ? <Loader /> : children}</div>
+        <div>{isColumnsLoading ? <Loader /> : children}</div>
       </div>
     </div>
   );
