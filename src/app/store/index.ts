@@ -3,7 +3,6 @@ import { FLUSH, PAUSE, PERSIST, persistReducer, persistStore, PURGE, REGISTER, R
 import storage from 'redux-persist/lib/storage';
 
 import { BoardReducer } from '@/entities/Board';
-
 import { rtkApi } from '@/shared/libs/redux-toolkit';
 import { ColumnReducer } from '@/entities/Column';
 

@@ -1,15 +1,15 @@
 import React, { type FC, type PropsWithChildren, useEffect, useState } from 'react';
+import classNames from 'classnames';
+import { useSelector } from 'react-redux';
 
 import { Header } from '@/widgets/Header';
 import { Aside } from '@/widgets/Aside';
-
-import styles from './Layout.module.scss';
-import classNames from 'classnames';
 import { columnApi } from '@/entities/Column';
 import { Loader } from '@/widgets/Loader';
-import { useSelector } from 'react-redux';
 import { getCurrentBoard } from '@/entities/Board';
 import { useAuthContext } from '@/features/Authorize';
+
+import styles from './Layout.module.scss';
 
 export const Layout: FC<PropsWithChildren> = ({ children }) => {
   const [isColumnsLoading, setIsColumnsLoading] = useState<boolean>(true);
