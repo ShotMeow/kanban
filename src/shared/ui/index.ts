@@ -15,3 +15,6 @@ export { RenameIcon } from './Icons/Rename';
 export { TextArea } from './TextArea';
 export { Select } from './Select';
 export { HideIcon } from './Icons/Hide';
+export { SunIcon } from './Icons/Sun';
+export { MoonIcon } from './Icons/Moon';
+export { Switch } from './Switch';

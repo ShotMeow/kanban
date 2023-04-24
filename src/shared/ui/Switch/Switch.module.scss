@@ -1,0 +1,15 @@
+.switch {
+  @apply relative bg-gray-dark w-16 h-8 flex items-center rounded-full transition-all px-1 cursor-pointer;
+
+  &.active {
+    @apply bg-primary;
+
+    > div {
+      @apply left-9;
+    }
+  }
+
+  > div {
+    @apply rounded-full bg-white h-6 w-6 absolute left-1 transition-all;
+  }
+}

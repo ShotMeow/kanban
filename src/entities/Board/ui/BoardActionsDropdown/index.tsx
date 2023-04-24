@@ -6,6 +6,7 @@ import { Dropdown, LogoutIcon, RenameIcon, TrashIcon } from '@/shared/ui';
 import { ChangeBoardModal } from '../ChangeBoardModal';
 import { DeleteBoardModal } from '../DeleteBoardModal';
 import styles from './BoardActionsDropdown.module.scss';
+import { ColorSwitcher } from '@/features/ColorScheme';
 
 interface Props {
   setDropdownShown: React.Dispatch<React.SetStateAction<boolean>>;
@@ -43,6 +44,7 @@ export const BoardActionsDropdown: FC<Props> = ({ setDropdownShown, setLogoutMod
         >
           <LogoutIcon /> <span>Logout</span>
         </button>
+        <ColorSwitcher />
       </Dropdown>
       <AnimatePresence>
         {changeBoardModalShown && (
