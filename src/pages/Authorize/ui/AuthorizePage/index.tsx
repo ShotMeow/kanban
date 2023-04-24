@@ -2,7 +2,7 @@ import React, { type FC, useState } from 'react';
 import { motion } from 'framer-motion';
 import { SignIn, SignUp } from '@/features/Authorize';
 
-import kanbanImageSrc from '@/shared/images/kanban_todo_app.jpg';
+import kanbanImageSrc from '@/shared/images/kanban_todo_app.webp';
 
 import styles from './AuthorizePage.module.scss';
 
