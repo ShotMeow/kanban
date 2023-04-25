@@ -9,8 +9,6 @@ import {
   ProviderId,
   signInWithPopup,
   sendPasswordResetEmail,
-  TwitterAuthProvider,
-  FacebookAuthProvider,
   GoogleAuthProvider,
   GithubAuthProvider,
   type UserCredential,
@@ -28,8 +26,6 @@ interface Props {
 export const ALLOWED_OAUTH_PROVIDERS: Record<string, any> = {
   [ProviderId.GOOGLE]: new GoogleAuthProvider(),
   [ProviderId.GITHUB]: new GithubAuthProvider(),
-  [ProviderId.FACEBOOK]: new FacebookAuthProvider(),
-  [ProviderId.TWITTER]: new TwitterAuthProvider(),
 };
 
 export const AuthContextProvider: FC<PropsWithChildren<Props>> = ({ children, firebaseApp }) => {
