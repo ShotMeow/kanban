@@ -5,7 +5,7 @@
 @tailwind utilities;
 
 body {
-  @apply font-montserrat bg-white dark:bg-dark text-black dark:text-white overflow-hidden;
+  @apply font-montserrat bg-white dark:bg-dark text-black dark:text-white overflow-hidden transition-all;
 }
 
 html,
