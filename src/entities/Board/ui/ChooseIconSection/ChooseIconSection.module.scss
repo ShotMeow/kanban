@@ -6,16 +6,20 @@
     > button {
       @apply p-4 flex items-center justify-center rounded-md transition-all;
 
-      &.active {
-        @apply bg-primary;
-      }
-
       &:hover {
         @apply bg-primary/20;
       }
 
+      &.active {
+        @apply bg-primary;
+
+        > img {
+          @apply invert;
+        }
+      }
+
       > img {
-        @apply scale-125 gdark:invert;
+        @apply scale-125 gdark:invert transition-all;
       }
     }
 
