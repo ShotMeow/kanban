@@ -9,6 +9,7 @@ import { getBoards, getCurrentBoard, CreateBoardModal, setCurrentBoard, boardApi
 import styles from './Aside.module.scss';
 import { useAuthContext } from '@/features/Authorize';
 import { Loader } from '@/widgets/Loader';
+import { ColorSwitcher } from '@/features/ColorScheme';
 
 interface Props {
   isSmallestAside: boolean;
@@ -85,6 +86,9 @@ export const Aside: FC<Props> = ({ isSmallestAside, setIsSmallestAside }) => {
           )}
         </div>
         <div className={styles.bottom}>
+          <div className={styles.switcher}>
+            <ColorSwitcher />
+          </div>
           <motion.button
             aria-label="Hide Sidebar Button"
             whileTap={{ scale: 0.95 }}

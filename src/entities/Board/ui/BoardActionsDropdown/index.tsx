@@ -44,7 +44,9 @@ export const BoardActionsDropdown: FC<Props> = ({ setDropdownShown, setLogoutMod
         >
           <LogoutIcon /> <span>Logout</span>
         </button>
-        <ColorSwitcher />
+        <div className={styles.switcher}>
+          <ColorSwitcher />
+        </div>
       </Dropdown>
       <AnimatePresence>
         {changeBoardModalShown && (

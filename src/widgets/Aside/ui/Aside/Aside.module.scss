@@ -6,26 +6,6 @@
     @apply hidden;
   }
 
-  &.smallest {
-    width: 90px;
-
-    > .top {
-      > div > div {
-        @apply w-6 h-6 border-4;
-      }
-      > a > span {
-        @apply opacity-0 invisible;
-      }
-      > h3 {
-        @apply opacity-0 invisible;
-      }
-    }
-
-    > .bottom > button > span {
-      @apply opacity-0 invisible;
-    }
-  }
-
   > .top {
     @apply flex flex-col h-full;
     > a > span {
@@ -85,6 +65,14 @@
   }
 
   > .bottom {
+    @apply space-y-6;
+    > .switcher {
+      @apply gdark:bg-black rounded-xl shadow-base;
+
+      @media (max-width: theme("screens.2xl")) {
+        @apply bg-transparent gdark:bg-transparent shadow-none;
+      }
+    }
     > button {
       @apply flex items-center gap-4 text-gray whitespace-nowrap;
 
@@ -94,6 +82,36 @@
 
       > svg {
         @apply flex-shrink-0;
+      }
+    }
+  }
+
+  &.smallest {
+    width: 90px;
+
+    > .top {
+      > div > div {
+        @apply w-6 h-6 border-4;
+      }
+      > a > span {
+        @apply opacity-0 invisible;
+      }
+      > h3 {
+        @apply opacity-0 invisible;
+      }
+    }
+
+    > .bottom {
+      > .switcher {
+        @apply bg-transparent shadow-none;
+
+        > div {
+          @apply flex-col;
+        }
+      }
+
+      > button > span {
+        @apply opacity-0 invisible;
       }
     }
   }

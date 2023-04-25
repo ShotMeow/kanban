@@ -25,4 +25,10 @@
       @apply flex-shrink-0;
     }
   }
+
+  .switcher {
+    @media (min-width: theme("screens.lg")) {
+      @apply hidden;
+    }
+  }
 }

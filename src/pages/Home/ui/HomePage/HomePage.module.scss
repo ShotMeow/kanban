@@ -2,6 +2,14 @@
   @apply h-full;
   width: 76vw;
 
+  > .text {
+    @apply text-center space-y-2 h-full flex flex-col justify-center transition-all w-full;
+
+    > h1 {
+      @apply text-4xl text-center leading-tight font-bold;
+    }
+  }
+
   @media (max-width: theme("screens.lg")) {
     width: 100%;
   }

@@ -10,5 +10,16 @@ import styles from './HomePage.module.scss';
 export const HomePage: FC = () => {
   const columns = useSelector(getColumns);
 
-  return <main className={styles.home}>{columns && <TaskBoard columns={columns} />}</main>;
+  return (
+    <main className={styles.home}>
+      {columns ? (
+        <TaskBoard columns={columns} />
+      ) : (
+        <div className={styles.text}>
+          <h1>Welcome to Kanban System</h1>
+          <p>To get started, try to create your first board.</p>
+        </div>
+      )}
+    </main>
+  );
 };
