@@ -20,3 +20,7 @@ export function getSystemScheme(): ColorSchemeSwitcherValues {
 export function getSavedScheme(): ColorSchemeSwitcherValues | null {
   return localStorage.getItem(LS_COLOR_SCHEME_KEY) as ColorSchemeSwitcherValues | null;
 }
+
+export function colorSchemeInitialize(): void {
+  applyScheme(getSavedScheme() || getSystemScheme());
+}
