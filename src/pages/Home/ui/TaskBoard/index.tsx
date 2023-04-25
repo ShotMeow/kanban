@@ -52,6 +52,7 @@ export const TaskBoard: FC<Props> = ({ columns }) => {
               onClick={() => {
                 setAddColumnModalShown(true);
               }}
+              whileTap={{ scale: 0.95 }}
             >
               + New Column
             </motion.button>

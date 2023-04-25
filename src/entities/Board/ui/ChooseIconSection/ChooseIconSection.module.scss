@@ -15,7 +15,7 @@
       }
 
       > img {
-        @apply scale-125;
+        @apply scale-125 gdark:invert;
       }
     }
 

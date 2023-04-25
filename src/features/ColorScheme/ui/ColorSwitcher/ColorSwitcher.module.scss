@@ -1,5 +1,5 @@
 .switcher {
-  @apply bg-black flex items-center justify-center gap-4 py-4 rounded-xl text-gray;
+  @apply flex items-center justify-center gap-4 py-4 rounded-xl text-gray;
 
   &.dark > .moon {
     @apply text-primary;

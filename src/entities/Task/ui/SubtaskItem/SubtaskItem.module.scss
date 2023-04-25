@@ -1,7 +1,7 @@
 .subtask {
-  @apply cursor-pointer flex items-center gap-4 bg-dark px-4 py-2 rounded-md drop-shadow-2xl line-clamp-1;
+  @apply cursor-pointer flex items-center gap-4 gdark:bg-dark px-4 py-2 rounded-md shadow-base line-clamp-1;
   > p {
-    @apply text-white;
+    @apply gdark:text-white;
   }
 
   &.success {

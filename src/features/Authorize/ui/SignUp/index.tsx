@@ -13,7 +13,7 @@ interface Props {
 }
 
 export const SignUp: FC<Props> = ({ setIsSignIn }) => {
-  const [isRememberMe, setIsRememberMe] = useState<boolean>(false);
+  const [isRememberMe, setIsRememberMe] = useState<boolean>(true);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const navigate = useNavigate();
   const { registerUserWithEmailAndPassword, loginWithEmailAndPassword } = useAuthContext();

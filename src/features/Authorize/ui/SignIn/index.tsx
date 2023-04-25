@@ -17,7 +17,7 @@ interface Props {
 }
 
 export const SignIn: FC<Props> = ({ setIsSignIn }) => {
-  const [isRememberMe, setIsRememberMe] = useState<boolean>(false);
+  const [isRememberMe, setIsRememberMe] = useState<boolean>(true);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');

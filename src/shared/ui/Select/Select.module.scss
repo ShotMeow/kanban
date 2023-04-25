@@ -29,14 +29,14 @@
     > ul {
       @apply hidden absolute w-full shadow-2xl rounded-b-md z-50;
       &.shown {
-        @apply bg-dark flex flex-col;
+        @apply bg-white gdark:bg-dark flex flex-col;
       }
 
       > li > button {
         @apply px-4 py-3 w-full text-left;
 
         &:hover {
-          @apply bg-gray-dark;
+          @apply bg-primary gdark:bg-gray-dark text-white gdark:text-black;
         }
       }
     }

@@ -6,7 +6,7 @@
   }
 
   > button {
-    @apply w-5 h-5 bg-gray-dark border border-gray-stroke rounded-sm flex items-center justify-center transition-all;
+    @apply w-5 h-5 gdark:bg-gray-dark border border-gray-stroke rounded-sm flex items-center justify-center transition-all;
 
     > div {
       @apply w-3 h-3 text-white border-2;

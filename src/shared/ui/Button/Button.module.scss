@@ -4,15 +4,15 @@
     @apply bg-primary text-white;
 
     &:hover {
-      @apply ring-2 ring-primary bg-transparent text-white;
+      @apply ring-2 ring-primary bg-transparent text-primary gdark:text-white;
     }
   }
 
   &.secondary {
-    @apply bg-white text-primary;
+    @apply bg-black gdark:bg-white text-white gdark:text-primary;
 
     &:hover {
-      @apply ring-2 ring-primary bg-transparent text-white;
+      @apply ring-2 ring-primary bg-transparent text-primary gdark:text-white;
     }
   }
 

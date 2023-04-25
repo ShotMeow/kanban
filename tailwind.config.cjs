@@ -1,3 +1,5 @@
+const plugin = require('tailwindcss/plugin');
+
 /** @type {import('tailwindcss').Config} */
 export default {
   content: [],
@@ -22,6 +24,15 @@ export default {
     },
   },
   darkMode: ['class'],
-  plugins: [],
+  plugins: [
+    plugin(({addVariant, e}) => {
+      addVariant('gdark', ({container, separator}) => {
+        container.walkRules((rule) => {
+          const className = rule.selector.slice(1);
+          rule.selector = `:global(.dark) .${e(`gdark${separator}${className}`)}`;
+        })
+      })
+    })
+  ],
 }
 

@@ -80,7 +80,7 @@ export const getIconsFromFirebaseStorage = async (): Promise<string[]> => {
 
   const paths: string[] = [];
   for (const icon of icons) {
-    const svgRef = ref(storage, `icons/heroicons-solid_${icon}.svg`);
+    const svgRef = ref(storage, `icons/kanban-${icon}.svg`);
     const path = await getDownloadURL(svgRef);
     paths.push(path);
   }

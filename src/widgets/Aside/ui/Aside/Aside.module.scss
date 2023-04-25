@@ -1,5 +1,5 @@
 .aside {
-  @apply bg-gray-dark p-8 border-r border-gray-stroke h-full flex flex-col justify-between transition-all;
+  @apply bg-white gdark:bg-gray-dark p-8 border-r border-purple-100 gdark:border-gray-stroke h-full flex flex-col justify-between transition-all;
   width: 25vw;
 
   @media (max-width: theme("screens.lg")) {
@@ -44,9 +44,8 @@
           > button {
             @apply relative text-white z-20;
 
-            > img,
-            svg {
-              @apply opacity-100;
+            > img:not(:last-child) {
+              @apply opacity-100 invert;
             }
           }
           > .background {
@@ -59,9 +58,8 @@
         > button {
           @apply flex items-center gap-3 text-gray text-start overflow-hidden w-full;
 
-          > img,
-          svg {
-            @apply opacity-20 text-white;
+          > img:not(:last-child) {
+            @apply opacity-20 text-white gdark:invert;
           }
 
           > * {

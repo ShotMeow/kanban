@@ -7,7 +7,7 @@
 }
 
 .modal {
-  @apply bg-gray-dark p-6 shadow-base flex flex-col gap-4 w-full;
+  @apply bg-white gdark:bg-gray-dark p-6 shadow-base flex flex-col gap-4 w-full;
 
   > header {
     @apply flex items-center justify-between gap-6;
