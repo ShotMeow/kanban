@@ -1,5 +1,5 @@
 import React, { type FC, useState } from 'react';
-import { AnimatePresence } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 
 import { type ColumnType } from '@/entities/Column';
 
@@ -16,17 +16,18 @@ export const TaskCard: FC<Props> = ({ task, column }) => {
   const [taskModalShown, setTaskModalShown] = useState<boolean>(false);
   return (
     <>
-      <article
+      <motion.article
         onClick={() => {
           setTaskModalShown(true);
         }}
+        whileTap={{ scale: 0.95 }}
         className={styles.task}
       >
         <h3>{task.title}</h3>
         <p>
           {task.subtasks.filter((subtask) => subtask.isSuccess).length} of {task.subtasks.length} subtasks
         </p>
-      </article>
+      </motion.article>
       <AnimatePresence>
         {taskModalShown && (
           <TaskModal column={column} isShown={taskModalShown} setIsShown={setTaskModalShown} task={task} />
