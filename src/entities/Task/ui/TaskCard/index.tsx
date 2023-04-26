@@ -14,6 +14,7 @@ interface Props {
 
 export const TaskCard: FC<Props> = ({ task, column }) => {
   const [taskModalShown, setTaskModalShown] = useState<boolean>(false);
+
   return (
     <>
       <motion.article

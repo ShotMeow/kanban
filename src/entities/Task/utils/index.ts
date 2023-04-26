@@ -1,4 +1,4 @@
-const placeholders = [
+export const placeholders = [
   'Warm up the milk',
   'Get coffee from the nightstand',
   'Make coffee',
