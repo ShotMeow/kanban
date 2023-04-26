@@ -1,5 +1,5 @@
 .spinner {
-  @apply w-20 h-20 border-8 rounded-full transition-all duration-700;
+  @apply w-20 h-20 border-8 rounded-full transition-all duration-300;
   border-color: theme("colors.primary") transparent theme("colors.primary") transparent;
   animation: spin-anim 1.2s linear infinite;
 }

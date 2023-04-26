@@ -1,5 +1,6 @@
 .button {
   @apply rounded-full px-8 py-3 font-semibold relative flex items-center justify-center gap-2 transition-all;
+
   &.primary {
     @apply bg-primary text-white;
 
@@ -22,6 +23,10 @@
     > div {
       @apply w-6 h-6 border-opacity-80 border-white border-4;
       border-color: rgba(255, 255, 255, 0.8) transparent rgba(255, 255, 255, 0.8) transparent;
+    }
+
+    &:hover > div {
+      border-color: theme("colors.primary") transparent theme("colors.primary") transparent;
     }
   }
 }

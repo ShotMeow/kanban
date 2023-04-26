@@ -2,7 +2,7 @@
   @apply flex flex-col gap-2 relative w-full;
 
   > input {
-    @apply bg-transparent border border-gray-stroke rounded-md py-1.5 px-5 focus:outline-none;
+    @apply bg-transparent border border-black/40 gdark:border-gray-stroke rounded-md py-1.5 px-5 focus:outline-none;
 
     &::placeholder {
       @apply text-gray;
