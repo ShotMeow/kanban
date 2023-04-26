@@ -1,12 +1,12 @@
 .authorize {
-  @apply text-white grid h-full overflow-x-hidden grid-cols-1;
+  @apply text-white grid h-full overflow-auto grid-cols-1;
 
   > .actions {
     @apply bg-black;
   }
 
   > .landing {
-    @apply px-6 py-10;
+    @apply px-6 py-10 overflow-hidden;
     background: linear-gradient(
       107deg,
       #191921 0%,
