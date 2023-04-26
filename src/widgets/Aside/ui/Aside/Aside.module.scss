@@ -67,7 +67,7 @@
   > .bottom {
     @apply space-y-6;
     > .switcher {
-      @apply gdark:bg-black rounded-xl shadow-base;
+      @apply gdark:bg-black rounded-xl shadow-base transition-all;
 
       @media (max-width: theme("screens.2xl")) {
         @apply bg-transparent gdark:bg-transparent shadow-none;

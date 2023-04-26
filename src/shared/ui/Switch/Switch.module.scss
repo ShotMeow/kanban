@@ -1,5 +1,5 @@
 .switch {
-  @apply relative bg-primary gdark:bg-gray-dark w-16 h-8 flex items-center rounded-full transition-all px-1 cursor-pointer shadow-base;
+  @apply relative bg-black/10 gdark:bg-gray-dark w-16 h-8 flex items-center rounded-full transition-all px-1 cursor-pointer shadow-base;
 
   &.active {
     @apply bg-primary;
@@ -10,6 +10,6 @@
   }
 
   > div {
-    @apply rounded-full bg-white h-6 w-6 absolute left-1 transition-all;
+    @apply rounded-full bg-primary gdark:bg-white h-6 w-6 absolute left-1 transition-all;
   }
 }
