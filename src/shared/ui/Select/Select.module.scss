@@ -33,7 +33,7 @@
         @apply px-4 py-3 w-full text-left;
 
         &:hover {
-          @apply bg-primary gdark:bg-gray-dark text-white gdark:text-black;
+          @apply bg-primary gdark:bg-gray-dark text-white;
         }
       }
     }
