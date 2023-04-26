@@ -13,10 +13,7 @@
   > div {
     @apply relative;
     > button {
-      @apply bg-transparent border border-gray-stroke rounded-md py-1.5 px-5 flex items-center w-full justify-between;
-      -webkit-appearance: none;
-      -moz-appearance: none;
-      appearance: none;
+      @apply bg-transparent border border-black/40 gdark:border-gray-stroke rounded-md py-1.5 px-5 flex items-center w-full justify-between;
 
       > svg {
         @apply transition-all duration-300;

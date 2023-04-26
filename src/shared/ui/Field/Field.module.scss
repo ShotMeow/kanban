@@ -22,7 +22,7 @@
       }
 
       &::-webkit-color-swatch {
-        @apply border border-gray-stroke rounded-md;
+        @apply border border-black/40 gdark:border-gray-stroke rounded-md;
       }
     }
   }
