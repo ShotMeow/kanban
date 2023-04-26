@@ -1,6 +1,6 @@
 {
   "name": "kanban",
-  "version": "1.4.1",
+  "version": "1.4.2",
   "type": "module",
   "description": "The purpose of this project is to provide a simple and intuitive way to manage tasks and workflows using the Kanban methodology.",
   "keywords": [
@@ -59,6 +59,7 @@
     "eslint-plugin-promise": "^6.1.1",
     "eslint-plugin-react": "^7.32.2",
     "jest": "^29.5.0",
+    "jest-environment-jsdom": "^29.5.0",
     "postcss": "^8.4.21",
     "pre-commit": "^1.2.2",
     "prettier": "^2.8.6",

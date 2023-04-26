@@ -2,7 +2,7 @@ import React, { type FC, type FormEvent, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 
-import { getOAuthProviderIcon } from '../../utils/getOAuthProviderIcon';
+import { getOAuthProviderIcon } from '../../utils';
 import { useAuthContext } from '../../context';
 import { ALLOWED_OAUTH_PROVIDERS } from '../../provider';
 import { ForgotPasswordModal } from '../ForgotPasswordModal';

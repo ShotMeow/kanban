@@ -1,4 +1,4 @@
-import { getRandomPlaceholder, placeholders } from '../';
+import { getRandomPlaceholder, placeholders } from '@/entities/Task/utils';
 
 describe('Get random placeholder', () => {
   test('Current value', () => {
