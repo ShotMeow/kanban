@@ -20,7 +20,7 @@
     );
 
     > .heading {
-      @apply relative z-20;
+      @apply relative z-20 mb-10;
       > h1 {
         @apply text-3xl font-semibold;
       }
@@ -31,7 +31,7 @@
     }
 
     > img {
-      @apply rotate-0 scale-100 cursor-grab active:cursor-grabbing rounded-lg shadow-base mt-10 static z-50 hover:shadow-2xl transition-shadow duration-500;
+      @apply rotate-0 scale-100 cursor-grab active:cursor-grabbing rounded-lg shadow-base static z-50 hover:shadow-2xl transition-shadow duration-500;
     }
   }
 
