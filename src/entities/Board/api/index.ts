@@ -51,34 +51,35 @@ export const deleteBoardCollectionOfUser = async ({ userId, boardId }: DeleteBoa
   await deleteDoc(docRef);
 };
 
-export const getIconsFromFirebaseStorage = async (): Promise<string[]> => {
-  const icons = [
-    'beaker',
-    'bell',
-    'chart-pie',
-    'chart-square-bar',
-    'chip',
-    'clock',
-    'currency-dollar',
-    'film',
-    'fire',
-    'flag',
-    'globe',
-    'photograph',
-    'presentation-chart-bar',
-    'presentation-chart-line',
-    'speakerphone',
-    'star',
-    'terminal',
-    'translate',
-    'trash',
-    'truck',
-    'video-camera',
-  ];
+export const icons = [
+  'beaker',
+  'bell',
+  'chart-pie',
+  'chart-square-bar',
+  'chip',
+  'clock',
+  'currency-dollar',
+  'film',
+  'fire',
+  'flag',
+  'globe',
+  'photograph',
+  'presentation-chart-bar',
+  'presentation-chart-line',
+  'speakerphone',
+  'star',
+  'terminal',
+  'translate',
+  'trash',
+  'truck',
+  'video-camera',
+];
 
+export const getIconsFromFirebaseStorage = async (): Promise<string[]> => {
   const storage = getStorage();
 
   const paths: string[] = [];
+
   for (const icon of icons) {
     const svgRef = ref(storage, `icons/kanban-${icon}.svg`);
     const path = await getDownloadURL(svgRef);

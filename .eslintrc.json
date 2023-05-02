@@ -24,6 +24,7 @@
     "no-void": "off",
     "@typescript-eslint/no-invalid-void-type": "off",
     "@typescript-eslint/no-misused-promises": "off",
-    "@typescript-eslint/restrict-template-expressions": "off"
+    "@typescript-eslint/restrict-template-expressions": "off",
+    "n/no-callback-literal": "off"
   }
 }
