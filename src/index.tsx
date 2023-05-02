@@ -6,7 +6,7 @@ import { Provider } from 'react-redux';
 import './app/styles/globals.scss';
 
 import { initializeAPI } from '@/shared/libs/firebase';
-import { AuthContextProvider } from '@/features/Authorize/provider';
+import { AuthContextProvider } from '@/features/Authorize';
 import { persistor, store } from '@/app/store';
 import { App } from '@/app';
 import { NotificationContextProvider } from '@/features/Notification';

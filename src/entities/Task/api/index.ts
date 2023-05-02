@@ -8,7 +8,6 @@ import {
   type MoveTaskToOtherColumnType,
   type TaskType,
 } from '../types';
-
 export const getTaskCollectionsOfColumn = async ({ userId, boardId, columnId }: GetTaskType): Promise<TaskType[]> => {
   const db = getFirestore();
 

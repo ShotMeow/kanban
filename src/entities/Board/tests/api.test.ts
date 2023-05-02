@@ -1,4 +1,5 @@
 import { getFirestore, collection, doc, updateDoc, getDocs, addDoc, deleteDoc } from 'firebase/firestore';
+import { getDownloadURL, getStorage, ref } from 'firebase/storage';
 import {
   addBoardCollectionToUser,
   changeBoardCollectionOfUser,
@@ -7,7 +8,13 @@ import {
   getIconsFromFirebaseStorage,
   icons,
 } from '../api';
-import { getDownloadURL, getStorage, ref } from 'firebase/storage';
+import {
+  type AddBoardType,
+  type BoardType,
+  type ChangeBoardType,
+  type DeleteBoardType,
+  type GetBoardType,
+} from '../types';
 
 jest.mock('firebase/firestore', () => ({
   getFirestore: jest.fn(),
@@ -26,8 +33,8 @@ jest.mock('firebase/storage', () => ({
 }));
 
 describe('getBoardCollectionsOfUser', () => {
-  const testUserId = 'testUserId';
-  const testBoardsData = [
+  const testUserId: GetBoardType['userId'] = 'testUserId';
+  const testBoardsData: BoardType[] = [
     {
       id: 'id1',
       title: 'Board 1',
@@ -66,13 +73,15 @@ describe('getBoardCollectionsOfUser', () => {
   });
 
   it('Get true data', async () => {
-    expect(await getBoardCollectionsOfUser({ userId: testUserId })).toEqual(testBoardsData);
+    const response = await getBoardCollectionsOfUser({ userId: testUserId });
+
+    expect(response).toEqual(testBoardsData);
   });
 });
 
 describe('addBoardCollectionToUser', () => {
-  const testUserId = 'testUserId';
-  const testBoard = { title: 'testBoardTitle', icon: 'https://kanban.com/icons/testIcon.svg' };
+  const testUserId: AddBoardType['userId'] = 'testUserId';
+  const testBoard: AddBoardType['board'] = { title: 'testBoardTitle', icon: 'https://kanban.com/icons/testIcon.svg' };
 
   beforeEach(() => {
     jest.clearAllMocks();
@@ -89,9 +98,9 @@ describe('addBoardCollectionToUser', () => {
 });
 
 describe('changeBoardCollectionOfUser', () => {
-  const testUserId = 'testUserId';
-  const testBoardId = 'testBoardId';
-  const testBoard = { title: 'testBoardTitle' };
+  const testUserId: ChangeBoardType['userId'] = 'testUserId';
+  const testBoardId: ChangeBoardType['boardId'] = 'testBoardId';
+  const testBoard: ChangeBoardType['board'] = { title: 'testBoardTitle' };
 
   beforeEach(() => {
     jest.clearAllMocks();
@@ -104,19 +113,11 @@ describe('changeBoardCollectionOfUser', () => {
     expect(updateDoc).toHaveBeenCalledTimes(1);
     expect(doc).toHaveBeenCalledTimes(2);
   });
-
-  it('Call Firestore methods with correct arguments and complete board data', async () => {
-    await changeBoardCollectionOfUser({ userId: testUserId, boardId: testBoardId, board: testBoard });
-
-    expect(getFirestore).toHaveBeenCalledTimes(1);
-    expect(updateDoc).toHaveBeenCalledTimes(1);
-    expect(doc).toHaveBeenCalledTimes(2);
-  });
 });
 
 describe('deleteBoardCollectionOfUser', () => {
-  const testUserId = 'testUserId';
-  const testBoardId = 'testBoardId';
+  const testUserId: DeleteBoardType['userId'] = 'testUserId';
+  const testBoardId: DeleteBoardType['boardId'] = 'testBoardId';
 
   beforeEach(() => {
     jest.clearAllMocks();
@@ -131,7 +132,7 @@ describe('deleteBoardCollectionOfUser', () => {
   });
 });
 describe('getIconsFromFirebaseStorage', () => {
-  const testIconPath = 'https://kanban.com/icons/kanban-test.svg';
+  const testIconPath: (typeof icons)[0] = 'https://kanban.com/icons/kanban-test.svg';
 
   beforeAll(() => {
     (getDownloadURL as jest.Mock).mockReturnValue(testIconPath);
@@ -150,6 +151,9 @@ describe('getIconsFromFirebaseStorage', () => {
   });
 
   it('Get current paths to icons', async () => {
-    expect(await getIconsFromFirebaseStorage()).toEqual(new Array(21).fill(testIconPath));
+    const response = await getIconsFromFirebaseStorage();
+    const testIconsPathArray = new Array(21).fill(testIconPath);
+
+    expect(response).toEqual(testIconsPathArray);
   });
 });

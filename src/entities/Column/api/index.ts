@@ -12,6 +12,7 @@ export const getColumnCollectionsOfBoard = async ({ userId, boardId }: GetColumn
   const db = getFirestore();
 
   const columns: ColumnType[] = [];
+
   try {
     const querySnapshot = await getDocs(collection(doc(doc(db, 'users', userId), 'boards', boardId), 'columns'));
 
