@@ -35,6 +35,7 @@ This project uses the following dependencies:
 - TailwindCSS: CSS-framework offering an extensive catalog of classes and tools to facilitate the styling of a website or application.
 - Prettier: opinionated code formatter.
 - ESLint: statically analyzes your code to quickly find problems.
+- Jest: delightful JavaScript Unit Testing Framework with a focus on simplicity.
 
 ## Contributing
 
