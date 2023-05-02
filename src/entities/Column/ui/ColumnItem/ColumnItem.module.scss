@@ -1,5 +1,5 @@
 .column {
-  @apply space-y-4;
+  @apply space-y-4 h-full;
 
   &:hover {
     > header > button {
