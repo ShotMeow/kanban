@@ -2,8 +2,8 @@ import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { FLUSH, PAUSE, PERSIST, persistReducer, persistStore, PURGE, REGISTER, REHYDRATE } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
-import { BoardReducer } from '@/entities/Board';
 import { rtkApi } from '@/shared/libs/redux-toolkit';
+import { BoardReducer } from '@/entities/Board';
 import { ColumnReducer } from '@/entities/Column';
 
 const reducer = combineReducers({

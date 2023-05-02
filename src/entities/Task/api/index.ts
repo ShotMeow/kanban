@@ -1,4 +1,4 @@
-import { addDoc, collection, deleteDoc, doc, getDocs, getFirestore, updateDoc } from '@firebase/firestore';
+import { getFirestore, addDoc, collection, deleteDoc, doc, getDocs, updateDoc } from '@firebase/firestore';
 
 import {
   type AddTaskType,
@@ -8,6 +8,7 @@ import {
   type MoveTaskToOtherColumnType,
   type TaskType,
 } from '../types';
+
 export const getTaskCollectionsOfColumn = async ({ userId, boardId, columnId }: GetTaskType): Promise<TaskType[]> => {
   const db = getFirestore();
 

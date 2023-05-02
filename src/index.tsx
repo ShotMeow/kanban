@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { PersistGate } from 'redux-persist/integration/react';
 import { Provider } from 'react-redux';
+import { type FirebaseApp } from 'firebase/app';
 
 import './app/styles/globals.scss';
 
@@ -11,7 +12,7 @@ import { persistor, store } from '@/app/store';
 import { App } from '@/app';
 import { NotificationContextProvider } from '@/features/Notification';
 
-const firebaseApp = initializeAPI();
+const firebaseApp: FirebaseApp = initializeAPI();
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <Provider store={store}>

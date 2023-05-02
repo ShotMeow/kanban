@@ -27,7 +27,8 @@
   },
   "pre-commit": [
     "eslint",
-    "prettier-check"
+    "prettier-check",
+    "test"
   ],
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.3",

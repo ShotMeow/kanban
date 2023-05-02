@@ -12,6 +12,7 @@ export const getBoardCollectionsOfUser = async ({ userId }: GetBoardType): Promi
   const db = getFirestore();
 
   const boards: BoardType[] = [];
+
   try {
     const querySnapshot = await getDocs(collection(doc(db, 'users', userId), 'boards'));
 
