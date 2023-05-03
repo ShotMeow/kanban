@@ -1,5 +1,5 @@
 # Kanban Board
-![Screen Shot](https://github.com/ShotMeow/kanban/blob/main/public/preview.png)
+![Screen Shot](https://raw.githubusercontent.com/ShotMeow/kanban/main/src/shared/images/kanban_todo_app.webp)
 This project is a **Kanban board** developed using **TypeScript** and **React**. The purpose of this project is to provide a simple and intuitive way to manage tasks and workflows using the Kanban methodology.
 
 ## Features
@@ -35,6 +35,7 @@ This project uses the following dependencies:
 - TailwindCSS: CSS-framework offering an extensive catalog of classes and tools to facilitate the styling of a website or application.
 - Prettier: opinionated code formatter.
 - ESLint: statically analyzes your code to quickly find problems.
+- Jest: delightful JavaScript Unit Testing Framework with a focus on simplicity.
 
 ## Contributing
 
