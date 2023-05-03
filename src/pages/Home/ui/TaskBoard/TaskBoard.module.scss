@@ -1,6 +1,6 @@
 .board {
   @apply overflow-hidden;
-  height: calc(100% - 86px);
+  height: calc(100vh - 120px);
   > .columns {
     @apply h-full transition-all duration-300 overflow-y-auto;
 

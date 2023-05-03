@@ -15,6 +15,14 @@
     "project": ["tsconfig.json", "tsconfig.node.json"]
   },
   "plugins": ["react"],
+  "overrides": [
+    {
+      "files": ["jest-setup.ts"],
+      "env": {
+        "jest": true
+      }
+    }
+  ],
   "rules": {
     "@typescript-eslint/prefer-nullish-coalescing": "off",
     "@typescript-eslint/strict-boolean-expressions": "off",

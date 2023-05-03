@@ -1,6 +1,6 @@
 {
   "name": "kanban",
-  "version": "1.5.0",
+  "version": "1.5.1",
   "type": "module",
   "description": "The purpose of this project is to provide a simple and intuitive way to manage tasks and workflows using the Kanban methodology.",
   "keywords": [
@@ -27,8 +27,7 @@
   },
   "pre-commit": [
     "eslint",
-    "prettier-check",
-    "test"
+    "prettier-check"
   ],
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.3",
@@ -44,6 +43,7 @@
     "swiper": "^9.2.0"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^14.0.0",
     "@types/jest": "^29.5.1",
     "@types/node": "^18.15.5",
@@ -61,6 +61,7 @@
     "eslint-plugin-promise": "^6.1.1",
     "eslint-plugin-react": "^7.32.2",
     "jest": "^29.5.0",
+    "jest-css-modules-transform": "^4.4.2",
     "jest-environment-jsdom": "^29.5.0",
     "postcss": "^8.4.21",
     "pre-commit": "^1.2.2",

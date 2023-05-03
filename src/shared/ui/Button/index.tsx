@@ -6,7 +6,6 @@ import { Spinner } from '../Spinner';
 import styles from './Button.module.scss';
 
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
-  disabled?: boolean;
   primary?: boolean;
   secondary?: boolean;
 }
