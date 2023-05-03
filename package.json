@@ -1,6 +1,6 @@
 {
   "name": "kanban",
-  "version": "1.4.8",
+  "version": "1.5.0",
   "type": "module",
   "description": "The purpose of this project is to provide a simple and intuitive way to manage tasks and workflows using the Kanban methodology.",
   "keywords": [
@@ -44,6 +44,7 @@
     "swiper": "^9.2.0"
   },
   "devDependencies": {
+    "@testing-library/react": "^14.0.0",
     "@types/jest": "^29.5.1",
     "@types/node": "^18.15.5",
     "@types/react": "^18.0.27",
