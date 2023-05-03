@@ -1,5 +1,4 @@
-import { getFirestore, addDoc, collection, deleteDoc, doc, getDocs, updateDoc } from '@firebase/firestore';
-
+import { getFirestore, addDoc, collection, deleteDoc, doc, getDocs, updateDoc } from 'firebase/firestore';
 import {
   type AddTaskType,
   type ChangeTaskType,

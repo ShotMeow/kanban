@@ -1,5 +1,4 @@
 import { getFirestore, doc, updateDoc, getDocs, collection, addDoc, deleteDoc } from 'firebase/firestore';
-
 import {
   type AddColumnType,
   type ChangeColumnType,

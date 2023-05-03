@@ -14,6 +14,7 @@ import {
   type MoveTaskToOtherColumnType,
   type TaskType,
 } from '../types';
+
 jest.mock('firebase/firestore', () => ({
   getFirestore: jest.fn(),
   collection: jest.fn(),
@@ -24,9 +25,7 @@ jest.mock('firebase/firestore', () => ({
   deleteDoc: jest.fn(),
 }));
 
-// ToDo: figure out why tests give errors
-
-describe.skip('getTaskCollectionsOfColumn', () => {
+describe('getTaskCollectionsOfColumn', () => {
   const testUserId: GetTaskType['userId'] = 'testUserId';
   const testBoardId: GetTaskType['boardId'] = 'testBoardId';
   const testColumnId: GetTaskType['columnId'] = 'testColumnId';
@@ -50,7 +49,7 @@ describe.skip('getTaskCollectionsOfColumn', () => {
       status: 'TestStatus',
     },
     {
-      id: 'TestTaskId',
+      id: 'TestTaskId2',
       title: 'TestTaskTitle',
       description: 'TestTaskDescription',
       subtasks: [
@@ -91,7 +90,7 @@ describe.skip('getTaskCollectionsOfColumn', () => {
     expect(getFirestore).toHaveBeenCalledTimes(1);
     expect(getDocs).toHaveBeenCalledTimes(1);
     expect(collection).toHaveBeenCalledTimes(1);
-    expect(doc).toHaveBeenCalledTimes(1);
+    expect(doc).toHaveBeenCalledTimes(3);
   });
 
   it('Get true data', async () => {
@@ -103,9 +102,18 @@ describe.skip('getTaskCollectionsOfColumn', () => {
 
     expect(response).toEqual(testTasks);
   });
+
+  it('Throw error if Firestore methods fail', async () => {
+    const errorMessage = 'Firestore methods failed';
+    (getDocs as jest.Mock).mockRejectedValueOnce(new Error(errorMessage));
+
+    await expect(
+      getTaskCollectionsOfColumn({ userId: testUserId, boardId: testBoardId, columnId: testColumnId })
+    ).rejects.toThrow(errorMessage);
+  });
 });
 
-describe.skip('addTaskToBoardCollectionOfUser', () => {
+describe('addTaskToBoardCollectionOfUser', () => {
   const testUserId: AddTaskType['userId'] = 'testUserId';
   const testBoardId: AddTaskType['boardId'] = 'testBoardId';
   const testColumnId: AddTaskType['columnId'] = 'testColumnId';
@@ -142,11 +150,11 @@ describe.skip('addTaskToBoardCollectionOfUser', () => {
     expect(getFirestore).toHaveBeenCalledTimes(1);
     expect(collection).toHaveBeenCalledTimes(1);
     expect(addDoc).toHaveBeenCalledTimes(1);
-    expect(doc).toHaveBeenCalledTimes(2);
+    expect(doc).toHaveBeenCalledTimes(3);
   });
 });
 
-describe.skip('changeTaskFromCollectionOfUser', () => {
+describe('changeTaskFromCollectionOfUser', () => {
   const testUserId: ChangeTaskType['userId'] = 'testUserId';
   const testBoardId: ChangeTaskType['boardId'] = 'testBoardId';
   const testColumnId: ChangeTaskType['columnId'] = 'testColumnId';
@@ -172,11 +180,11 @@ describe.skip('changeTaskFromCollectionOfUser', () => {
 
     expect(getFirestore).toHaveBeenCalledTimes(1);
     expect(updateDoc).toHaveBeenCalledTimes(1);
-    expect(doc).toHaveBeenCalledTimes(3);
+    expect(doc).toHaveBeenCalledTimes(4);
   });
 });
 
-describe.skip('deleteTaskFromBoardCollectionOfUser', () => {
+describe('deleteTaskFromBoardCollectionOfUser', () => {
   const testUserId: DeleteTaskType['userId'] = 'testUserId';
   const testBoardId: DeleteTaskType['boardId'] = 'testBoardId';
   const testColumnId: DeleteTaskType['columnId'] = 'testColumnId';
@@ -196,11 +204,11 @@ describe.skip('deleteTaskFromBoardCollectionOfUser', () => {
 
     expect(getFirestore).toHaveBeenCalledTimes(1);
     expect(deleteDoc).toHaveBeenCalledTimes(1);
-    expect(doc).toHaveBeenCalledTimes(3);
+    expect(doc).toHaveBeenCalledTimes(4);
   });
 });
 
-describe.skip('moveTaskToOtherColumn', () => {
+describe('moveTaskToOtherColumn', () => {
   const testUserId: MoveTaskToOtherColumnType['userId'] = 'testUserId';
   const testBoardId: MoveTaskToOtherColumnType['boardId'] = 'testBoardId';
   const testColumnFromId: MoveTaskToOtherColumnType['columnFromId'] = 'testColumnFromId';
@@ -239,6 +247,6 @@ describe.skip('moveTaskToOtherColumn', () => {
 
     expect(getFirestore).toHaveBeenCalledTimes(1);
     expect(deleteDoc).toHaveBeenCalledTimes(1);
-    expect(doc).toHaveBeenCalledTimes(3);
+    expect(doc).toHaveBeenCalledTimes(7);
   });
 });

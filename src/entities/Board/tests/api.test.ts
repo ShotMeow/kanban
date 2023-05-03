@@ -77,6 +77,13 @@ describe('getBoardCollectionsOfUser', () => {
 
     expect(response).toEqual(testBoardsData);
   });
+
+  it('Throw error if Firestore methods fail', async () => {
+    const errorMessage = 'Firestore methods failed';
+    (getDocs as jest.Mock).mockRejectedValueOnce(new Error(errorMessage));
+
+    await expect(getBoardCollectionsOfUser({ userId: testUserId })).rejects.toThrow(errorMessage);
+  });
 });
 
 describe('addBoardCollectionToUser', () => {
