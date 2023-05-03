@@ -25,7 +25,7 @@ export const Field: FC<Props> = ({ type = 'text', title, value, ...props }) => {
       <input value={value} type={fieldType} {...props} />
       {type === 'password' ? (
         <button
-          aria-label="Shown Password Button"
+          aria-label="Shown password"
           className={classNames({
             [styles.active]: fieldType === 'text',
           })}

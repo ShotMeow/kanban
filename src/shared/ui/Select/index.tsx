@@ -18,6 +18,7 @@ export const Select: FC<Props> = ({ title, options, currentValue, setCurrentValu
 
   return (
     <label
+      role="radiogroup"
       className={classNames(
         {
           [styles.disabled]: disabled,

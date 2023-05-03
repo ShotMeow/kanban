@@ -61,6 +61,7 @@ export const Dropdown: FC<PropsWithChildren<Props>> = ({ children, onShownChange
       exit={{ opacity: 0 }}
     >
       <div
+        aria-label="Dropdown"
         onClick={(event) => {
           event.stopPropagation();
         }}

@@ -8,7 +8,7 @@ interface Props extends HTMLAttributes<HTMLButtonElement> {}
 
 export const OtherButton = forwardRef<HTMLButtonElement, Props>(({ ...props }, ref) => {
   return (
-    <button aria-label="Open Other Content Popup Button" ref={ref} className={styles.other} {...props}>
+    <button aria-label="Open other content popup" ref={ref} className={styles.other} {...props}>
       <OtherIcon className={styles.icon} />
     </button>
   );

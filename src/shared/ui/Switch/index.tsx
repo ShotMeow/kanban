@@ -10,6 +10,7 @@ interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
 export const Switch: FC<Props> = ({ isActive, className, ...props }) => {
   return (
     <button
+      role="switch"
       className={classNames(
         {
           [styles.switch]: true,
