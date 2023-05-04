@@ -34,6 +34,7 @@ describe('Auth', () => {
 
     cy.get('._form_1yf8n_1 button[type="submit"]').click();
     cy.get('._layout_1wedr_1');
+    cy.get('._success_1l9k5_10._message_1l9k5_1');
 
     cy.reload();
 
@@ -44,8 +45,10 @@ describe('Auth', () => {
     cy.get('._form_1yf8n_1 ._field_f3780_1 input[type="email"]').type('test@example.com');
     cy.get('._form_1yf8n_1 ._field_f3780_1 input[type="password"]').type('password');
     cy.get('._form_1yf8n_1 ._checkbox_e8lyb_1 button').click();
+
     cy.get('._form_1yf8n_1 button[type="submit"]').click();
     cy.get('._layout_1wedr_1');
+    cy.get('._success_1l9k5_10._message_1l9k5_1');
 
     cy.reload();
 
