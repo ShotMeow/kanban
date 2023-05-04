@@ -97,6 +97,7 @@ export const SignIn: FC<Props> = ({ setIsSignIn }) => {
         <div className={styles.actions}>
           <Checkbox isActive={isRememberMe} setIsActive={setIsRememberMe} title="Remember me" />
           <button
+            aria-label="Forgot password"
             type="button"
             onClick={() => {
               setForgotPasswordModal(true);

@@ -6,7 +6,7 @@
   }
 
   > .landing {
-    @apply px-6 py-10 overflow-hidden;
+    @apply px-6 py-10 overflow-y-hidden overflow-x-hidden;
     background: linear-gradient(
       107deg,
       #191921 0%,
@@ -18,6 +18,10 @@
       #2c2c3b 74.13%,
       #2c2c3b 100%
     );
+
+    @media (max-width: calc(theme("screens.md") - 1px)) {
+      @apply hidden;
+    }
 
     > .heading {
       @apply relative z-20 mb-10;
