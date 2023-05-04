@@ -36,11 +36,11 @@ export const ChangeColumnModal: FC<Props> = ({ column, setChangeColumnModalShown
       },
     })
       .then(() => {
-        setSuccess(`The board «${currentBoard?.title}» was successfully changed`);
+        setSuccess(`The column «${currentBoard?.title}» was successfully changed`);
         setChangeColumnModalShown(false);
       })
       .catch(() => {
-        setError('The board could not be changed. Try again later');
+        setError('The column could not be changed. Try again later');
       });
   };
 

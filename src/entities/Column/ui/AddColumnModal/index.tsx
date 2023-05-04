@@ -35,7 +35,7 @@ export const AddColumnModal: FC<Props> = ({ setAddColumnModalShown, addColumnMod
       },
     })
       .then(() => {
-        setSuccess(`The column ${title} in the ${currentBoard?.title} has been created successfully`);
+        setSuccess(`The column «${title}» in the «${currentBoard?.title}» has been created successfully`);
         setAddColumnModalShown(false);
       })
       .catch(() => {
