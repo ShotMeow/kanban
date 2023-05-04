@@ -26,18 +26,22 @@ describe('Home', () => {
     cy.get('aside:not(._smallest_k62l8_74)');
   });
 
-  it.only('CRUD board worked', () => {
+  it('CRUD board worked', () => {
+    // Create board
     cy.get('._top_k62l8_10 > ul > li:last-child > button').click();
 
-    cy.get('#overlay > ._frame_f7u2u_1 ._modal_f7u2u_10 form input[type="text"]').type('Test Title');
+    cy.get('#overlay > ._frame_f7u2u_1 ._modal_f7u2u_10 form input[type="text"]').type('Test board');
     cy.get('#overlay > ._frame_f7u2u_1 ._modal_f7u2u_10 form button[type="submit"]').click();
 
     cy.get('._success_1l9k5_10._message_1l9k5_1').should(
       'include.text',
-      'The board «Test Title» was created successfully'
+      'The board «Test board» was created successfully'
     );
-    cy.get('._top_k62l8_10 > ul > li:nth-last-child(2) > button > span').should('include.text', 'Test Title');
 
+    // Read board
+    cy.get('._top_k62l8_10 > ul > li:first-child > button > span').should('include.text', 'Test board');
+
+    // Update board
     cy.get('header ._other_vuxcw_19 > button').click();
     cy.get('header ._other_vuxcw_19 ._dropdown_1y21a_1 button:first-child').click();
     cy.get('#overlay > ._frame_f7u2u_1 ._modal_f7u2u_10 form input[type="text"]').type(' 2');
@@ -46,15 +50,60 @@ describe('Home', () => {
 
     cy.get('._success_1l9k5_10._message_1l9k5_1').should(
       'include.text',
-      'The board «Test Title» was successfully changed'
+      'The board «Test board» was successfully changed'
     );
-    cy.get('._top_k62l8_10 > ul > li:nth-last-child(2) > button > span').should('include.text', 'Test Title 2');
 
+    // Read updated board
+    cy.get('._top_k62l8_10 > ul > li:first-child > button > span').should('include.text', 'Test board 2');
+
+    // Delete board
     cy.get('header ._other_vuxcw_19 ._dropdown_1y21a_1 ._delete_1y21a_10').click();
     cy.get('#overlay ._frame_f7u2u_1 ._modal_f7u2u_10 form button[type="submit"]').click();
     cy.get('._success_1l9k5_10._message_1l9k5_1').should(
       'include.text',
-      'The board «Test Title 2» was successfully deleted'
+      'The board «Test board 2» was successfully deleted'
+    );
+  });
+
+  it.only('CRUD columns worked', () => {
+    // Create board
+    cy.get('._top_k62l8_10 > ul > li:last-child > button').click();
+
+    cy.get('#overlay > ._frame_f7u2u_1 ._modal_f7u2u_10 form input[type="text"]').type('Test board');
+    cy.get('#overlay > ._frame_f7u2u_1 ._modal_f7u2u_10 form button[type="submit"]').click();
+
+    cy.get('._success_1l9k5_10._message_1l9k5_1').should(
+      'include.text',
+      'The board «Test board» was created successfully'
+    );
+
+    // Create column
+    cy.get('.swiper > .swiper-wrapper > div:last-child button').click();
+    cy.get('#overlay ._frame_f7u2u_1 ._modal_f7u2u_10 form label:first-child > input').type('Test column');
+    cy.get('#overlay ._frame_f7u2u_1 ._modal_f7u2u_10 form button[type="submit"]').click();
+
+    // Read column
+    cy.get('._success_1l9k5_10._message_1l9k5_1').should(
+      'include.text',
+      'The column «Test column» in the «Test board» has been created successfully'
+    );
+
+    // Change column
+    cy.get('.swiper > .swiper-wrapper > div:first-child > article > header > button').click();
+    cy.get(
+      '.swiper > .swiper-wrapper > div:first-child > article > header > ._dropdown_1r8fa_1 > ._dropdown_16go4_1 > button:first-child'
+    ).click();
+    cy.get('#overlay ._frame_f7u2u_1 ._modal_f7u2u_10 form label:first-child > input').type(' 2');
+    cy.get('#overlay ._frame_f7u2u_1 ._modal_f7u2u_10 form button[type="submit"]').click();
+
+    // Delete column
+    cy.get(
+      '.swiper > .swiper-wrapper > div:first-child > article > header > ._dropdown_1r8fa_1 > ._dropdown_16go4_1 > button:last-child'
+    ).click();
+    cy.get('#overlay ._frame_f7u2u_1 ._modal_f7u2u_10 form button[type="submit"]').click();
+    cy.get('._success_1l9k5_10._message_1l9k5_1').should(
+      'include.text',
+      'The column «Test column 2» was successfully deleted'
     );
   });
 });
