@@ -25,7 +25,7 @@ describe('Home', () => {
     cy.get('aside:not(._smallest_k62l8_74)');
   });
 
-  it.only('CRUD worked', () => {
+  it('CRUD worked', () => {
     // Create board
     cy.get('._top_k62l8_10 > ul > li:last-child > button').click();
 
