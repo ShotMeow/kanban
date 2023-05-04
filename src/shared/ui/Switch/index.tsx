@@ -10,6 +10,8 @@ interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
 export const Switch: FC<Props> = ({ isActive, className, ...props }) => {
   return (
     <button
+      aria-label="Switch"
+      aria-checked={isActive}
       role="switch"
       className={classNames(
         {
