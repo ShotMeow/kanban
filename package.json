@@ -1,6 +1,6 @@
 {
   "name": "kanban",
-  "version": "1.5.2",
+  "version": "1.6.0",
   "type": "module",
   "description": "The purpose of this project is to provide a simple and intuitive way to manage tasks and workflows using the Kanban methodology.",
   "keywords": [
@@ -23,7 +23,8 @@
     "eslint": "eslint --ext .js,.ts,.tsx ./src",
     "test": "jest",
     "test:watch": "jest --watch",
-    "test:coverage": "jest --coverage"
+    "test:coverage": "jest --coverage",
+    "cypress:open": "cypress open"
   },
   "pre-commit": [
     "eslint",
@@ -54,6 +55,7 @@
     "@typescript-eslint/eslint-plugin": "^5.56.0",
     "@vitejs/plugin-react": "^3.1.0",
     "autoprefixer": "^10.4.14",
+    "cypress": "^12.11.0",
     "eslint": "^8.36.0",
     "eslint-config-prettier": "^8.8.0",
     "eslint-config-standard-with-typescript": "^34.0.1",

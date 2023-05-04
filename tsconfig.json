@@ -18,8 +18,10 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"]
-    }
+    },
+    "sourceMap": true
   },
-  "include": ["src", "jest-setup.ts"],
+  "include": ["src", "jest-setup.ts", "cypress.config.ts"],
+  "exclude": ["cypress", "node_modules"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
