@@ -1,6 +1,6 @@
 {
   "name": "kanban",
-  "version": "1.6.4",
+  "version": "1.6.5",
   "type": "module",
   "description": "The purpose of this project is to provide a simple and intuitive way to manage tasks and workflows using the Kanban methodology.",
   "keywords": [

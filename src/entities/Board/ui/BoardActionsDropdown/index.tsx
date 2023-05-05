@@ -7,6 +7,8 @@ import { ChangeBoardModal } from '../ChangeBoardModal';
 import { DeleteBoardModal } from '../DeleteBoardModal';
 import styles from './BoardActionsDropdown.module.scss';
 import { ColorSwitcher } from '@/features/ColorScheme';
+import { useSelector } from 'react-redux';
+import { getCurrentBoard } from '@/entities/Board';
 
 interface Props {
   setDropdownShown: React.Dispatch<React.SetStateAction<boolean>>;
@@ -18,24 +20,30 @@ export const BoardActionsDropdown: FC<Props> = ({ setDropdownShown, setLogoutMod
   const [changeBoardModalShown, setChangeBoardModalShown] = useState<boolean>(false);
   const [deleteBoardModalShown, setDeleteBoardModalShown] = useState<boolean>(false);
 
+  const currentBoard = useSelector(getCurrentBoard);
+
   return (
     <>
       <Dropdown className={styles.dropdown} onShownChange={setDropdownShown} shown={dropdownShown}>
-        <button
-          onClick={() => {
-            setChangeBoardModalShown(true);
-          }}
-        >
-          <RenameIcon /> <span>Rename</span>
-        </button>
-        <button
-          className={styles.delete}
-          onClick={() => {
-            setDeleteBoardModalShown(true);
-          }}
-        >
-          <TrashIcon /> <span>Delete</span>
-        </button>
+        {currentBoard && (
+          <>
+            <button
+              onClick={() => {
+                setChangeBoardModalShown(true);
+              }}
+            >
+              <RenameIcon /> <span>Rename</span>
+            </button>
+            <button
+              className={styles.delete}
+              onClick={() => {
+                setDeleteBoardModalShown(true);
+              }}
+            >
+              <TrashIcon /> <span>Delete</span>
+            </button>
+          </>
+        )}
         <button
           className={styles.logout}
           onClick={() => {
